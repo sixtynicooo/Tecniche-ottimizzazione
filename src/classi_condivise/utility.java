@@ -55,4 +55,30 @@ public class utility {
         }
         return migliorato;
     }
+    
+    // Metodo per verificare e aggiornare il miglioramento locale del fitness
+    public double verificaMiglioramentoLocale(double fitness, double[] arrDoublePos, 
+                                             double fitnessLocaleMigliore, 
+                                             double[] arrDoublePosMiglioreLocale, 
+                                             boolean problemaMassimizzareMinimizzare) {
+        // Verifica miglioramento locale in base al tipo di problema
+        boolean migliorato;
+        
+        if (problemaMassimizzareMinimizzare) {
+            // Problema di massimizzazione (fitness maggiore è meglio)
+            migliorato = fitness > fitnessLocaleMigliore;
+        } else {
+            // Problema di minimizzazione (fitness minore è meglio)
+            migliorato = fitness < fitnessLocaleMigliore;
+        }
+        
+        // Se è migliorato, aggiorna il fitness locale e la posizione migliore
+        if (migliorato) {
+            fitnessLocaleMigliore = fitness;
+            arrDoublePosMiglioreLocale = arrDoublePos.clone();
+            return fitnessLocaleMigliore;
+        }
+         return fitnessLocaleMigliore;
+        
+    }
 }

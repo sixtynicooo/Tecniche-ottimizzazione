@@ -70,14 +70,14 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     }
 
 
-    public void calcoloFitnessPos() {
-        this.fitness=fitnessClass.fitness(this.ArrDoublePos);
-        if(this.fitness<this.fitnessLocaleMigliore){
-            this.fitnessLocaleMigliore=this.fitness;
-            this.ArrDoublePosMiglioreLocale = ArrDoublePos.clone();
-        }
-    }
+     public void calcoloFitnessPos() {
+    // Calcolo del fitness attuale
+    this.fitness = fitnessClass.fitness(this.ArrDoublePos);
 
+    // Verifica miglioramento locale in base al tipo di problema
+    this.fitnessLocaleMigliore=utilita.verificaMiglioramentoLocale(this.fitness,this.ArrDoublePos,this.fitnessLocaleMigliore,this.ArrDoublePosMiglioreLocale,problemaMassimizzareMinimizzare);
+    
+}
     public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,problemaMassimizzareMinimizzare);
        

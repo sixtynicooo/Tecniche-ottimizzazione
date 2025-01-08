@@ -75,19 +75,7 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     this.fitness = fitnessClass.fitness(this.ArrDoublePos);
 
     // Verifica miglioramento locale in base al tipo di problema
-    boolean migliorato;
-    if (problemaMassimizzareMinimizzare) {
-        // Problema di massimizzazione
-        migliorato = this.fitness > this.fitnessLocaleMigliore;
-    } else {
-        // Problema di minimizzazione
-        migliorato = this.fitness < this.fitnessLocaleMigliore;
-    }
-
-    if (migliorato) {
-        this.fitnessLocaleMigliore = this.fitness;
-        this.ArrDoublePosMiglioreLocale = this.ArrDoublePos.clone();
-    }
+    this.fitnessLocaleMigliore=utilita.verificaMiglioramentoLocale(this.fitness,this.ArrDoublePos,this.fitnessLocaleMigliore,this.ArrDoublePosMiglioreLocale,problemaMassimizzareMinimizzare);
 }
 
     public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {

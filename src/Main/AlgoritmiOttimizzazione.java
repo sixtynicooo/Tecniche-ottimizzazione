@@ -67,11 +67,11 @@ public class AlgoritmiOttimizzazione {
         
         
 
-//        PSO.PSO_Base pso = new PSO_Base(NUM_INDIVIDUO, ITERAZIONI,STAZIONARIETA, DIM_ARR_DOUBLE, ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX,w, c1, c2,problemaMassimizzareMinimizzare);
-//        pso.run();
+        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION(NUM_INDIVIDUO, ITERAZIONI,STAZIONARIETA, DIM_ARR_DOUBLE, ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX,w, c1, c2,problemaMassimizzareMinimizzare);
+        pso.run();
         
         
-//        PSO.PSO_INERZIA_ADATTIVA psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA(NUM_INDIVIDUO,
+//        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(NUM_INDIVIDUO,
 //                ITERAZIONI, STAZIONARIETA, DIM_ARR_DOUBLE,
 //                ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX, w_ARR_DOUBLE, w_ARR_DOUBLE_MIN, w_ARR_DOUBLE_MAX, c1, c2,problemaMassimizzareMinimizzare);
 //        psoAdattivo.run();

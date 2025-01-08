@@ -12,7 +12,7 @@ import java.util.Random;
 public class random {
     private static final Random random = new Random(); // Sorgente casuale
     
-    // Sorgente casuale sicura
+    // Sorgente casuale sicura in teoria migliore ma più lento
     //private static final SecureRandom random = new SecureRandom();
     /**
      * Genera un numero casuale double tra min e max (inclusi min e max).
