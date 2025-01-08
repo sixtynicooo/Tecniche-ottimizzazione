@@ -4,14 +4,12 @@
  */
 package classi_condivise;
 
-
-
 /**
  *
  * @author sixty
  */
-public class PARTICELLA_PSO_Base {
-
+public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.FitnessEntity{
+    static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
     double[] ArrDoublePos;          // array double parametri
 
     
@@ -25,6 +23,8 @@ public class PARTICELLA_PSO_Base {
     static random rand = new random();
     static Fitness fitnessClass=new Fitness();
     static utility utilita=new utility();
+
+
     
 public double[] getArrDoublePos() {
         return this.ArrDoublePos;
@@ -40,8 +40,10 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     public void setFitness(double fitness) {
         this.fitness = fitness;
     }
-    public PARTICELLA_PSO_Base(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX) {
-        this.ArrDoublePos = new double[DIM_ARR_DOUBLE];
+       public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX) {
+        PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION.problemaMassimizzareMinimizzare = problemaMassimizzareMinimizzare;
+           
+           this.ArrDoublePos = new double[DIM_ARR_DOUBLE];
         this.ArrDoubleVel = new double[DIM_ARR_DOUBLE];
         
         ArrDoublePosMiglioreLocale=new double[DIM_ARR_DOUBLE];
@@ -51,12 +53,12 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
         }
     }
 
-    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE, double w, double c1, double c2, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX, PARTICELLA_PSO_Base globalFitnessMIgliore) {
+    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE , double[] w_ARR_DOUBLE, double c1,double c2,double[]ARR_DOUBLE_MIN,double[] ARR_DOUBLE_MAX  ,PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,long indiceMovimenti ) {
         for (int d = 0; d < DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
             this.ArrDoubleVel[d]
-                    = w * ArrDoubleVel[d]
+                    = w_ARR_DOUBLE[d] * ArrDoubleVel[d]
                     + c1 * r1 * (this.ArrDoublePosMiglioreLocale[d] - this.ArrDoublePos[d])
                     + c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.ArrDoublePos[d]);
             
@@ -76,14 +78,8 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
         }
     }
 
-    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_Base globalFitnessMIgliore) {
-        boolean migliorato=false;
-        if(this.fitness<globalFitnessMIgliore.getFitness()){
-            globalFitnessMIgliore.setFitness(this.fitness);
-            globalFitnessMIgliore.setArrDoublePos(this.ArrDoublePos.clone());
-            globalFitnessMIgliore.stampa();
-        }
-        return migliorato;
+    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,problemaMassimizzareMinimizzare);
        
     }
 
@@ -91,6 +87,5 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
          System.out.println(" fitness "+ fitness+" x= "+ArrDoublePos[0]+" y= "+ArrDoublePos[1]);
     }
 
-
-
+    
 }

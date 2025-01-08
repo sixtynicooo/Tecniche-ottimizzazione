@@ -4,12 +4,14 @@
  */
 package classi_condivise;
 
+
+
 /**
  *
  * @author sixty
  */
-public class PARTICELLA_PSO_INERZIA_ADATTIVA {
-    
+public class PARTICELLA_PSO_Base_SINGLE_SOLUTION implements utility.FitnessEntity {
+    static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
     double[] ArrDoublePos;          // array double parametri
 
     
@@ -23,8 +25,6 @@ public class PARTICELLA_PSO_INERZIA_ADATTIVA {
     static random rand = new random();
     static Fitness fitnessClass=new Fitness();
     static utility utilita=new utility();
-
-
     
 public double[] getArrDoublePos() {
         return this.ArrDoublePos;
@@ -40,23 +40,25 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     public void setFitness(double fitness) {
         this.fitness = fitness;
     }
-       public PARTICELLA_PSO_INERZIA_ADATTIVA(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX) {
+    public PARTICELLA_PSO_Base_SINGLE_SOLUTION(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX,boolean problemaMassimizzareMinimizzare) {
+        
+        PARTICELLA_PSO_Base_SINGLE_SOLUTION.problemaMassimizzareMinimizzare=problemaMassimizzareMinimizzare;
         this.ArrDoublePos = new double[DIM_ARR_DOUBLE];
         this.ArrDoubleVel = new double[DIM_ARR_DOUBLE];
         
         ArrDoublePosMiglioreLocale=new double[DIM_ARR_DOUBLE];
-
+        // inizializzo ARR_DOUBLE
         for (int i = 0; i < DIM_ARR_DOUBLE; i++) {
             this.ArrDoublePos[i] = rand.generateRandomDouble(ARR_DOUBLE_MIN[i], ARR_DOUBLE_MAX[i]);
         }
     }
 
-    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE , double[] w_ARR_DOUBLE, double c1,double c2,double[]ARR_DOUBLE_MIN,double[] ARR_DOUBLE_MAX  ,PARTICELLA_PSO_INERZIA_ADATTIVA globalFitnessMIgliore,long indiceMovimenti ) {
+    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE, double w, double c1, double c2, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX, PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {
         for (int d = 0; d < DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
             this.ArrDoubleVel[d]
-                    = w_ARR_DOUBLE[d] * ArrDoubleVel[d]
+                    = w * ArrDoubleVel[d]
                     + c1 * r1 * (this.ArrDoublePosMiglioreLocale[d] - this.ArrDoublePos[d])
                     + c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.ArrDoublePos[d]);
             
@@ -69,21 +71,27 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
 
 
     public void calcoloFitnessPos() {
-        this.fitness=fitnessClass.fitness(this.ArrDoublePos);
-        if(this.fitness<this.fitnessLocaleMigliore){
-            this.fitnessLocaleMigliore=this.fitness;
-            this.ArrDoublePosMiglioreLocale = ArrDoublePos.clone();
-        }
+    // Calcolo del fitness attuale
+    this.fitness = fitnessClass.fitness(this.ArrDoublePos);
+
+    // Verifica miglioramento locale in base al tipo di problema
+    boolean migliorato;
+    if (problemaMassimizzareMinimizzare) {
+        // Problema di massimizzazione
+        migliorato = this.fitness > this.fitnessLocaleMigliore;
+    } else {
+        // Problema di minimizzazione
+        migliorato = this.fitness < this.fitnessLocaleMigliore;
     }
 
-    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA globalFitnessMIgliore) {
-        boolean migliorato=false;
-        if(this.fitness<globalFitnessMIgliore.getFitness()){
-            globalFitnessMIgliore.setFitness(this.fitness);
-            globalFitnessMIgliore.setArrDoublePos(this.ArrDoublePos.clone());
-            globalFitnessMIgliore.stampa();
-        }
-        return migliorato;
+    if (migliorato) {
+        this.fitnessLocaleMigliore = this.fitness;
+        this.ArrDoublePosMiglioreLocale = this.ArrDoublePos.clone();
+    }
+}
+
+    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,problemaMassimizzareMinimizzare);
        
     }
 
@@ -91,5 +99,6 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
          System.out.println(" fitness "+ fitness+" x= "+ArrDoublePos[0]+" y= "+ArrDoublePos[1]);
     }
 
-    
+
+
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package classi_condivise;
+import java.security.SecureRandom;
 import java.util.Random;
 /**
  *
@@ -10,6 +11,9 @@ import java.util.Random;
  */
 public class random {
     private static final Random random = new Random(); // Sorgente casuale
+    
+    // Sorgente casuale sicura
+    //private static final SecureRandom random = new SecureRandom();
     /**
      * Genera un numero casuale double tra min e max (inclusi min e max).
      *
