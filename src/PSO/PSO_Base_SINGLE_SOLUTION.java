@@ -4,6 +4,7 @@
  */
 package PSO;
 
+import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
 
 /**
@@ -12,41 +13,18 @@ import classi_condivise.random;
  */
 public class PSO_Base_SINGLE_SOLUTION {
     // variabili globali
-    static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
+    static VariabilGlobali  variabilGlobali;
 
-    // uguali per ogni algoritmo
-    static int NUM_INDIVIDUO;        // Numero di particelle
-    static long ITERAZIONI;         // generazioni o movimento 
-    static long STAZIONARIETA;         // generazioni o movimento 
     static classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
     
 
-    static int DIM_ARR_DOUBLE;          // array double parametri
-    static double[] ARR_DOUBLE_MIN;          // array double parametri
-    static double[] ARR_DOUBLE_MAX;          // array double parametri
 
-    // spazio variabili
-    // parametri PSO
-    static double w;                // Inerzia
-    static double c1;              // Parametro cognitivo
-    static double c2;              // Parametro sociale
 
     // Costruttore della classe PSO_Base
-    public PSO_Base_SINGLE_SOLUTION(int NUM_INDIVIDUO, long ITERAZIONI, long STAZIONARIETA, int DIM_ARR_DOUBLE, double[] ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX, double w, double c1, double c2,boolean problemaMassimizzareMinimizzare) {
-        PSO_Base_SINGLE_SOLUTION.NUM_INDIVIDUO = NUM_INDIVIDUO;
-        PSO_Base_SINGLE_SOLUTION.ITERAZIONI = ITERAZIONI;
-        PSO_Base_SINGLE_SOLUTION.STAZIONARIETA=STAZIONARIETA;
-        PSO_Base_SINGLE_SOLUTION.problemaMassimizzareMinimizzare=problemaMassimizzareMinimizzare;
-        
-        PSO_Base_SINGLE_SOLUTION.DIM_ARR_DOUBLE = DIM_ARR_DOUBLE;
-        PSO_Base_SINGLE_SOLUTION.ARR_DOUBLE_MIN = ARR_DOUBLE_MIN;
-        PSO_Base_SINGLE_SOLUTION.ARR_DOUBLE_MAX = ARR_DOUBLE_MAX;
-        
-        
-        PSO_Base_SINGLE_SOLUTION.w = w;
-        PSO_Base_SINGLE_SOLUTION.c1 = c1;
-        PSO_Base_SINGLE_SOLUTION.c2 = c2;
+    public PSO_Base_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
+        PSO_Base_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
+        PSO_Base_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
 
     }
 
@@ -58,16 +36,16 @@ public class PSO_Base_SINGLE_SOLUTION {
 
     private void inizializza() {
         // Creazione dell'array di individui
-        listaIndividui = new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION[NUM_INDIVIDUO];
-           globalFitnessMIgliore= new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION(DIM_ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX,problemaMassimizzareMinimizzare); // Crea un nuovo individuo
+        listaIndividui = new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
+           globalFitnessMIgliore= new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
         // Inizializzazione degli individui
-        for (int i = 0; i < NUM_INDIVIDUO; i++) {
-            listaIndividui[i] = new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION(DIM_ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX,problemaMassimizzareMinimizzare); // Crea un nuovo individuo
+        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
+            listaIndividui[i] = new classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividui[i].calcoloFitnessPos();
         }
         globalFitnessMIgliore.calcoloFitnessPos();
         
-        for (int i = 0; i < NUM_INDIVIDUO; i++) {
+        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
         }
         // inizializza particella globale
@@ -78,14 +56,14 @@ public class PSO_Base_SINGLE_SOLUTION {
         int indiceMovimenti=0;
         boolean migliorato=false;
 
-        for (long  movimento = 0; movimento < ITERAZIONI; movimento++) {
+        for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
-            for(int individuo=0;individuo<NUM_INDIVIDUO;individuo++){
-                listaIndividui[individuo].aggiornaVelocitaPosizione(DIM_ARR_DOUBLE,w,c1,c2,ARR_DOUBLE_MIN, ARR_DOUBLE_MAX,globalFitnessMIgliore);
+            for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
+                listaIndividui[individuo].aggiornaVelocitaPosizione(variabilGlobali.DIM_ARR_DOUBLE,variabilGlobali.w,variabilGlobali.c1,variabilGlobali.c2,variabilGlobali.ARR_DOUBLE_MIN, variabilGlobali.ARR_DOUBLE_MAX,globalFitnessMIgliore);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
-            for(int individuo=0;individuo<NUM_INDIVIDUO;individuo++){
+            for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
                 migliorato=listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore);
             }
             // semigliorato resetto
@@ -93,7 +71,7 @@ public class PSO_Base_SINGLE_SOLUTION {
                 indiceMovimenti=0;
                 migliorato=false;
             }
-            if(indiceMovimenti>STAZIONARIETA){
+            if(indiceMovimenti>variabilGlobali.STAZIONARIETA){
                 System.out.println("Uscito per stazionarieta");
                 break;
             }

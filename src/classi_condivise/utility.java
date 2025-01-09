@@ -4,7 +4,6 @@
  */
 package classi_condivise;
 
-import static classi_condivise.PARTICELLA_PSO_Base_SINGLE_SOLUTION.problemaMassimizzareMinimizzare;
 
 /**
  *

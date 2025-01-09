@@ -11,7 +11,7 @@ package classi_condivise;
  * @author sixty
  */
 public class PARTICELLA_PSO_Base_SINGLE_SOLUTION implements utility.FitnessEntity {
-    static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
+    static VariabilGlobali  variabilGlobali;
     double[] ArrDoublePos;          // array double parametri
 
     
@@ -40,16 +40,17 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     public void setFitness(double fitness) {
         this.fitness = fitness;
     }
-    public PARTICELLA_PSO_Base_SINGLE_SOLUTION(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX,boolean problemaMassimizzareMinimizzare) {
+    public PARTICELLA_PSO_Base_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
         
-        PARTICELLA_PSO_Base_SINGLE_SOLUTION.problemaMassimizzareMinimizzare=problemaMassimizzareMinimizzare;
-        this.ArrDoublePos = new double[DIM_ARR_DOUBLE];
-        this.ArrDoubleVel = new double[DIM_ARR_DOUBLE];
+        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
+        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
+        this.ArrDoublePos = new double[variabilGlobali.DIM_ARR_DOUBLE];
+        this.ArrDoubleVel = new double[variabilGlobali.DIM_ARR_DOUBLE];
         
-        ArrDoublePosMiglioreLocale=new double[DIM_ARR_DOUBLE];
+        ArrDoublePosMiglioreLocale=new double[variabilGlobali.DIM_ARR_DOUBLE];
         // inizializzo ARR_DOUBLE
-        for (int i = 0; i < DIM_ARR_DOUBLE; i++) {
-            this.ArrDoublePos[i] = rand.generateRandomDouble(ARR_DOUBLE_MIN[i], ARR_DOUBLE_MAX[i]);
+        for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
+            this.ArrDoublePos[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
         }
     }
 
@@ -75,11 +76,11 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
     this.fitness = fitnessClass.fitness(this.ArrDoublePos);
 
     // Verifica miglioramento locale in base al tipo di problema
-    this.fitnessLocaleMigliore=utilita.verificaMiglioramentoLocale(this.fitness,this.ArrDoublePos,this.fitnessLocaleMigliore,this.ArrDoublePosMiglioreLocale,problemaMassimizzareMinimizzare);
+    this.fitnessLocaleMigliore=utilita.verificaMiglioramentoLocale(this.fitness,this.ArrDoublePos,this.fitnessLocaleMigliore,this.ArrDoublePosMiglioreLocale,variabilGlobali.problemaMassimizzareMinimizzare);
 }
 
     public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {
-        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,problemaMassimizzareMinimizzare);
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }
 
