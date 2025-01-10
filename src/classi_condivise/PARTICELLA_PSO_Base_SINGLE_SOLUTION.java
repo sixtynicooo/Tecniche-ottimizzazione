@@ -47,17 +47,17 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
         }
     }
 
-    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE, double w, double c1, double c2, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX, PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {
-        for (int d = 0; d < DIM_ARR_DOUBLE; d++) {
+    public void aggiornaVelocitaPosizione(PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore) {
+        for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
             this.variabili_Individuo.arrDoubleVel[d]
-                    = w * this.variabili_Individuo.arrDoubleVel[d]
-                    + c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDoublePos[d])
-                    + c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDoublePos[d]);
+                    = variabilGlobali.w * this.variabili_Individuo.arrDoubleVel[d]
+                    + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDoublePos[d])
+                    + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDoublePos[d]);
             
             this.variabili_Individuo.arrDoublePos[d]+=this.variabili_Individuo.arrDoubleVel[d];
-            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDoublePos[d], ARR_DOUBLE_MIN[d], ARR_DOUBLE_MAX[d]);
+            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDoublePos[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
              
         }
         this.calcoloFitnessPos();

@@ -48,8 +48,6 @@ public class PSO_Base_SINGLE_SOLUTION {
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
         }
-        // inizializza particella globale
-        //System.out.println(" fitness "+globalFitnessMIgliore.getFitness()+" x= "+globalFitnessMIgliore.getArrDoublePos()[0]+" y= "+globalFitnessMIgliore.getArrDoublePos()[1]);
     }
 
     private void movimenti() {
@@ -59,7 +57,7 @@ public class PSO_Base_SINGLE_SOLUTION {
         for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                listaIndividui[individuo].aggiornaVelocitaPosizione(variabilGlobali.DIM_ARR_DOUBLE,variabilGlobali.w,variabilGlobali.c1,variabilGlobali.c2,variabilGlobali.ARR_DOUBLE_MIN, variabilGlobali.ARR_DOUBLE_MAX,globalFitnessMIgliore);
+                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale

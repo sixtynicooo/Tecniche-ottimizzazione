@@ -32,9 +32,7 @@ public class AlgoritmiOttimizzazione {
         pso.run();
         
         
-//        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(NUM_INDIVIDUO,
-//                ITERAZIONI, STAZIONARIETA, DIM_ARR_DOUBLE,
-//                ARR_DOUBLE, ARR_DOUBLE_MIN, ARR_DOUBLE_MAX, w_ARR_DOUBLE, w_ARR_DOUBLE_MIN, w_ARR_DOUBLE_MAX, c1, c2,problemaMassimizzareMinimizzare);
+//        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
 //        psoAdattivo.run();
 
     }

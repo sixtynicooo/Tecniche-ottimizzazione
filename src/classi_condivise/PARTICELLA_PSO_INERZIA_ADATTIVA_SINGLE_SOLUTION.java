@@ -4,88 +4,84 @@
  */
 package classi_condivise;
 
+import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+import classi_condivise.utility.FitnessEntity;
+
 /**
  *
  * @author sixty
  */
 public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.FitnessEntity{
-    static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
-    double[] ArrDoublePos;          // array double parametri
-
-    
-    double[] ArrDoubleVel;          // array double parametri
-    public double fitness;          // array double parametri
-
-    double[] ArrDoublePosMiglioreLocale;          // array double parametri
-    double fitnessLocaleMigliore;          // array double parametri
+    static VariabilGlobali  variabilGlobali;
+    Variabili_Individuo variabili_Individuo;
 
     
     static random rand = new random();
     static Fitness fitnessClass=new Fitness();
     static utility utilita=new utility();
-
-
     
 public double[] getArrDoublePos() {
-        return this.ArrDoublePos;
+        return this.variabili_Individuo.arrDoublePos;
     }
 public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
-        this.ArrDoublePos = ARR_DOUBLE_POS;
+        this.variabili_Individuo.arrDoublePos = ARR_DOUBLE_POS;
     }
 
 
     public double getFitness() {
-        return this.fitness;
+        return this.variabili_Individuo.fitness;
     }
     public void setFitness(double fitness) {
-        this.fitness = fitness;
+        this.variabili_Individuo.fitness = fitness;
     }
-       public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(int DIM_ARR_DOUBLE, double[] ARR_DOUBLE_MIN, double[] ARR_DOUBLE_MAX) {
-        PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION.problemaMassimizzareMinimizzare = problemaMassimizzareMinimizzare;
-           
-           this.ArrDoublePos = new double[DIM_ARR_DOUBLE];
-        this.ArrDoubleVel = new double[DIM_ARR_DOUBLE];
+    public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
         
-        ArrDoublePosMiglioreLocale=new double[DIM_ARR_DOUBLE];
-
-        for (int i = 0; i < DIM_ARR_DOUBLE; i++) {
-            this.ArrDoublePos[i] = rand.generateRandomDouble(ARR_DOUBLE_MIN[i], ARR_DOUBLE_MAX[i]);
+        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
+        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
+        
+        this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
+        // inizializzo ARR_DOUBLE
+        for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
+            this.variabili_Individuo.arrDoublePos[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
         }
     }
-
-    public void aggiornaVelocitaPosizione(int DIM_ARR_DOUBLE , double[] w_ARR_DOUBLE, double c1,double c2,double[]ARR_DOUBLE_MIN,double[] ARR_DOUBLE_MAX  ,PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,long indiceMovimenti ) {
-        for (int d = 0; d < DIM_ARR_DOUBLE; d++) {
+    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
+        for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
-            this.ArrDoubleVel[d]
-                    = w_ARR_DOUBLE[d] * ArrDoubleVel[d]
-                    + c1 * r1 * (this.ArrDoublePosMiglioreLocale[d] - this.ArrDoublePos[d])
-                    + c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.ArrDoublePos[d]);
+            this.variabili_Individuo.arrDoubleVel[d]
+                    = variabilGlobali.w * this.variabili_Individuo.arrDoubleVel[d]
+                    + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDoublePos[d])
+                    + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDoublePos[d]);
             
-            this.ArrDoublePos[d]+=this.ArrDoubleVel[d];
-            utilita.verificaIntervalloDouble(this.ArrDoublePos[d], ARR_DOUBLE_MIN[d], ARR_DOUBLE_MAX[d]);
+            this.variabili_Individuo.arrDoublePos[d]+=this.variabili_Individuo.arrDoubleVel[d];
+            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDoublePos[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
              
         }
         this.calcoloFitnessPos();
     }
 
 
-     public void calcoloFitnessPos() {
+    public void calcoloFitnessPos() {
     // Calcolo del fitness attuale
-    this.fitness = fitnessClass.fitness(this.ArrDoublePos);
+    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDoublePos);
 
     // Verifica miglioramento locale in base al tipo di problema
-    this.fitnessLocaleMigliore=utilita.verificaMiglioramentoLocale(this.fitness,this.ArrDoublePos,this.fitnessLocaleMigliore,this.ArrDoublePosMiglioreLocale,problemaMassimizzareMinimizzare);
-    
+    utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
 }
-    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
-        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.fitness,this.ArrDoublePos,problemaMassimizzareMinimizzare);
+
+
+ public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }
+ 
+
 
     public void stampa() {
-         System.out.println(" fitness "+ fitness+" x= "+ArrDoublePos[0]+" y= "+ArrDoublePos[1]);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDoublePos[0]+" y= "+this.variabili_Individuo.arrDoublePos[1]);
     }
+
 
     
 }
