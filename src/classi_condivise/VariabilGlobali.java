@@ -11,9 +11,9 @@ package classi_condivise;
 public class VariabilGlobali {
 
     
-    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
-    public static long ITERAZIONI = 1000000000;         // generazioni o movimento 
-    public static long STAZIONARIETA = 1000000000/10;         // generazioni o movimento 
+    public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
+    public static long ITERAZIONI = 1000000;         // generazioni o movimento 
+    public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
     public static int DIM_ARR_DOUBLE = 2;          // array double parametri

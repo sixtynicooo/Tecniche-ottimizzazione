@@ -32,8 +32,8 @@ public class AlgoritmiOttimizzazione {
 //        pso.run();
         
           // valore inerziale cambia nel tempo
-//        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
-//        psoAdattivo.run();
+        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
+        psoAdattivo.run();
 
     }
 
