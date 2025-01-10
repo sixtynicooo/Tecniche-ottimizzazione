@@ -4,6 +4,8 @@
  */
 package classi_condivise;
 
+import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+
 
 /**
  *
@@ -31,6 +33,9 @@ public class utility {
         }
     }
 
+    boolean aggiornaFitnessGlobale() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 
     public interface FitnessEntity {
@@ -44,11 +49,11 @@ public class utility {
         void stampa();
     }
     // aggiorno globale 
-    public <T extends FitnessEntity> boolean aggiornaFitnessGlobale(T globalFitnessMigliore, double fitness, double[] arrDoublePos, boolean problemaMassimizzareMinimizzare) {
+    public <T extends FitnessEntity> boolean aggiornaFitnessGlobale(T globalFitnessMigliore, Variabili_Individuo variabili_Individuo, boolean problemaMassimizzareMinimizzare) {
         boolean migliorato = false;
-        if (fitness < globalFitnessMigliore.getFitness()) {
-            globalFitnessMigliore.setFitness(fitness);
-            globalFitnessMigliore.setArrDoublePos(arrDoublePos.clone());
+        if (variabili_Individuo.fitness < globalFitnessMigliore.getFitness()) {
+            globalFitnessMigliore.setFitness(variabili_Individuo.fitness);
+            globalFitnessMigliore.setArrDoublePos(variabili_Individuo.arrDoublePos.clone());
             globalFitnessMigliore.stampa();
             migliorato = true; // Indica che c'è stato un miglioramento
         }
@@ -56,28 +61,24 @@ public class utility {
     }
     
     // Metodo per verificare e aggiornare il miglioramento locale del fitness
-    public double verificaMiglioramentoLocale(double fitness, double[] arrDoublePos, 
-                                             double fitnessLocaleMigliore, 
-                                             double[] arrDoublePosMiglioreLocale, 
+    public void verificaMiglioramentoLocale(Variabili_Individuo variabili_Individuo, 
                                              boolean problemaMassimizzareMinimizzare) {
         // Verifica miglioramento locale in base al tipo di problema
         boolean migliorato;
         
         if (problemaMassimizzareMinimizzare) {
             // Problema di massimizzazione (fitness maggiore è meglio)
-            migliorato = fitness > fitnessLocaleMigliore;
+            migliorato = variabili_Individuo.fitness > variabili_Individuo.fitnessLocaleMigliore;
         } else {
             // Problema di minimizzazione (fitness minore è meglio)
-            migliorato = fitness < fitnessLocaleMigliore;
+            migliorato = variabili_Individuo.fitness < variabili_Individuo.fitnessLocaleMigliore;
         }
         
         // Se è migliorato, aggiorna il fitness locale e la posizione migliore
         if (migliorato) {
-            fitnessLocaleMigliore = fitness;
-            arrDoublePosMiglioreLocale = arrDoublePos.clone();
-            return fitnessLocaleMigliore;
+            variabili_Individuo.fitnessLocaleMigliore = variabili_Individuo.fitness;
+            variabili_Individuo.arrDoublePosMiglioreLocale = variabili_Individuo.arrDoublePos.clone();
         }
-         return fitnessLocaleMigliore;
         
     }
 }
