@@ -56,21 +56,11 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
         boolean migliorato=false;
         double fattoreStazionarieta = 0;
         for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
-            
              for (int inerzia = 0; inerzia < variabilGlobali.DIM_ARR_DOUBLE; inerzia++) {
-
                 fattoreStazionarieta = indiceMovimenti / variabilGlobali.STAZIONARIETA;
-
-              
-
                 // Calcolo dell'inerzia
                 variabilGlobali.w_ARR_DOUBLE[inerzia] = variabilGlobali.w_ARR_DOUBLE_MAX[inerzia] - (variabilGlobali.w_ARR_DOUBLE_MAX[inerzia] - variabilGlobali.w_ARR_DOUBLE_MIN[inerzia]) * fattoreStazionarieta;
-
             }
-            
-            
-            
-            
             // Aggiorna la velocità
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore);
@@ -82,7 +72,6 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
             }
             // semigliorato resetto
             if(migliorato){
-                System.err.println("fattoreStazionarieta "+fattoreStazionarieta+" indiceMovimenti "+indiceMovimenti);
                 indiceMovimenti=0;
                 migliorato=false;
             }

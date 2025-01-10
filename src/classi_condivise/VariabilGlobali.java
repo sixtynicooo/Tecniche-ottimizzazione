@@ -9,7 +9,7 @@ package classi_condivise;
  * @author sixty
  */
 public class VariabilGlobali {
-
+    
     
     public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
     public static long ITERAZIONI = 1000000;         // generazioni o movimento 
