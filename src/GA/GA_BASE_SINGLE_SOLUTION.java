@@ -74,6 +74,14 @@ public class GA_BASE_SINGLE_SOLUTION {
                     mutazione(figlio1);
                     mutazione(figlio2);
                 }
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_MUTAZIONE_ULTRARRARA) {
+                    System.out.println("mutazione ultrarara");
+                    mutazione_ultrarara(figlio1);
+                }
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_MUTAZIONE_ULTRARRARA) {
+                    System.out.println("mutazione ultrarara");
+                    mutazione_ultrarara(figlio2);
+                }
 
                 listaIndividui[figlio1].calcoloFitness();
                 listaIndividui[figlio2].calcoloFitness();
@@ -128,6 +136,21 @@ public class GA_BASE_SINGLE_SOLUTION {
 
         }
 
+    }
+
+    private void mutazione_ultrarara(int figlio) {
+        for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
+            listaIndividui[figlio].variabili_Individuo.arrDouble[d] = listaIndividui[figlio].variabili_Individuo.arrDouble[d];
+             listaIndividui[figlio].variabili_Individuo.arrDouble[d] = rand.generateRandomDouble(
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 - variabilGlobali.MUTAZIONE_ULTRARARA),
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 + variabilGlobali.MUTAZIONE_ULTRARARA)
+            );
+            listaIndividui[figlio].variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d],
+                    variabilGlobali.ARR_DOUBLE_MIN[d],
+                    variabilGlobali.ARR_DOUBLE_MAX[d]);
+           
+        }
     }
 
 }

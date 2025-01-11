@@ -42,8 +42,10 @@ public class VariabilGlobali {
     
     // Parametri GA
     public static double PROBABILITA_CROSSOWER=0.7;
-    public static double PROBABILITA_MUTAZIONE=0.2;
-    public static double MUTAZIONE=0.2;
+    public static double PROBABILITA_MUTAZIONE=0.1;
+    public static double PROBABILITA_MUTAZIONE_ULTRARRARA=0.00000001;
+    public static double MUTAZIONE=0.15;
+    public static double MUTAZIONE_ULTRARARA=0.5;
     
     public VariabilGlobali() {
         // false=minimizzare, true=massimizzare
