@@ -15,8 +15,8 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
  // variabili globali
     static VariabilGlobali  variabilGlobali;
 
-    static classi_condivise.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION[] listaIndividui;    // lista individui
-    static classi_condivise.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
+    static PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION[] listaIndividui;    // lista individui
+    static PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
     
     static random rand = new random();
 
@@ -36,11 +36,11 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
 
     private void inizializza() {
         // Creazione dell'array di individui
-        listaIndividui = new classi_condivise.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
-           globalFitnessMIgliore= new classi_condivise.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
+        listaIndividui = new PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
+           globalFitnessMIgliore= new PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i] = new classi_condivise.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
+            listaIndividui[i] = new PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividui[i].calcoloFitnessPos();
         }
         globalFitnessMIgliore.calcoloFitnessPos();

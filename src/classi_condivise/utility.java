@@ -11,7 +11,7 @@ import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
  * @author sixty
  */
 public class utility {
-
+static random rand = new random();
     public double verificaIntervalloDouble(double numero, double min, double max) {
         if (numero < min) {
             return min;
@@ -42,7 +42,7 @@ public class utility {
 
         void setFitness(double fitness);
 
-        void setArrDoublePos(double[] arrDoublePos);
+        void setArrDouble(double[] arrDoublePos);
 
         void stampa();
     }
@@ -60,7 +60,7 @@ public class utility {
                 || (!problemaMassimizzareMinimizzare && variabili_Individuo.fitness < globalFitnessMigliore.getFitness())) {
 
             globalFitnessMigliore.setFitness(variabili_Individuo.fitness);
-            globalFitnessMigliore.setArrDoublePos(variabili_Individuo.arrDoublePos.clone());
+            globalFitnessMigliore.setArrDouble(variabili_Individuo.arrDouble.clone());
             globalFitnessMigliore.stampa();
             migliorato = true; // Indica che c'è stato un miglioramento
         }
@@ -85,8 +85,19 @@ public class utility {
         // Se è migliorato, aggiorna il fitness locale e la posizione migliore
         if (migliorato) {
             variabili_Individuo.fitnessLocaleMigliore = variabili_Individuo.fitness;
-            variabili_Individuo.arrDoublePosMiglioreLocale = variabili_Individuo.arrDoublePos.clone();
+            variabili_Individuo.arrDoublePosMiglioreLocale = variabili_Individuo.arrDouble.clone();
         }
 
+    }
+    public static void mescolaArray(int[] array) {
+
+        // Itera sull'array e scambia ogni elemento con un altro elemento casuale
+        for (int i = 0; i < array.length; i++) {
+            int randomIndex = rand.generateRandomInt(0, array.length-1); // Ottieni un indice casuale
+            // Scambia array[i] con array[randomIndex]
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
     }
 }

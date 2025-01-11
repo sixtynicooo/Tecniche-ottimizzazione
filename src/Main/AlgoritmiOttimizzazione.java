@@ -4,6 +4,7 @@
  */
 package Main;
 
+import GA.GA_BASE_SINGLE_SOLUTION;
 import PSO.PSO_Base_SINGLE_SOLUTION;
 import PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
@@ -34,6 +35,9 @@ public class AlgoritmiOttimizzazione {
           // valore inerziale cambia nel tempo
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
 //        psoAdattivo.run();
+
+//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
+//          ga.run();
 
     }
 

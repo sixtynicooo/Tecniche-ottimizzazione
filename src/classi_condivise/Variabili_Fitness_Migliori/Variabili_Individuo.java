@@ -11,7 +11,7 @@ import classi_condivise.VariabilGlobali;
  * @author sixty
  */
 public class Variabili_Individuo {
-     public double[] arrDoublePos;          // array double parametri
+     public double[] arrDouble;          // array double parametri
     public double[] arrDoubleVel;          // array double parametri
     public double fitness;          // array double parametri
 
@@ -21,7 +21,7 @@ public class Variabili_Individuo {
    
 
     public Variabili_Individuo(VariabilGlobali variabilGlobali) {
-        this.arrDoublePos = new double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDouble = new double[VariabilGlobali.DIM_ARR_DOUBLE];
         this.arrDoubleVel = new double[VariabilGlobali.DIM_ARR_DOUBLE];
         this.arrDoublePosMiglioreLocale=new double[VariabilGlobali.DIM_ARR_DOUBLE];
        

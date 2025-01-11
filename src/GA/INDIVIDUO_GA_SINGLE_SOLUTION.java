@@ -15,5 +15,59 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
-   
+    static VariabilGlobali  variabilGlobali;
+    Variabili_Individuo variabili_Individuo;
+
+    
+    static random rand = new random();
+    static Fitness fitnessClass=new Fitness();
+    static utility utilita=new utility();
+    
+    
+    public INDIVIDUO_GA_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
+        INDIVIDUO_GA_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
+        INDIVIDUO_GA_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
+        
+        this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
+        // inizializzo ARR_DOUBLE
+        for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
+            this.variabili_Individuo.arrDouble[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
+        }
+    }
+    
+        public void calcoloFitness() {
+    // Calcolo del fitness attuale
+    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
+
+    // Verifica miglioramento locale in base al tipo di problema
+    utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
+}
+
+    public boolean aggiornaFitnessGlobale(INDIVIDUO_GA_SINGLE_SOLUTION globalFitnessMIgliore) {
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
+       
+    }
+
+    @Override
+    public double getFitness() {
+        return this.variabili_Individuo.fitness;
+    }
+
+    @Override
+    public void setFitness(double fitness) {
+        this.variabili_Individuo.fitness = fitness;
+    }
+
+    @Override
+    public void setArrDouble(double[] ARR_DOUBLE_POS) {
+        this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
+    }
+
+    @Override
+    public void stampa() {
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
+    }
+
+
+
 }

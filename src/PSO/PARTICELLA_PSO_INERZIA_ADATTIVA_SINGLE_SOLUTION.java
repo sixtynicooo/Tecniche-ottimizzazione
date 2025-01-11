@@ -2,9 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package classi_condivise;
+package PSO;
 
+import classi_condivise.Fitness;
+import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+import classi_condivise.random;
+import classi_condivise.utility;
 import classi_condivise.utility.FitnessEntity;
 
 /**
@@ -21,10 +25,10 @@ public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.
     static utility utilita=new utility();
     
 public double[] getArrDoublePos() {
-        return this.variabili_Individuo.arrDoublePos;
+        return this.variabili_Individuo.arrDouble;
     }
-public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
-        this.variabili_Individuo.arrDoublePos = ARR_DOUBLE_POS;
+public void setArrDouble(double[] ARR_DOUBLE_POS) {
+        this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
     }
 
 
@@ -42,7 +46,7 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
         this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
         for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
-            this.variabili_Individuo.arrDoublePos[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
+            this.variabili_Individuo.arrDouble[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
         }
     }
     public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
@@ -51,11 +55,11 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
             this.variabili_Individuo.arrDoubleVel[d]
                     = variabilGlobali.w * this.variabili_Individuo.arrDoubleVel[d]
-                    + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDoublePos[d])
-                    + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDoublePos[d]);
+                    + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDouble[d])
+                    + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDouble[d]);
             
-            this.variabili_Individuo.arrDoublePos[d]+=this.variabili_Individuo.arrDoubleVel[d];
-            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDoublePos[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
+            this.variabili_Individuo.arrDouble[d]+=this.variabili_Individuo.arrDoubleVel[d];
+            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
              
         }
         this.calcoloFitnessPos();
@@ -64,7 +68,7 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
 
     public void calcoloFitnessPos() {
     // Calcolo del fitness attuale
-    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDoublePos);
+    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
 
     // Verifica miglioramento locale in base al tipo di problema
     utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
@@ -79,7 +83,7 @@ public void setArrDoublePos(double[] ARR_DOUBLE_POS) {
 
 
     public void stampa() {
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDoublePos[0]+" y= "+this.variabili_Individuo.arrDoublePos[1]);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
     }
 
 

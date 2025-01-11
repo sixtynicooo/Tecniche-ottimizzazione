@@ -11,7 +11,7 @@ package classi_condivise;
 public class VariabilGlobali {
     
     
-    public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
+    public static int NUM_INDIVIDUO = 1000;        // Numero di particelle
     public static long ITERAZIONI = 1000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
@@ -39,13 +39,19 @@ public class VariabilGlobali {
     public static double[] w_ARR_DOUBLE_MIN;    // Array dell'inerzia per ogni parametro
     public static double[] w_ARR_DOUBLE_MAX;    // Array dell'inerzia per ogni parametro
     
+    
+    // Parametri GA
+    public static double PROBABILITA_CROSSOWER=0.7;
+    public static double PROBABILITA_MUTAZIONE=0.2;
+    public static double MUTAZIONE=0.2;
+    
     public VariabilGlobali() {
         // false=minimizzare, true=massimizzare
-        problemaMassimizzareMinimizzare=true;
+        problemaMassimizzareMinimizzare=false;
         // sistemo ARR_DOUBLE
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MIN = new double[]{-100000000, -100000000};
-        ARR_DOUBLE_MAX = new double[]{100000000, 100000000};
+        ARR_DOUBLE_MIN = new double[]{-100000, -100000};
+        ARR_DOUBLE_MAX = new double[]{100000, 100000};
         // w adattivo
         w_ARR_DOUBLE = new double[DIM_ARR_DOUBLE];      // Array dell'inerzia per ogni parametro
         w_ARR_DOUBLE_MIN = new double[]{0.1, 0.1};    // Array dell'inerzia per ogni parametro
