@@ -41,7 +41,7 @@ public class VariabilGlobali {
     
     public VariabilGlobali() {
         // false=minimizzare, true=massimizzare
-        problemaMassimizzareMinimizzare=false;
+        problemaMassimizzareMinimizzare=true;
         // sistemo ARR_DOUBLE
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
         ARR_DOUBLE_MIN = new double[]{-100000000, -100000000};
