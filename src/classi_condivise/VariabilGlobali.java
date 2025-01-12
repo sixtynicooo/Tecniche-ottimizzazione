@@ -11,8 +11,8 @@ package classi_condivise;
 public class VariabilGlobali {
     
     
-    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
-    public static long ITERAZIONI = 10000000;         // generazioni o movimento 
+    public static int NUM_INDIVIDUO = 400;        // Numero di particelle
+    public static long ITERAZIONI = 50000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -50,6 +50,7 @@ public class VariabilGlobali {
     
     // parametri DE
     public static double DE_q=0.4;
+    // al momento non uso i limti
     public static double DE_MIN_Q_ARR_DOUBLE=0.4;
     public static double DE_MAX_Q_ARR_DOUBLE=0.5;
     public static double DE_PROBABILITA_CROSSOWER=0.5;
