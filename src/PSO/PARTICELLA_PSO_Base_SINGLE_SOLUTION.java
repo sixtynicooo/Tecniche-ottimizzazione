@@ -64,7 +64,7 @@ public double[] getArrDoublePos() {
                     + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDouble[d]);
             
             this.variabili_Individuo.arrDouble[d]+=this.variabili_Individuo.arrDoubleVel[d];
-            utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
+            this.variabili_Individuo.arrDouble[d]=utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
              
         }
         this.calcoloFitnessPos();

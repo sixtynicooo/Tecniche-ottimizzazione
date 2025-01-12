@@ -4,6 +4,7 @@
  */
 package Main;
 
+import DE.DE_BASE_SINGLE_SOLUTION;
 import GA.GA_BASE_SINGLE_SOLUTION;
 import PSO.PSO_Base_SINGLE_SOLUTION;
 import PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION;
@@ -16,28 +17,25 @@ import classi_condivise.VariabilGlobali;
 public class AlgoritmiOttimizzazione {
 
     // variabili globali
-    static VariabilGlobali  variabilGlobali;
-   
-
+    static VariabilGlobali variabilGlobali;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        AlgoritmiOttimizzazione.variabilGlobali=new VariabilGlobali();
-      
-        
+        AlgoritmiOttimizzazione.variabilGlobali = new VariabilGlobali();
+
         // PSO funziona bene con variabili continue
-          // versione base
+        // versione base
 //        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION(variabilGlobali);
 //        pso.run();
-        
-          // valore inerziale cambia nel tempo
+        // valore inerziale cambia nel tempo
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
 //        psoAdattivo.run();
-
-          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
-          ga.run();
+//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
+//          ga.run();
+        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION(variabilGlobali);
+        de.run();
 
     }
 

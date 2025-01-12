@@ -66,19 +66,19 @@ public class GA_BASE_SINGLE_SOLUTION {
                 int figlio1 = individuo;
                 int figlio2 = individuo + 1;
                 // operatore crossower
-                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_CROSSOWER) {
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_CROSSOWER) {
                     crossower(figlio1, figlio2);
 
                 }
-                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_MUTAZIONE) {
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_MUTAZIONE) {
                     mutazione(figlio1);
                     mutazione(figlio2);
                 }
-                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_MUTAZIONE_ULTRARRARA) {
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_MUTAZIONE_ULTRARRARA) {
                     System.out.println("mutazione ultrarara");
                     mutazione_ultrarara(figlio1);
                 }
-                if (rand.generateRandomDouble(0, 1) < variabilGlobali.PROBABILITA_MUTAZIONE_ULTRARRARA) {
+                if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_MUTAZIONE_ULTRARRARA) {
                     System.out.println("mutazione ultrarara");
                     mutazione_ultrarara(figlio2);
                 }
@@ -108,6 +108,7 @@ public class GA_BASE_SINGLE_SOLUTION {
             
 
             indiceMovimenti++;
+            utilita.mescolaArray(indiciIndividui);
 
         }
         globalFitnessMIgliore.stampa();
@@ -127,8 +128,8 @@ public class GA_BASE_SINGLE_SOLUTION {
         int dimensioneRandomArrDouble = rand.generateRandomInt(0, variabilGlobali.DIM_ARR_DOUBLE - 1);
         if (dimensioneRandomArrDouble >= 0) {
             listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] = rand.generateRandomDouble(
-                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 - variabilGlobali.PROBABILITA_MUTAZIONE),
-                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 + variabilGlobali.PROBABILITA_MUTAZIONE)
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 - variabilGlobali.GA_PROBABILITA_MUTAZIONE),
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 + variabilGlobali.GA_PROBABILITA_MUTAZIONE)
             );
             listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] = utilita.verificaIntervalloDouble(listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble],
                     variabilGlobali.ARR_DOUBLE_MIN[dimensioneRandomArrDouble],
@@ -142,8 +143,8 @@ public class GA_BASE_SINGLE_SOLUTION {
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             listaIndividui[figlio].variabili_Individuo.arrDouble[d] = listaIndividui[figlio].variabili_Individuo.arrDouble[d];
              listaIndividui[figlio].variabili_Individuo.arrDouble[d] = rand.generateRandomDouble(
-                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 - variabilGlobali.MUTAZIONE_ULTRARARA),
-                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 + variabilGlobali.MUTAZIONE_ULTRARARA)
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 - variabilGlobali.GA_MUTAZIONE_ULTRARARA),
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 + variabilGlobali.GA_MUTAZIONE_ULTRARARA)
             );
             listaIndividui[figlio].variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(
                     listaIndividui[figlio].variabili_Individuo.arrDouble[d],

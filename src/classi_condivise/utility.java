@@ -32,10 +32,6 @@ static random rand = new random();
         }
     }
 
-    boolean aggiornaFitnessGlobale() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public interface FitnessEntity {
 
         double getFitness();

@@ -11,8 +11,8 @@ package classi_condivise;
 public class VariabilGlobali {
     
     
-    public static int NUM_INDIVIDUO = 1000;        // Numero di particelle
-    public static long ITERAZIONI = 1000000;         // generazioni o movimento 
+    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
+    public static long ITERAZIONI = 10000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -41,19 +41,27 @@ public class VariabilGlobali {
     
     
     // Parametri GA
-    public static double PROBABILITA_CROSSOWER=0.7;
-    public static double PROBABILITA_MUTAZIONE=0.1;
-    public static double PROBABILITA_MUTAZIONE_ULTRARRARA=0.00000001;
-    public static double MUTAZIONE=0.15;
-    public static double MUTAZIONE_ULTRARARA=0.5;
+    public static double GA_PROBABILITA_CROSSOWER=0.7;
+    public static double GA_PROBABILITA_MUTAZIONE=0.1;
+    public static double GA_PROBABILITA_MUTAZIONE_ULTRARRARA=0.00000001;
+    public static double GA_MUTAZIONE=0.15;
+    public static double GA_MUTAZIONE_ULTRARARA=0.5;
+    
+    
+    // parametri DE
+    public static double DE_q=0.4;
+    public static double DE_MIN_Q_ARR_DOUBLE=0.4;
+    public static double DE_MAX_Q_ARR_DOUBLE=0.5;
+    public static double DE_PROBABILITA_CROSSOWER=0.5;
+    public static double DE_PROBABILITA_SELEZIONE=0.5;
     
     public VariabilGlobali() {
         // false=minimizzare, true=massimizzare
         problemaMassimizzareMinimizzare=false;
         // sistemo ARR_DOUBLE
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MIN = new double[]{-100000, -100000};
-        ARR_DOUBLE_MAX = new double[]{100000, 100000};
+        ARR_DOUBLE_MIN = new double[]{-1000000 ,-1000000};
+        ARR_DOUBLE_MAX = new double[]{1000000, 1000000};
         // w adattivo
         w_ARR_DOUBLE = new double[DIM_ARR_DOUBLE];      // Array dell'inerzia per ogni parametro
         w_ARR_DOUBLE_MIN = new double[]{0.1, 0.1};    // Array dell'inerzia per ogni parametro

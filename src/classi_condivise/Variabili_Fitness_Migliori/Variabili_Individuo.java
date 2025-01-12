@@ -28,4 +28,17 @@ public class Variabili_Individuo {
         
     }
     
+    // Metodo per creare una copia profonda di Variabili_Individuo
+    public Variabili_Individuo copiaVariabiliIndividuo(VariabilGlobali variabilGlobali) {
+        Variabili_Individuo copia = new Variabili_Individuo(variabilGlobali);
+        copia.arrDouble=this.arrDouble.clone();
+        copia.arrDoubleVel=this.arrDoubleVel.clone();
+        copia.fitness=this.fitness;
+        copia.arrDoublePosMiglioreLocale=this.arrDoublePosMiglioreLocale.clone();
+        copia.fitnessLocaleMigliore=this.fitnessLocaleMigliore;
+        
+        return copia;
+    }
+
+   
 }
