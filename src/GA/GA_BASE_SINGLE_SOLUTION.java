@@ -91,8 +91,8 @@ public class GA_BASE_SINGLE_SOLUTION {
                 migliorato2 = listaIndividui[individuo+1].aggiornaFitnessGlobale(globalFitnessMIgliore);
                 
                 if (migliorato1 || migliorato2) {
-//                System.out.print("generazione " + i);
-//                globalFitnessMIgliore.stampa();
+                System.out.print("generazione " + i);
+                globalFitnessMIgliore.stampa();
                 indiceMovimenti = 0;
                 migliorato1 = false;
                 migliorato2 = false;

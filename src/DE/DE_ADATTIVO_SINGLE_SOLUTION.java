@@ -12,7 +12,7 @@ import classi_condivise.utility;
  *
  * @author sixty
  */
-public class DE_BASE_SINGLE_SOLUTION {
+public class DE_ADATTIVO_SINGLE_SOLUTION {
 
     // variabili globali
     static VariabilGlobali variabilGlobali;
@@ -22,7 +22,7 @@ public class DE_BASE_SINGLE_SOLUTION {
     static utility utilita = new utility();
     static random rand = new random();
 
-    public DE_BASE_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
+    public DE_ADATTIVO_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
         DE_BASE_SINGLE_SOLUTION.variabilGlobali = new VariabilGlobali();
         DE_BASE_SINGLE_SOLUTION.variabilGlobali = variabilGlobali;
     }
@@ -62,17 +62,20 @@ public class DE_BASE_SINGLE_SOLUTION {
 
         DE.INDIVIDUO_DE_SINGLE_SOLUTION mutante;    // lista individui
         mutante = new DE.INDIVIDUO_DE_SINGLE_SOLUTION(variabilGlobali);
-        System.out.println("DE.DE_BASE_SINGLE_SOLUTION.generazioni()");
-       
 
+        double fattoreQAdattivo = 0;
         for (int iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
-
+            fattoreQAdattivo = indiceMovimenti / variabilGlobali.STAZIONARIETA;
+            variabilGlobali.DE_q = utilita.verificaIntervalloDouble(
+                    variabilGlobali.DE_q+fattoreQAdattivo, 
+                    variabilGlobali.DE_MIN_Q_ARR_DOUBLE, 
+                    variabilGlobali.DE_MAX_Q_ARR_DOUBLE);
             for (int individuo = 0; individuo + 3 < variabilGlobali.NUM_INDIVIDUO; individuo += 4) {
 
                 int genitorePrimario = indiciIndividui[individuo];
-                int mutante1 = indiciIndividui[individuo+ 1] ;
-                int mutante2 = indiciIndividui[individuo+ 2] ;
-                int mutante3 = indiciIndividui[individuo+ 3] ;
+                int mutante1 = indiciIndividui[individuo + 1];
+                int mutante2 = indiciIndividui[individuo + 2];
+                int mutante3 = indiciIndividui[individuo + 3];
 
                 // operatore mutazione
                 mutazione(mutante1, mutante2, mutante3, mutante);
@@ -80,9 +83,10 @@ public class DE_BASE_SINGLE_SOLUTION {
                 //crossower(mutante, genitorePrimario);
                 // operatore selezione
                 if (selezione(mutante, genitorePrimario)) {
+                    indiceMovimenti = 0;
+                    variabilGlobali.DE_q=variabilGlobali.DE_MIN_Q_ARR_DOUBLE;
                     System.out.print("N iterazione "+iter);
                     globalFitnessMIgliore.stampa();
-                    indiceMovimenti = 0;
                     migliorato = true;
                 }
 

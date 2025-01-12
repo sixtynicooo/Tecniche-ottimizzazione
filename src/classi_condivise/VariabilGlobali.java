@@ -65,7 +65,7 @@ public class VariabilGlobali {
         ARR_DOUBLE_MAX = new double[]{1000000, 1000000};
         // w adattivo
         w_ARR_DOUBLE = new double[DIM_ARR_DOUBLE];      // Array dell'inerzia per ogni parametro
-        w_ARR_DOUBLE_MIN = new double[]{0.1, 0.1};    // Array dell'inerzia per ogni parametro
+        w_ARR_DOUBLE_MIN = new double[]{0.001, 0.001};    // Array dell'inerzia per ogni parametro
         w_ARR_DOUBLE_MAX = new double[]{1, 1};    // Array dell'inerzia per ogni parametro
         
         

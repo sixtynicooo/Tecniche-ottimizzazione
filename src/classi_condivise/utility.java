@@ -57,7 +57,6 @@ static random rand = new random();
 
             globalFitnessMigliore.setFitness(variabili_Individuo.fitness);
             globalFitnessMigliore.setArrDouble(variabili_Individuo.arrDouble.clone());
-            globalFitnessMigliore.stampa();
             migliorato = true; // Indica che c'è stato un miglioramento
         }
 

@@ -62,12 +62,15 @@ public class PSO_Base_SINGLE_SOLUTION {
             }
             // aggiorna globale
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                migliorato=listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore);
+                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore)){
+                    migliorato=true;
+                }
             }
             // semigliorato resetto
             if(migliorato){
-                indiceMovimenti=0;
+                System.out.print("N iterazione "+movimento);
                 globalFitnessMIgliore.stampa();
+                indiceMovimenti=0;
                 migliorato=false;
             }
             if(indiceMovimenti>variabilGlobali.STAZIONARIETA){
