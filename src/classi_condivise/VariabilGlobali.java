@@ -35,9 +35,9 @@ public class VariabilGlobali {
     public static double c2 = 2;              // Parametro sociale
 
 // Parametri PARTICELLA_PSO_INERZIA_ADATTIVA: ora ogni parametro ARR_DOUBLE ha l'inerzia personalizzata
-    public static double[] w_ARR_DOUBLE;    // Array dell'inerzia per ogni parametro
-    public static double[] w_ARR_DOUBLE_MIN;    // Array dell'inerzia per ogni parametro
-    public static double[] w_ARR_DOUBLE_MAX;    // Array dell'inerzia per ogni parametro
+    public static double w_ARR_DOUBLE=0.6;    // Array dell'inerzia per ogni parametro
+    public static double w_ARR_DOUBLE_MIN=0.1;    // Array dell'inerzia per ogni parametro
+    public static double w_ARR_DOUBLE_MAX=0.8;    // Array dell'inerzia per ogni parametro
     
     
     // Parametri GA
@@ -63,10 +63,6 @@ public class VariabilGlobali {
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
         ARR_DOUBLE_MIN = new double[]{-1000000 ,-1000000};
         ARR_DOUBLE_MAX = new double[]{1000000, 1000000};
-        // w adattivo
-        w_ARR_DOUBLE = new double[DIM_ARR_DOUBLE];      // Array dell'inerzia per ogni parametro
-        w_ARR_DOUBLE_MIN = new double[]{0.001, 0.001};    // Array dell'inerzia per ogni parametro
-        w_ARR_DOUBLE_MAX = new double[]{1, 1};    // Array dell'inerzia per ogni parametro
         
         
         ARR_INTERI = new int[DIM_ARR_INTERI];          // Array interi

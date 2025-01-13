@@ -125,12 +125,16 @@ public class DE_BASE_SINGLE_SOLUTION {
         // Calcola la fitness del mutante
         mutante.calcoloFitness();
         // Confronta la fitness del mutante con il genitore
-        if ((variabilGlobali.problemaMassimizzareMinimizzare && mutante.getFitness() > listaIndividui[genitorePrimario].getFitness())
-                || (!variabilGlobali.problemaMassimizzareMinimizzare && mutante.getFitness() < listaIndividui[genitorePrimario].getFitness())) {
-            // Sostituisci il genitore con il mutante se la fitness è migliore
-            listaIndividui[genitorePrimario].variabili_Individuo = mutante.copiare();
-            migliorato = listaIndividui[genitorePrimario].aggiornaFitnessGlobale(globalFitnessMIgliore);
-        }
+        if (utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare, 
+                                  mutante.getFitness(), 
+                                  listaIndividui[genitorePrimario].getFitness())) {
+    // Sostituisci il genitore con il mutante se la fitness è migliore
+    listaIndividui[genitorePrimario].variabili_Individuo = mutante.copiare();
+
+    // Aggiorna il fitness globale e controlla se c'è stato un miglioramento
+    migliorato = listaIndividui[genitorePrimario].aggiornaFitnessGlobale(globalFitnessMIgliore);
+}
+
 
         return migliorato;
     }

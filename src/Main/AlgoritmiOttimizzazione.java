@@ -31,11 +31,11 @@ public class AlgoritmiOttimizzazione {
 //        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION(variabilGlobali);
 //        pso.run();
         // valore inerziale cambia nel tempo
-        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
-        psoAdattivo.run();
+//        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
+//        psoAdattivo.run();
 // GA
-//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
-//          ga.run();
+          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
+          ga.run();
 // DE 
 //        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION(variabilGlobali);
 //        de.run();

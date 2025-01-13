@@ -11,7 +11,9 @@ import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
  * @author sixty
  */
 public class utility {
-static random rand = new random();
+
+    static random rand = new random();
+
     public double verificaIntervalloDouble(double numero, double min, double max) {
         if (numero < min) {
             return min;
@@ -43,6 +45,26 @@ static random rand = new random();
         void stampa();
     }
 
+    /**
+     * Verifica se il valore di fitness di un individuo migliora rispetto al
+     * valore globale, considerando se il problema è di massimizzazione o
+     * minimizzazione.
+     *
+     * @param problemaMassimizzareMinimizzare true se il problema è di
+     * massimizzazione, false per minimizzazione
+     * @param fitnessIndividuo il valore di fitness dell'individuo
+     * @param fitnessGlobale il valore di fitness globale
+     * @return true se il valore dell'individuo migliora rispetto al valore
+     * globale, false altrimenti
+     */
+    public boolean verificaMiglioramento(boolean problemaMassimizzareMinimizzare, double fitnessIndividuo, double fitnessMigliore) {
+        if (problemaMassimizzareMinimizzare) {
+            return fitnessIndividuo > fitnessMigliore;
+        } else {
+            return fitnessIndividuo < fitnessMigliore;
+        }
+    }
+
     // aggiorno globale 
     public <T extends FitnessEntity> boolean aggiornaFitnessGlobale(
             T globalFitnessMigliore,
@@ -51,13 +73,13 @@ static random rand = new random();
 
         boolean migliorato = false;
 
-        // Confronto in base al criterio di massimizzazione o minimizzazione
-        if ((problemaMassimizzareMinimizzare && variabili_Individuo.fitness > globalFitnessMigliore.getFitness())
-                || (!problemaMassimizzareMinimizzare && variabili_Individuo.fitness < globalFitnessMigliore.getFitness())) {
+        if (verificaMiglioramento(problemaMassimizzareMinimizzare,
+                variabili_Individuo.fitness,
+                globalFitnessMigliore.getFitness())) {
 
             globalFitnessMigliore.setFitness(variabili_Individuo.fitness);
             globalFitnessMigliore.setArrDouble(variabili_Individuo.arrDouble.clone());
-            migliorato = true; // Indica che c'è stato un miglioramento
+            migliorato = true;
         }
 
         return migliorato;
@@ -84,11 +106,12 @@ static random rand = new random();
         }
 
     }
+
     public static void mescolaArray(int[] array) {
 
         // Itera sull'array e scambia ogni elemento con un altro elemento casuale
         for (int i = 0; i < array.length; i++) {
-            int randomIndex = rand.generateRandomInt(0, array.length-1); // Ottieni un indice casuale
+            int randomIndex = rand.generateRandomInt(0, array.length - 1); // Ottieni un indice casuale
             // Scambia array[i] con array[randomIndex]
             int temp = array[i];
             array[i] = array[randomIndex];
