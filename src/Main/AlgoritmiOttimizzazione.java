@@ -1,9 +1,12 @@
+package Main;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package Main;
 
+
+import BAT.BAT_BASE_SINGLE_SOLUTION;
 import DE.DE_ADATTIVO_SINGLE_SOLUTION;
 import DE.DE_BASE_SINGLE_SOLUTION;
 import GA.GA_BASE_SINGLE_SOLUTION;
@@ -34,14 +37,18 @@ public class AlgoritmiOttimizzazione {
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali);
 //        psoAdattivo.run();
 // GA
-          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
-          ga.run();
+//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION(variabilGlobali);
+//          ga.run();
 // DE 
 //        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION(variabilGlobali);
 //        de.run();
 // DE ADATTIVO
-//        DE.DE_ADATTIVO_SINGLE_SOLUTION deAdattivo = new DE_ADATTIVO_SINGLE_SOLUTION(variabilGlobali);
-//        deAdattivo.run();
+        DE.DE_ADATTIVO_SINGLE_SOLUTION deAdattivo = new DE_ADATTIVO_SINGLE_SOLUTION(variabilGlobali);
+        deAdattivo.run();
+
+          //Bat
+          BAT.BAT_BASE_SINGLE_SOLUTION bat=new BAT_BASE_SINGLE_SOLUTION(variabilGlobali);
+          bat.run();
     }
 
 }

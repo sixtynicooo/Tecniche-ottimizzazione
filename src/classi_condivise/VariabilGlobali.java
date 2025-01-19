@@ -11,7 +11,7 @@ package classi_condivise;
 public class VariabilGlobali {
     
     
-    public static int NUM_INDIVIDUO = 400;        // Numero di particelle
+    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
     public static long ITERAZIONI = 50000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
@@ -56,13 +56,24 @@ public class VariabilGlobali {
     public static double DE_PROBABILITA_CROSSOWER=0.5;
     public static double DE_PROBABILITA_SELEZIONE=0.5;
     
+    
+    // PARAMETRI BAT
+    public static double FREQUENZA_MIN=0;
+    public static double FREQUENZA_MAX=100;
+    // gestita a livello individuo
+    public static double A_MIN=0;
+    public static double A_MAX=100;
+    public static double alfaBat=0.9999;
+    
+    
+    
     public VariabilGlobali() {
         // false=minimizzare, true=massimizzare
         problemaMassimizzareMinimizzare=false;
         // sistemo ARR_DOUBLE
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MIN = new double[]{-1000000 ,-1000000};
-        ARR_DOUBLE_MAX = new double[]{1000000, 1000000};
+        ARR_DOUBLE_MIN = new double[]{-10000 ,-10000};
+        ARR_DOUBLE_MAX = new double[]{10000, 10000};
         
         
         ARR_INTERI = new int[DIM_ARR_INTERI];          // Array interi
@@ -71,6 +82,7 @@ public class VariabilGlobali {
 
         DIM_ARR_BOOLEAN = 0;          // Dimensione array booleani
         ARR_BOOLEAN = new boolean[DIM_ARR_BOOLEAN]; // Array booleani
+        
         
     }
 }
