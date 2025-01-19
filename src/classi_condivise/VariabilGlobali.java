@@ -58,11 +58,12 @@ public class VariabilGlobali {
     
     
     // PARAMETRI BAT
+    // modificando frequenza e aMax e alfabet funziona bene
     public static double FREQUENZA_MIN=0;
-    public static double FREQUENZA_MAX=100;
+    public static double FREQUENZA_MAX=1000;
     // gestita a livello individuo
     public static double A_MIN=0;
-    public static double A_MAX=100;
+    public static double A_MAX=1000000;
     public static double alfaBat=0.9999;
     
     

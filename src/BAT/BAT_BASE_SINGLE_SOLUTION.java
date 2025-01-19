@@ -64,17 +64,16 @@ public class BAT_BASE_SINGLE_SOLUTION{
     private void movimenti() {
         int indiceMovimenti=0;
         boolean migliorato=false;
-
+        double BAT_A=variabilGlobali.A_MAX;
         for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
-            double mediaA=mediaA();
+            BAT_A*=variabilGlobali.alfaBat;
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore);
                 INDIVIDUO_BAT_SINGLE_SOLUTION tmpBat=new INDIVIDUO_BAT_SINGLE_SOLUTION(variabilGlobali);
-                listaIndividui[individuo].variabili_Individuo.aggiornaBatA(variabilGlobali.alfaBat);
                 for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
                     // prima salvo qui così non viene sovrascritto nel pipistrello principale
-                    tmpBat.variabili_Individuo.arrDouble[d]=listaIndividui[individuo].variabili_Individuo.arrDouble[d]+( rand.generateRandomDouble(-1, 1)*mediaA);
+                    tmpBat.variabili_Individuo.arrDouble[d]=listaIndividui[individuo].variabili_Individuo.arrDouble[d]+( rand.generateRandomDouble(-1, 1)*BAT_A);
                     
                     // 
                 }
@@ -82,7 +81,6 @@ public class BAT_BASE_SINGLE_SOLUTION{
                 if(utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare, tmpBat.getFitness(), listaIndividui[individuo].getFitness())){
                     listaIndividui[individuo].variabili_Individuo=tmpBat.variabili_Individuo.copiaVariabiliIndividuoBat(variabilGlobali);
                 }
-                listaIndividui[individuo].aggiornaA(variabilGlobali.alfaBat);
                 
                 
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
@@ -100,9 +98,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
                 indiceMovimenti=0;
                 migliorato=false;
                 // rimeetto al massimo le A
-                 for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                  listaIndividui[individuo].variabili_Individuo.BAT_A=variabilGlobali.A_MAX;
-            }
+                 BAT_A=variabilGlobali.A_MAX;
                 
             }
             if(indiceMovimenti>variabilGlobali.STAZIONARIETA){
@@ -116,14 +112,6 @@ public class BAT_BASE_SINGLE_SOLUTION{
        
         
 
-    }
-    double mediaA(){
-        double media=0;
-        for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-            media+=listaIndividui[individuo].variabili_Individuo.BAT_A;
-            }
-        return media/variabilGlobali.NUM_INDIVIDUO;
-        
     }
 
 }

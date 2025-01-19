@@ -86,9 +86,4 @@ public double[] getArrDoublePos() {
          System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
     }
 
-    void aggiornaA(double alfaBat) {
-        this.variabili_Individuo.BAT_A=this.variabili_Individuo.BAT_A * alfaBat;
-    }
-    
-
 }
