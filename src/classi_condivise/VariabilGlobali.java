@@ -60,12 +60,20 @@ public class VariabilGlobali {
     // PARAMETRI BAT
     // modificando frequenza e aMax e alfabet funziona bene
     public static double FREQUENZA_MIN=0;
-    public static double FREQUENZA_MAX=1000;
-    // gestita a livello individuo
+    public static double FREQUENZA_MAX=1;
+    // gestita a livello individuo, serve per diminuire gradualmente il valore
     public static double A_MIN=0;
-    public static double A_MAX=1000000;
+    public static double A_MAX=1000000000;
     public static double alfaBat=0.9999;
     
+    // parametri lucciole 
+    // gamma da 0.01 a 100
+    public static double GAMMA=10;
+    public static double ALFALucciola_MIN=0.1;
+    public static double ALFALucciola_MAX=10;
+    public static double ALFALucciola=ALFALucciola_MAX;
+    public static double BETA=0.9;
+    public static double THETA=0.999; //da 0.95 a 0.97 riduce ALFALucciola
     
     
     public VariabilGlobali() {
@@ -73,8 +81,8 @@ public class VariabilGlobali {
         problemaMassimizzareMinimizzare=false;
         // sistemo ARR_DOUBLE
         ARR_DOUBLE = new double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MIN = new double[]{-10000 ,-10000};
-        ARR_DOUBLE_MAX = new double[]{10000, 10000};
+        ARR_DOUBLE_MIN = new double[]{-1000000000 ,-1000000000};
+        ARR_DOUBLE_MAX = new double[]{1000000000, 1000000000};
         
         
         ARR_INTERI = new int[DIM_ARR_INTERI];          // Array interi

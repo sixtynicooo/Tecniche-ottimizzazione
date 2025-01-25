@@ -10,6 +10,7 @@ import BAT.BAT_BASE_SINGLE_SOLUTION;
 import DE.DE_ADATTIVO_SINGLE_SOLUTION;
 import DE.DE_BASE_SINGLE_SOLUTION;
 import GA.GA_BASE_SINGLE_SOLUTION;
+import LUCCIOLE.LUCCIOLA_BASE_SINGLE_SOLUTION;
 import PSO.PSO_Base_SINGLE_SOLUTION;
 import PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
@@ -43,12 +44,16 @@ public class AlgoritmiOttimizzazione {
 //        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION(variabilGlobali);
 //        de.run();
 // DE ADATTIVO
-        DE.DE_ADATTIVO_SINGLE_SOLUTION deAdattivo = new DE_ADATTIVO_SINGLE_SOLUTION(variabilGlobali);
-        deAdattivo.run();
+//        DE.DE_ADATTIVO_SINGLE_SOLUTION deAdattivo = new DE_ADATTIVO_SINGLE_SOLUTION(variabilGlobali);
+//        deAdattivo.run();
 
           //Bat
-          BAT.BAT_BASE_SINGLE_SOLUTION bat=new BAT_BASE_SINGLE_SOLUTION(variabilGlobali);
-          bat.run();
+//          BAT.BAT_BASE_SINGLE_SOLUTION bat=new BAT_BASE_SINGLE_SOLUTION(variabilGlobali);
+//          bat.run();
+          // lucciole
+          LUCCIOLE.LUCCIOLA_BASE_SINGLE_SOLUTION lucciola=new LUCCIOLA_BASE_SINGLE_SOLUTION(variabilGlobali);
+          lucciola.run();
+          
     }
 
 }
