@@ -94,7 +94,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
             // semigliorato resetto
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa();
+                globalFitnessMIgliore.stampa(movimento,globalFitnessMIgliore.variabili_Individuo.fitness,"BAT.txt");
                 indiceMovimenti=0;
                 migliorato=false;
                 // rimeetto al massimo le A
@@ -108,7 +108,6 @@ public class BAT_BASE_SINGLE_SOLUTION{
             indiceMovimenti++;
             
         }
-        globalFitnessMIgliore.stampa();
        
         
 

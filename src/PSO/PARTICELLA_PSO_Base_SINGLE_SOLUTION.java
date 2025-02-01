@@ -83,10 +83,14 @@ public double[] getArrDoublePos() {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }
-
-    public void stampa() {
+ @Override
+    public void stampa(long generation, double solution,String fileName) {
          System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
+         utilita.scriviSuFile(generation, solution,fileName);
     }
+
+   
+
 
 
 

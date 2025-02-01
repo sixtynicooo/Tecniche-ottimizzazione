@@ -78,7 +78,7 @@ static utility utilita=new utility();
             // se migliorato resetto
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa();
+                globalFitnessMIgliore.stampa(movimento,globalFitnessMIgliore.variabili_Individuo.fitness,"Lucciole.txt");
                 variabilGlobali.ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 indiceMovimenti=0;
                 migliorato=false;
@@ -101,13 +101,7 @@ static utility utilita=new utility();
                  variabilGlobali.ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 
             }
-            //System.out.println("variabilGlobali.ALFALucciola "+variabilGlobali.ALFALucciola);
-            
-            
-            //variabilGlobali.ALFALucciola=utilita.verificaIntervalloDouble(variabilGlobali.ALFALucciola*variabilGlobali.THETA, variabilGlobali.ALFALucciola_MIN, variabilGlobali.ALFALucciola_MAX);
-            
         }
-        globalFitnessMIgliore.stampa();
        
         
 

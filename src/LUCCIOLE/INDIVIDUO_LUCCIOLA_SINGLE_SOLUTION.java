@@ -85,10 +85,10 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
                                 listaIndividuiCopia[lucciola].variabili_Individuo.arrDouble[d]);
                         // Calcolo dell'intensità della lucciola corrente
                         intensitaCorrente = this.variabili_Individuo.arrDouble[d]
-                                * Math.exp(- variabilGlobali.GAMMA * distanza);
+                                * Math.exp(-variabilGlobali.GAMMA * distanza);
 
                         // Aggiornamento della posizione della lucciola corrente
-                        this.variabili_Individuo.arrDouble[d] =  listaIndividuiCopia[lucciola].variabili_Individuo.arrDouble[d]+intensitaCorrente
+                        this.variabili_Individuo.arrDouble[d] = listaIndividuiCopia[lucciola].variabili_Individuo.arrDouble[d] + intensitaCorrente
                                 * (listaIndividuiCopia[lucciola].variabili_Individuo.arrDouble[d]
                                 - this.variabili_Individuo.arrDouble[d])
                                 + componenteCasuale;
@@ -116,8 +116,10 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
 
     }
 
-    public void stampa() {
+    @Override
+    public void stampa(long generation, double solution, String fileName) {
         System.out.println(" fitness " + this.variabili_Individuo.fitness + " x= " + this.variabili_Individuo.arrDouble[0] + " y= " + this.variabili_Individuo.arrDouble[1]);
+        utilita.scriviSuFile(generation, solution, fileName);
     }
 
     // Metodo per calcolare la distanza euclidea tra due lucciole

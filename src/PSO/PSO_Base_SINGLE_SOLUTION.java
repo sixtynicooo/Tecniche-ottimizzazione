@@ -69,7 +69,7 @@ public class PSO_Base_SINGLE_SOLUTION {
             // semigliorato resetto
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa();
+                globalFitnessMIgliore.stampa(movimento,globalFitnessMIgliore.variabili_Individuo.fitness,"PSO.txt");
                 indiceMovimenti=0;
                 migliorato=false;
             }
@@ -80,7 +80,7 @@ public class PSO_Base_SINGLE_SOLUTION {
             indiceMovimenti++;
             
         }
-        globalFitnessMIgliore.stampa();
+        //globalFitnessMIgliore.stampa();
        
         
 

@@ -65,7 +65,7 @@ public class DE_BASE_SINGLE_SOLUTION {
         System.out.println("DE.DE_BASE_SINGLE_SOLUTION.generazioni()");
        
 
-        for (int iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
+        for (long iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
 
             for (int individuo = 0; individuo + 3 < variabilGlobali.NUM_INDIVIDUO; individuo += 4) {
 
@@ -81,7 +81,7 @@ public class DE_BASE_SINGLE_SOLUTION {
                 // operatore selezione
                 if (selezione(mutante, genitorePrimario)) {
                     System.out.print("N iterazione "+iter);
-                    globalFitnessMIgliore.stampa();
+                    globalFitnessMIgliore.stampa(iter,globalFitnessMIgliore.variabili_Individuo.fitness,"DE.txt");
                     indiceMovimenti = 0;
                     migliorato = true;
                 }
@@ -97,7 +97,6 @@ public class DE_BASE_SINGLE_SOLUTION {
             indiceMovimenti++;
             utilita.mescolaArray(indiciIndividui);
         }
-        globalFitnessMIgliore.stampa();
     }
 
     private void mutazione(int mutante1, int mutante2, int mutante3, INDIVIDUO_DE_SINGLE_SOLUTION mutante) {

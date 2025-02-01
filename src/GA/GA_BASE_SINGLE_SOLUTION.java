@@ -61,7 +61,7 @@ public class GA_BASE_SINGLE_SOLUTION {
         }
         utilita.mescolaArray(indiciIndividui);
 
-        for (int i = 0; i < variabilGlobali.ITERAZIONI; i++) {
+        for (long i = 0; i < variabilGlobali.ITERAZIONI; i++) {
             for (int individuo = 0; individuo + 1 < variabilGlobali.NUM_INDIVIDUO; individuo++) {
                 int figlio1 = individuo;
                 int figlio2 = individuo + 1;
@@ -92,7 +92,7 @@ public class GA_BASE_SINGLE_SOLUTION {
                 
                 if (migliorato1 || migliorato2) {
                 System.out.print("generazione " + i);
-                globalFitnessMIgliore.stampa();
+                globalFitnessMIgliore.stampa(i,globalFitnessMIgliore.variabili_Individuo.fitness,"GA.txt");
                 indiceMovimenti = 0;
                 migliorato1 = false;
                 migliorato2 = false;
@@ -111,7 +111,6 @@ public class GA_BASE_SINGLE_SOLUTION {
             utilita.mescolaArray(indiciIndividui);
 
         }
-        globalFitnessMIgliore.stampa();
 
     }
 

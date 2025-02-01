@@ -5,6 +5,9 @@
 package classi_condivise;
 
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -42,7 +45,7 @@ public class utility {
 
         void setArrDouble(double[] arrDoublePos);
 
-        void stampa();
+        void stampa(long generation, double solution,String fileName);
     }
 
     /**
@@ -116,6 +119,22 @@ public class utility {
             int temp = array[i];
             array[i] = array[randomIndex];
             array[randomIndex] = temp;
+        }
+    }
+    public static void scriviSuFile(long generation, double solution,String fileName) {
+        try {
+            // Usa FileWriter per aprire il file in modalità append
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            // Scrivi le informazioni sul miglioramento della soluzione
+            bufferedWriter.write("Generazione: " + generation + " - Soluzione: " + solution);
+            bufferedWriter.newLine();
+            
+            // Chiudi il file
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     

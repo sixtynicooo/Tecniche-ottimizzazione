@@ -64,7 +64,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
         mutante = new DE.INDIVIDUO_DE_SINGLE_SOLUTION(variabilGlobali);
 
         double fattoreQAdattivo = 0;
-        for (int iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
+        for (long iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
             fattoreQAdattivo = indiceMovimenti / variabilGlobali.STAZIONARIETA;
             variabilGlobali.DE_q = utilita.verificaIntervalloDouble(
                     variabilGlobali.DE_q+fattoreQAdattivo, 
@@ -86,7 +86,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
                     indiceMovimenti = 0;
                     variabilGlobali.DE_q=variabilGlobali.DE_MIN_Q_ARR_DOUBLE;
                     System.out.print("N iterazione "+iter);
-                    globalFitnessMIgliore.stampa();
+                    globalFitnessMIgliore.stampa(iter,globalFitnessMIgliore.variabili_Individuo.fitness,"DE Adattivo.txt");
                     migliorato = true;
                 }
 
@@ -101,7 +101,6 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
             indiceMovimenti++;
             utilita.mescolaArray(indiciIndividui);
         }
-        globalFitnessMIgliore.stampa();
     }
 
     private void mutazione(int mutante1, int mutante2, int mutante3, INDIVIDUO_DE_SINGLE_SOLUTION mutante) {

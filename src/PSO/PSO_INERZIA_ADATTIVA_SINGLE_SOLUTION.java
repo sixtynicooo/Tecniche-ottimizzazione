@@ -75,7 +75,7 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
             // semigliorato resetto
             if(migliorato){
                 System.out.print("N iterazione " + movimento);
-                globalFitnessMIgliore.stampa();
+                globalFitnessMIgliore.stampa(movimento,globalFitnessMIgliore.variabili_Individuo.fitness,"PSO_Adattiva.txt");
                 indiceMovimenti = 0;
                 migliorato = false; 
                 variabilGlobali.w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MIN;
@@ -88,7 +88,6 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
             indiceMovimenti++;
 
         }
-        globalFitnessMIgliore.stampa();
 
     }
 

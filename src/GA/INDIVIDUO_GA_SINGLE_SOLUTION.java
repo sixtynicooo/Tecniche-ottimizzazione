@@ -63,9 +63,10 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
         this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
     }
 
-    @Override
-    public void stampa() {
+         @Override
+    public void stampa(long generation, double solution,String fileName) {
          System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
+         utilita.scriviSuFile(generation, solution,fileName);
     }
 
 
