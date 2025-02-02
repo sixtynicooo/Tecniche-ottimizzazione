@@ -92,7 +92,7 @@ public class GA_BASE_SINGLE_SOLUTION {
                 
                 if (migliorato1 || migliorato2) {
                 System.out.print("generazione " + i);
-                globalFitnessMIgliore.stampa(i,globalFitnessMIgliore.variabili_Individuo.fitness,"GA.txt");
+                globalFitnessMIgliore.stampa(i,"GA.txt");
                 indiceMovimenti = 0;
                 migliorato1 = false;
                 migliorato2 = false;

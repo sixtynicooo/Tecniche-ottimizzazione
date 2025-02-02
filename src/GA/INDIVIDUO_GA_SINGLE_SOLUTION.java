@@ -64,9 +64,9 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     }
 
          @Override
-    public void stampa(long generation, double solution,String fileName) {
+    public void stampa(long generation,String fileName) {
          System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
-         utilita.scriviSuFile(generation, solution,fileName);
+         utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
     }
 
 

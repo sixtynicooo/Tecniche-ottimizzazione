@@ -45,7 +45,7 @@ public class utility {
 
         void setArrDouble(double[] arrDoublePos);
 
-        void stampa(long generation, double solution,String fileName);
+        void stampa(long generation,String fileName);
     }
 
     /**
@@ -121,14 +121,20 @@ public class utility {
             array[randomIndex] = temp;
         }
     }
-    public static void scriviSuFile(long generation, double solution,String fileName) {
+/**
+ * Salvo su file la soluzione e stampo su console 
+ * @param iterazione
+ * @param variabili_Individuo
+ * @param fileName 
+ */
+    public static void scriviSuFile(long iterazione, Variabili_Individuo variabili_Individuo,String fileName) {
         try {
             // Usa FileWriter per aprire il file in modalità append
             FileWriter fileWriter = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             
             // Scrivi le informazioni sul miglioramento della soluzione
-            bufferedWriter.write("Generazione: " + generation + " - Soluzione: " + solution);
+            bufferedWriter.write("Iterazione: " + iterazione + " - Soluzione: " + variabili_Individuo.fitness + " x= "+variabili_Individuo.arrDouble[0]+" y= "+variabili_Individuo.arrDouble[0]);
             bufferedWriter.newLine();
             
             // Chiudi il file
