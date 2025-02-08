@@ -16,7 +16,6 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class INDIVIDUO_BAT_SINGLE_SOLUTION implements utility.FitnessEntity{
-     static VariabilGlobali  variabilGlobali;
     Variabili_Individuo variabili_Individuo;
 
     
@@ -43,9 +42,6 @@ public double[] getArrDoublePos() {
     }
     public INDIVIDUO_BAT_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
         
-        INDIVIDUO_BAT_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
-        INDIVIDUO_BAT_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
-        
         this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
         for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
@@ -53,7 +49,7 @@ public double[] getArrDoublePos() {
         }
     }
 
-    public void aggiornaVelocitaPosizione(INDIVIDUO_BAT_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public void aggiornaVelocitaPosizione(INDIVIDUO_BAT_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
         
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1);
@@ -65,11 +61,11 @@ public double[] getArrDoublePos() {
             this.variabili_Individuo.arrDouble[d]=utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
             
         }
-        this.calcoloFitnessPos();
+        this.calcoloFitnessPos(variabilGlobali);
     }
 
 
-    public void calcoloFitnessPos() {
+    public void calcoloFitnessPos(VariabilGlobali  variabilGlobali) {
     // Calcolo del fitness attuale
     this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
 
@@ -77,7 +73,7 @@ public double[] getArrDoublePos() {
     utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
 }
 
-    public boolean aggiornaFitnessGlobale(INDIVIDUO_BAT_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public boolean aggiornaFitnessGlobale(INDIVIDUO_BAT_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }

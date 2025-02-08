@@ -15,7 +15,6 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
-    static VariabilGlobali  variabilGlobali;
     Variabili_Individuo variabili_Individuo;
 
     
@@ -25,8 +24,6 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     
     
     public INDIVIDUO_GA_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
-        INDIVIDUO_GA_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
-        INDIVIDUO_GA_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
         
         this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
@@ -35,7 +32,7 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
         }
     }
     
-        public void calcoloFitness() {
+        public void calcoloFitness(VariabilGlobali variabilGlobali) {
     // Calcolo del fitness attuale
     this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
 
@@ -43,7 +40,7 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
 }
 
-    public boolean aggiornaFitnessGlobale(INDIVIDUO_GA_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public boolean aggiornaFitnessGlobale(INDIVIDUO_GA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali variabilGlobali) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }

@@ -11,7 +11,7 @@ package classi_condivise;
 public class VariabilGlobali {
     
     
-    public static int NUM_INDIVIDUO = 1000;        // Numero di particelle
+    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
     public static long ITERAZIONI = 5000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
@@ -67,12 +67,13 @@ public class VariabilGlobali {
     public static double alfaBat=0.9999;
     
     // parametri lucciole 
+    // si potrebbe fare una versione adattiva di BETACASUALE
     // gamma da 0.01 a 100
     public static double GAMMA=10;
-    public static double ALFALucciola_MIN=0.1;
-    public static double ALFALucciola_MAX=10;
+    public static double ALFALucciola_MIN=0.01;
+    public static double ALFALucciola_MAX=100;
     public static double ALFALucciola=ALFALucciola_MAX;
-    public static double BETA=0.9;
+    public static double BETACASUALE=1;
     public static double THETA=0.999; //da 0.95 a 0.97 riduce ALFALucciola
     
     

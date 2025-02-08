@@ -15,16 +15,15 @@ import classi_condivise.utility;
 public class GA_BASE_SINGLE_SOLUTION {
 
     // variabili globali
-    static VariabilGlobali variabilGlobali;
+    VariabilGlobali variabilGlobali;
     static GA.INDIVIDUO_GA_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static GA.INDIVIDUO_GA_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
 
     static utility utilita = new utility();
     static random rand = new random();
 
-    public GA_BASE_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
-        GA_BASE_SINGLE_SOLUTION.variabilGlobali = new VariabilGlobali();
-        GA_BASE_SINGLE_SOLUTION.variabilGlobali = variabilGlobali;
+    public GA_BASE_SINGLE_SOLUTION() {
+        variabilGlobali = new VariabilGlobali();
     }
 
     public void run() {
@@ -39,14 +38,14 @@ public class GA_BASE_SINGLE_SOLUTION {
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new GA.INDIVIDUO_GA_SINGLE_SOLUTION(variabilGlobali);
-            listaIndividui[i].calcoloFitness();
+            listaIndividui[i].calcoloFitness(variabilGlobali);
             //listaIndividui[i].stampa();
         }
-        globalFitnessMIgliore.calcoloFitness();
+        globalFitnessMIgliore.calcoloFitness(variabilGlobali);
         //globalFitnessMIgliore.stampa();
 
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
+            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
         }
         //globalFitnessMIgliore.stampa();
     }
@@ -83,12 +82,12 @@ public class GA_BASE_SINGLE_SOLUTION {
                     mutazione_ultrarara(figlio2);
                 }
 
-                listaIndividui[figlio1].calcoloFitness();
-                listaIndividui[figlio2].calcoloFitness();
+                listaIndividui[figlio1].calcoloFitness(variabilGlobali);
+                listaIndividui[figlio2].calcoloFitness(variabilGlobali);
                 
                 // aggiorna globale
-                migliorato1 = listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore);
-                migliorato2 = listaIndividui[individuo+1].aggiornaFitnessGlobale(globalFitnessMIgliore);
+                migliorato1 = listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
+                migliorato2 = listaIndividui[individuo+1].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
                 
                 if (migliorato1 || migliorato2) {
                 System.out.print("generazione " + i);

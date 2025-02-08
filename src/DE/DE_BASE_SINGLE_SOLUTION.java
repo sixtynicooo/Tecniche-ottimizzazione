@@ -15,16 +15,15 @@ import classi_condivise.utility;
 public class DE_BASE_SINGLE_SOLUTION {
 
     // variabili globali
-    static VariabilGlobali variabilGlobali;
+    VariabilGlobali variabilGlobali;
     static DE.INDIVIDUO_DE_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static DE.INDIVIDUO_DE_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
 
     static utility utilita = new utility();
     static random rand = new random();
 
-    public DE_BASE_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
-        DE_BASE_SINGLE_SOLUTION.variabilGlobali = new VariabilGlobali();
-        DE_BASE_SINGLE_SOLUTION.variabilGlobali = variabilGlobali;
+    public DE_BASE_SINGLE_SOLUTION() {
+        variabilGlobali = new VariabilGlobali();
     }
 
     public void run() {
@@ -39,13 +38,13 @@ public class DE_BASE_SINGLE_SOLUTION {
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new DE.INDIVIDUO_DE_SINGLE_SOLUTION(variabilGlobali);
-            listaIndividui[i].calcoloFitness();
+            listaIndividui[i].calcoloFitness(variabilGlobali);
             //listaIndividui[i].stampa();
         }
-        globalFitnessMIgliore.calcoloFitness();
+        globalFitnessMIgliore.calcoloFitness(variabilGlobali);
 
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
+            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
         }
 
     }
@@ -122,16 +121,16 @@ public class DE_BASE_SINGLE_SOLUTION {
     private boolean selezione(INDIVIDUO_DE_SINGLE_SOLUTION mutante, int genitorePrimario) {
         boolean migliorato = false;
         // Calcola la fitness del mutante
-        mutante.calcoloFitness();
+        mutante.calcoloFitness(variabilGlobali);
         // Confronta la fitness del mutante con il genitore
         if (utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare, 
                                   mutante.getFitness(), 
                                   listaIndividui[genitorePrimario].getFitness())) {
     // Sostituisci il genitore con il mutante se la fitness è migliore
-    listaIndividui[genitorePrimario].variabili_Individuo = mutante.copiare();
+    listaIndividui[genitorePrimario].variabili_Individuo = mutante.copiare(variabilGlobali);
 
     // Aggiorna il fitness globale e controlla se c'è stato un miglioramento
-    migliorato = listaIndividui[genitorePrimario].aggiornaFitnessGlobale(globalFitnessMIgliore);
+    migliorato = listaIndividui[genitorePrimario].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
 }
 
 

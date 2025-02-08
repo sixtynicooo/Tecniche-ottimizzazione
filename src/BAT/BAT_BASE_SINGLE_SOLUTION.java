@@ -9,7 +9,6 @@ package BAT;
 
 
 import static BAT.INDIVIDUO_BAT_SINGLE_SOLUTION.rand;
-import static BAT.INDIVIDUO_BAT_SINGLE_SOLUTION.variabilGlobali;
 import classi_condivise.Fitness;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
@@ -22,7 +21,7 @@ import classi_condivise.utility;
  */
 public class BAT_BASE_SINGLE_SOLUTION{
    // variabili globali
-    static VariabilGlobali  variabilGlobali;
+    VariabilGlobali  variabilGlobali;
 
     static BAT.INDIVIDUO_BAT_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static BAT.INDIVIDUO_BAT_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
@@ -33,9 +32,8 @@ public class BAT_BASE_SINGLE_SOLUTION{
     static Fitness fitnessClass=new Fitness();
     static utility utilita=new utility();
     // Costruttore della classe PSO_Base
-    public BAT_BASE_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
-        BAT_BASE_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
-        BAT_BASE_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
+    public BAT_BASE_SINGLE_SOLUTION() {
+        variabilGlobali=new VariabilGlobali();
 
     }
 
@@ -52,12 +50,12 @@ public class BAT_BASE_SINGLE_SOLUTION{
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new BAT.INDIVIDUO_BAT_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
-            listaIndividui[i].calcoloFitnessPos();
+            listaIndividui[i].calcoloFitnessPos( variabilGlobali);
         }
-        globalFitnessMIgliore.calcoloFitnessPos();
+        globalFitnessMIgliore.calcoloFitnessPos(variabilGlobali);
         
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
+            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
         }
     }
 
@@ -69,7 +67,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
             // Aggiorna la velocità
             BAT_A*=variabilGlobali.alfaBat;
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore);
+                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,variabilGlobali);
                 INDIVIDUO_BAT_SINGLE_SOLUTION tmpBat=new INDIVIDUO_BAT_SINGLE_SOLUTION(variabilGlobali);
                 for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
                     // prima salvo qui così non viene sovrascritto nel pipistrello principale
@@ -77,7 +75,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
                     
                     // 
                 }
-                tmpBat.calcoloFitnessPos();
+                tmpBat.calcoloFitnessPos(variabilGlobali);
                 if(utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare, tmpBat.getFitness(), listaIndividui[individuo].getFitness())){
                     listaIndividui[individuo].variabili_Individuo=tmpBat.variabili_Individuo.copiaVariabiliIndividuoBat(variabilGlobali);
                 }
@@ -87,7 +85,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
             }
             // aggiorna globale
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore)){
+                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali)){
                     migliorato=true;
                 }
             }

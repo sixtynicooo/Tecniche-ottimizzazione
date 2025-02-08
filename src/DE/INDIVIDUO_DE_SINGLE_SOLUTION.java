@@ -15,8 +15,6 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
-
-    static VariabilGlobali variabilGlobali;
     Variabili_Individuo variabili_Individuo;
 
     static random rand = new random();
@@ -24,8 +22,6 @@ public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
     static utility utilita = new utility();
 
     public INDIVIDUO_DE_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
-        INDIVIDUO_DE_SINGLE_SOLUTION.variabilGlobali = new VariabilGlobali();
-        INDIVIDUO_DE_SINGLE_SOLUTION.variabilGlobali = variabilGlobali;
 
         this.variabili_Individuo = new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
@@ -34,7 +30,7 @@ public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
         }
     }
 
-    public void calcoloFitness() {
+    public void calcoloFitness(VariabilGlobali variabilGlobali) {
         // Calcolo del fitness attuale
         this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
 
@@ -42,7 +38,7 @@ public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
         utilita.verificaMiglioramentoLocale(this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
     }
 
-    public boolean aggiornaFitnessGlobale(INDIVIDUO_DE_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public boolean aggiornaFitnessGlobale(INDIVIDUO_DE_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali variabilGlobali) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore, this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
 
     }
@@ -69,8 +65,7 @@ public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
     }
     
     // Metodo clone standard (shallow copy)
-    @Override
-    public INDIVIDUO_DE_SINGLE_SOLUTION clone() {
+    public INDIVIDUO_DE_SINGLE_SOLUTION clone(VariabilGlobali variabilGlobali) {
         INDIVIDUO_DE_SINGLE_SOLUTION cloned = new INDIVIDUO_DE_SINGLE_SOLUTION(variabilGlobali);
         cloned.variabili_Individuo.arrDouble=variabili_Individuo.arrDouble.clone();
         
@@ -78,7 +73,7 @@ public class INDIVIDUO_DE_SINGLE_SOLUTION implements utility.FitnessEntity {
     }
 
      // Metodo per copiare i dati di variabili_Individuo
-    public Variabili_Individuo copiare() {
+    public Variabili_Individuo copiare(VariabilGlobali variabilGlobali) {
         return variabili_Individuo.copiaVariabiliIndividuo(variabilGlobali);
     }
 

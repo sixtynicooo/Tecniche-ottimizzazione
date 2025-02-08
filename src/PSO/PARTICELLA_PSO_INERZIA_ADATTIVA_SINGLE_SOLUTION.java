@@ -16,7 +16,6 @@ import classi_condivise.utility.FitnessEntity;
  * @author sixty
  */
 public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.FitnessEntity{
-    static VariabilGlobali  variabilGlobali;
     Variabili_Individuo variabili_Individuo;
 
     
@@ -40,16 +39,13 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
     }
     public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
         
-        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
-        PARTICELLA_PSO_Base_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
-        
         this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
         for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
             this.variabili_Individuo.arrDouble[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
         }
     }
-    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
@@ -62,11 +58,11 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
             this.variabili_Individuo.arrDouble[d]=utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
              
         }
-        this.calcoloFitnessPos();
+        this.calcoloFitnessPos(variabilGlobali);
     }
 
 
-    public void calcoloFitnessPos() {
+    public void calcoloFitnessPos(VariabilGlobali  variabilGlobali) {
     // Calcolo del fitness attuale
     this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
 
@@ -75,7 +71,7 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
 }
 
 
- public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore) {
+ public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
        
     }

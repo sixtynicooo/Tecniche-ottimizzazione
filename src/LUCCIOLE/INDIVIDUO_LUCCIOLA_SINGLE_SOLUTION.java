@@ -17,8 +17,6 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity {
-
-    static VariabilGlobali variabilGlobali;
     Variabili_Individuo variabili_Individuo;
 
     static random rand = new random();
@@ -46,9 +44,6 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
 
     public INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
 
-        INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION.variabilGlobali = new VariabilGlobali();
-        INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION.variabilGlobali = variabilGlobali;
-
         this.variabili_Individuo = new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
         for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
@@ -56,7 +51,7 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
         }
     }
 
-    public void aggiornaVelocitaPosizione(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore, int individuoCorrente, LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[] listaIndividuiCopia, double ALFALucciola) {
+    public void aggiornaVelocitaPosizione(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore, int individuoCorrente, LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[] listaIndividuiCopia, double ALFALucciola,VariabilGlobali  variabilGlobali) {
 
         for (int lucciola = 0; lucciola < variabilGlobali.NUM_INDIVIDUO; lucciola++) {
             if (individuoCorrente != lucciola) {
@@ -66,8 +61,8 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
                 double componenteCasuale;
                 for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
                     // Componente casuale
-                    componenteCasuale = ALFALucciola * (rand.generateRandomDouble(0, 1) - 0.5);
-
+                    componenteCasuale = ALFALucciola * (rand.generateRandomDouble(-variabilGlobali.BETACASUALE,variabilGlobali.BETACASUALE));
+                    // caso in cui la lucciola corrente è la migliore
                     if (utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare,
                             this.variabili_Individuo.fitness,
                             listaIndividuiCopia[lucciola].variabili_Individuo.fitness)) {
@@ -111,7 +106,7 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
         this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
     }
 
-    public boolean aggiornaFitnessGlobale(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore) {
+    public boolean aggiornaFitnessGlobale(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
         return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore, this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
 
     }

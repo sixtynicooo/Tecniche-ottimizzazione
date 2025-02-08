@@ -13,7 +13,7 @@ import classi_condivise.random;
  */
 public class PSO_Base_SINGLE_SOLUTION {
     // variabili globali
-    static VariabilGlobali  variabilGlobali;
+    VariabilGlobali  variabilGlobali;
 
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
@@ -22,9 +22,8 @@ public class PSO_Base_SINGLE_SOLUTION {
 
 
     // Costruttore della classe PSO_Base
-    public PSO_Base_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
-        PSO_Base_SINGLE_SOLUTION.variabilGlobali=new VariabilGlobali();
-        PSO_Base_SINGLE_SOLUTION.variabilGlobali=variabilGlobali;
+    public PSO_Base_SINGLE_SOLUTION() {
+        variabilGlobali=new VariabilGlobali();
 
     }
 
@@ -41,12 +40,12 @@ public class PSO_Base_SINGLE_SOLUTION {
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
-            listaIndividui[i].calcoloFitnessPos();
+            listaIndividui[i].calcoloFitnessPos(variabilGlobali);
         }
-        globalFitnessMIgliore.calcoloFitnessPos();
+        globalFitnessMIgliore.calcoloFitnessPos(variabilGlobali);
         
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore);
+            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
         }
     }
 
@@ -57,12 +56,12 @@ public class PSO_Base_SINGLE_SOLUTION {
         for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore);
+                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,variabilGlobali);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore)){
+                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali)){
                     migliorato=true;
                 }
             }
