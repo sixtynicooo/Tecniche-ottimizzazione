@@ -16,7 +16,7 @@ public class VariabilGlobali {
 
     public static int NUM_INDIVIDUO = 100;        // Numero di particelle
     public static long ITERAZIONI = 20000000;         // generazioni o movimento 
-    public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
+    public static long STAZIONARIETA = ITERAZIONI / 10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
     // struttura per gestire array multidimensionali usando 
@@ -30,9 +30,10 @@ public class VariabilGlobali {
 //                {2, 2, 2}, // Cubo 2x2x2
 //                {2} // array 1
 //            };
-        public static // Dimensioni delle strutture (matrici, array, cubi)
+    public static // Dimensioni delle strutture (matrici, array, cubi)
             int[][] listaStrutturaDati = {
-                {2} // array 1
+                {2}, // array 1
+                {10}
             };
     // utile per iterare e calcolare indici
 
@@ -102,16 +103,17 @@ public class VariabilGlobali {
         double max = 1000000000;
         offsets = gestioneArray1D.calcolaOffset(listaStrutturaDati);
         // al momento ho scelto di usare numeri costanti per ogni struttura dati
-        ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min};
-        ARR_DOUBLE_STRUTTURA_DATI_MAX = new double[]{max};
+        ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min, -10};
+        ARR_DOUBLE_STRUTTURA_DATI_MAX = new double[]{max, 10};
         ARR_DOUBLE_MIN = new double[DIM_ARR_DOUBLE];
         ARR_DOUBLE_MAX = new double[DIM_ARR_DOUBLE];
         // popolo gli array come ho deciso di fare
-        for (int indice = 0; indice < listaStrutturaDati[0][0]; indice++) {
-            gestioneArray1D.setArray1D(ARR_DOUBLE_MIN, offsets, listaStrutturaDati, 0, indice, ARR_DOUBLE_STRUTTURA_DATI_MIN[0]);
-            gestioneArray1D.setArray1D(ARR_DOUBLE_MAX, offsets, listaStrutturaDati, 0, indice, ARR_DOUBLE_STRUTTURA_DATI_MAX[0]);
+        for (int n_struttura = 0; n_struttura < listaStrutturaDati.length; n_struttura++) {
+            for (int indice = 0; indice < listaStrutturaDati[n_struttura][0]; indice++) {
+                gestioneArray1D.setArray1D(ARR_DOUBLE_MIN, offsets, listaStrutturaDati, n_struttura, indice, ARR_DOUBLE_STRUTTURA_DATI_MIN[n_struttura]);
+                gestioneArray1D.setArray1D(ARR_DOUBLE_MAX, offsets, listaStrutturaDati, n_struttura, indice, ARR_DOUBLE_STRUTTURA_DATI_MAX[n_struttura]);
+            }
         }
-
 
 //        for ( strutturaDati = 0; strutturaDati < listaStrutturaDati.length; strutturaDati++) {
 //            System.out.println("Struttura "+strutturaDati);

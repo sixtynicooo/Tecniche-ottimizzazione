@@ -79,10 +79,13 @@ public double[] getArrDoublePos() {
        
     }
 
-     public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
+        public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
         double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
         double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
+        // System.out.print(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness);
+         gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0);
+          System.out.println();
         // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
          utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
     }
