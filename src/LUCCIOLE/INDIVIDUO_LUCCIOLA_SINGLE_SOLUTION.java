@@ -68,7 +68,7 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
                             this.variabili_Individuo.fitness,
                             listaIndividuiCopia[lucciola].variabili_Individuo.fitness)) {
 
-                        this.variabili_Individuo.arrDouble[d] += ALFALucciola * componenteCasuale;
+                        this.variabili_Individuo.arrDouble[d] += componenteCasuale;
 
                         // Verifica dei limiti della variabile
                         this.variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d],

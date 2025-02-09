@@ -14,7 +14,7 @@ public class VariabilGlobali {
 
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
-    public static int NUM_INDIVIDUO = 1000;        // Numero di particelle
+    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
     public static long ITERAZIONI = 20000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI/10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
@@ -54,9 +54,9 @@ public class VariabilGlobali {
     public static double c2 = 2;              // Parametro sociale
 
 // Parametri PARTICELLA_PSO_INERZIA_ADATTIVA: ora ogni parametro ARR_DOUBLE ha l'inerzia personalizzata
-    public static double w_ARR_DOUBLE_MIN = 0.001;    // Array dell'inerzia per ogni parametro
+    public static double w_ARR_DOUBLE_MIN = 0.01;    // Array dell'inerzia per ogni parametro
     public static double w_ARR_DOUBLE_MAX = 0.5;    // Array dell'inerzia per ogni parametro
-    public static double w_Riduzione = 0.9;    // ad ogni ciclo diminuisce w
+    public static double w_Riduzione = 0.99;    // ad ogni ciclo diminuisce w
 
     // Parametri GA
     public static double GA_PROBABILITA_CROSSOWER = 0.7;
@@ -86,11 +86,11 @@ public class VariabilGlobali {
     // si potrebbe fare una versione adattiva di BETACASUALE
     // gamma da 0.01 a 100
     public static double GAMMA = 10;
-    public static double ALFALucciola_MIN = 0.01;
-    public static double ALFALucciola_MAX = 100;
+    public static double ALFALucciola_MIN = 0.00001;
+    public static double ALFALucciola_MAX = 10;
     public static double ALFALucciola = ALFALucciola_MAX;
     public static double BETACASUALE = 1;
-    public static double THETA = 0.999; //da 0.95 a 0.97 riduce ALFALucciola
+    public static double THETA = 0.99; //da 0.95 a 0.97 riduce ALFALucciola
 
     public VariabilGlobali() {
         gestioneArray1D = new gestioneArray1DMultidimensionali();
