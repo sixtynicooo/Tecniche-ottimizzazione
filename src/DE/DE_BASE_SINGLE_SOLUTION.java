@@ -80,7 +80,7 @@ public class DE_BASE_SINGLE_SOLUTION {
                 // operatore selezione
                 if (selezione(mutante, genitorePrimario)) {
                     System.out.print("N iterazione "+iter);
-                    globalFitnessMIgliore.stampa(iter,"DE.txt");
+                    globalFitnessMIgliore.stampa(iter,"DE.txt", variabilGlobali);
                     indiceMovimenti = 0;
                     migliorato = true;
                 }

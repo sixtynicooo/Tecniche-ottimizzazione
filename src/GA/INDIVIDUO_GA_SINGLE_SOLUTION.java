@@ -5,6 +5,7 @@
 package GA;
 
 import classi_condivise.Fitness;
+import static classi_condivise.Fitness.gestioneParametri;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
 import classi_condivise.random;
@@ -34,7 +35,7 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     
         public void calcoloFitness(VariabilGlobali variabilGlobali) {
     // Calcolo del fitness attuale
-    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
+    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo, variabilGlobali);
 
     // Verifica miglioramento locale in base al tipo di problema
     utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
@@ -61,8 +62,11 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     }
 
          @Override
-    public void stampa(long generation,String fileName) {
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
+     public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
+        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
+        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
+        // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
          utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
     }
 

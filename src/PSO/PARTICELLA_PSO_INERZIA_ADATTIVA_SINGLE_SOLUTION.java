@@ -5,6 +5,7 @@
 package PSO;
 
 import classi_condivise.Fitness;
+import static classi_condivise.Fitness.gestioneParametri;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
 import classi_condivise.random;
@@ -45,12 +46,12 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
             this.variabili_Individuo.arrDouble[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
         }
     }
-    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
+    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore, VariabilGlobali variabilGlobali, double w_ARR_DOUBLE) {
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
             this.variabili_Individuo.arrDoubleVel[d]
-                    = variabilGlobali.w * this.variabili_Individuo.arrDoubleVel[d]
+                    = w_ARR_DOUBLE * this.variabili_Individuo.arrDoubleVel[d]
                     + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDouble[d])
                     + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDouble[d]);
             
@@ -64,7 +65,7 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
 
     public void calcoloFitnessPos(VariabilGlobali  variabilGlobali) {
     // Calcolo del fitness attuale
-    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
+    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo, variabilGlobali);
 
     // Verifica miglioramento locale in base al tipo di problema
     utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
@@ -79,8 +80,11 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
 
 
      @Override
-    public void stampa(long generation,String fileName) {
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x= "+this.variabili_Individuo.arrDouble[0]+" y= "+this.variabili_Individuo.arrDouble[1]);
+    public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
+        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
+        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
+        // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
          utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
     }
 

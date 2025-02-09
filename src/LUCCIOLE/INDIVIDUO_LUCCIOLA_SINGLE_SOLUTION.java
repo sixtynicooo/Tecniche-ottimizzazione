@@ -7,6 +7,7 @@ package LUCCIOLE;
 import static LUCCIOLE.LUCCIOLA_BASE_SINGLE_SOLUTION.listaIndividuiCopia;
 import PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION;
 import classi_condivise.Fitness;
+import static classi_condivise.Fitness.gestioneParametri;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
 import classi_condivise.random;
@@ -101,9 +102,9 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
 
     }
 
-    public void calcoloFitness() {
+    public void calcoloFitness(VariabilGlobali variabilGlobali) {
         // Calcolo del fitness attuale
-        this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo.arrDouble);
+        this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo, variabilGlobali);
     }
 
     public boolean aggiornaFitnessGlobale(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
@@ -112,9 +113,12 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
     }
 
     @Override
-    public void stampa(long generation, String fileName) {
-        System.out.println(" fitness " + this.variabili_Individuo.fitness + " x= " + this.variabili_Individuo.arrDouble[0] + " y= " + this.variabili_Individuo.arrDouble[1]);
-        utilita.scriviSuFile(generation, this.variabili_Individuo, fileName);
+    public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
+        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
+        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
+         System.out.println(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
+        // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
+         utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
     }
 
     // Metodo per calcolare la distanza euclidea tra due lucciole

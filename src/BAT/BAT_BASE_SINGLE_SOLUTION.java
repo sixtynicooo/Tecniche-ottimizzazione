@@ -92,7 +92,7 @@ public class BAT_BASE_SINGLE_SOLUTION{
             // semigliorato resetto
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa(movimento,"BAT.txt");
+                globalFitnessMIgliore.stampa(movimento,"BAT.txt",variabilGlobali);
                 indiceMovimenti=0;
                 migliorato=false;
                 // rimeetto al massimo le A

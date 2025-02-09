@@ -85,7 +85,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
                     indiceMovimenti = 0;
                     variabilGlobali.DE_q=variabilGlobali.DE_MIN_Q_ARR_DOUBLE;
                     System.out.print("N iterazione "+iter);
-                    globalFitnessMIgliore.stampa(iter,"DE Adattivo.txt");
+                    globalFitnessMIgliore.stampa(iter,"DE Adattivo.txt",variabilGlobali);
                     migliorato = true;
                 }
 

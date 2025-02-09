@@ -53,16 +53,12 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
         double indiceMovimenti = 0;
         boolean migliorato = false;
         double fattoreStazionarieta = 0;
+        double w_ARR_DOUBLE=variabilGlobali.w_ARR_DOUBLE_MAX;
         for (long movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
-            for (int inerzia = 0; inerzia < variabilGlobali.DIM_ARR_DOUBLE; inerzia++) {
-                fattoreStazionarieta = indiceMovimenti / variabilGlobali.STAZIONARIETA;
-                // Calcolo dell'inerzia
-                
-            }
-            variabilGlobali.w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX - (variabilGlobali.w_ARR_DOUBLE_MAX - variabilGlobali.w_ARR_DOUBLE_MIN) * fattoreStazionarieta;
+            w_ARR_DOUBLE*= variabilGlobali.w_Riduzione;
             // Aggiorna la velocità
             for (int individuo = 0; individuo < variabilGlobali.NUM_INDIVIDUO; individuo++) {
-                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,variabilGlobali);
+                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,variabilGlobali,w_ARR_DOUBLE);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
@@ -74,10 +70,10 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
             // semigliorato resetto
             if(migliorato){
                 System.out.print("N iterazione " + movimento);
-                globalFitnessMIgliore.stampa(movimento,"PSO_Adattiva.txt");
+                globalFitnessMIgliore.stampa(movimento,"PSO_Adattiva.txt",variabilGlobali);
                 indiceMovimenti = 0;
                 migliorato = false; 
-                variabilGlobali.w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MIN;
+               w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
                 
             }
             if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
@@ -85,6 +81,9 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
                 break;
             }
             indiceMovimenti++;
+            if(w_ARR_DOUBLE< variabilGlobali.w_ARR_DOUBLE_MIN){
+            w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
+        }
 
         }
 

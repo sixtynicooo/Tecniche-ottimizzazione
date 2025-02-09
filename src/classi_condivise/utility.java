@@ -45,7 +45,7 @@ public class utility {
 
         void setArrDouble(double[] arrDoublePos);
 
-        void stampa(long generation,String fileName);
+        void stampa(long generation,String fileName,VariabilGlobali variabilGlobali);
     }
 
     /**

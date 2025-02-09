@@ -42,11 +42,11 @@ static utility utilita=new utility();
         // Inizializzazione degli individui
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
-            listaIndividui[i].calcoloFitness();
+            listaIndividui[i].calcoloFitness(variabilGlobali);
             listaIndividuiCopia[i]=new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividuiCopia[i].variabili_Individuo=listaIndividui[i].variabili_Individuo.copiaVariabiliIndividuo(variabilGlobali);
         }
-        globalFitnessMIgliore.calcoloFitness();
+        globalFitnessMIgliore.calcoloFitness(variabilGlobali);
         
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
@@ -65,7 +65,7 @@ static utility utilita=new utility();
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,individuo,listaIndividuiCopia,ALFALucciola,variabilGlobali);
                 // Calcolo del fitness aggiornato
-                listaIndividui[individuo].calcoloFitness();
+                listaIndividui[individuo].calcoloFitness(variabilGlobali);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
@@ -77,7 +77,7 @@ static utility utilita=new utility();
             // se migliorato resetto
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa(movimento,"Lucciole.txt");
+                globalFitnessMIgliore.stampa(movimento,"Lucciole.txt",variabilGlobali);
                 ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 indiceMovimenti=0;
                 migliorato=false;
