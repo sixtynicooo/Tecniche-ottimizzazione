@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author sixty
  */
 public class gestioneArray1DMultidimensionali {
-    
+
 //        // Dati di esempio
 //        double[] array = new double[100];
 //        int[][] offsets = {
@@ -44,17 +44,13 @@ public class gestioneArray1DMultidimensionali {
 //
 //// Stampa una matrice
 //        gestioneArray1DMultidimensionali.stampaMatrice(array, offsets, listaStrutturaDati, 1);
-        // Inizializzazione dell'array di cubi
+    // Inizializzazione dell'array di cubi
 //        double[] array = new double[27];  // Array principale per memorizzare i cubi
 //        int[][] offsets = {{0, 27}};  // Offset per il cubo
 //        int[][] listaStrutturaDati = {{3, 3, 3}};  // Un cubo 3x3x3
 //            gestioneArray1DMultidimensionali.setCubo(array, offsets, listaStrutturaDati, 0,0,1,2, 20.5);  // Imposta valore errore
 //        // Test di stampaCubo
 //        gestioneArray1DMultidimensionali.stampaCubo(array, offsets, listaStrutturaDati, 0);  // Stampa il cubo
-
-     
-
-
     // Funzione per calcolare la dimensione totale dell'array double[]
     public static int calcolaDimensioneTotale(int[][] listaStrutturaDati) {
         int totalSize = 0;
@@ -107,7 +103,6 @@ public class gestioneArray1DMultidimensionali {
         int start = offsets[strutturaIndex][0];
         // Calcola la posizione finale per il controllo degli indici.
         int end = offsets[strutturaIndex][1];
-       
 
         // Verifica che l'indice sia all'interno dell'intervallo valido.
         if (index < 0 || index >= end) {
@@ -115,7 +110,7 @@ public class gestioneArray1DMultidimensionali {
         }
 
         // Imposta il valore nell'array 1D.
-        array[start+index] = value;
+        array[start + index] = value;
     }
 
     /**
@@ -165,6 +160,65 @@ public class gestioneArray1DMultidimensionali {
         }
 
         // Stampa l'array 1D nella forma di una sottosequenza dell'array principale.
+        System.out.println("Array 1D: " + Arrays.toString(Arrays.copyOfRange(array, start, end)));
+    }
+
+    // boolean
+    /**
+     * Imposta un valore in una specifica posizione di un array 1D.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param strutturaIndex L'indice della struttura dati.
+     * @param index La posizione nell'array 1D relativo a questa struttura.
+     * @param value Il valore booleano da impostare.
+     */
+    public static void setArray1D(boolean[] array, int[][] offsets, int strutturaIndex, int index, boolean value) {
+        int start = offsets[strutturaIndex][0];
+        int end = offsets[strutturaIndex][1];
+
+        if (index < 0 || index >= (end - start)) {
+            throw new IndexOutOfBoundsException("Indice fuori dall'intervallo valido per l'array 1D.");
+        }
+
+        array[start + index] = value;
+    }
+
+    /**
+     * Ottiene un valore da una specifica posizione di un array 1D.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param strutturaIndex L'indice della struttura dati.
+     * @param index La posizione nell'array 1D relativo a questa struttura.
+     * @return Il valore booleano dell'elemento alla posizione specificata.
+     */
+    public static boolean getArray1D(boolean[] array, int[][] offsets, int strutturaIndex, int index) {
+        int start = offsets[strutturaIndex][0];
+        int end = offsets[strutturaIndex][1];
+
+        if (index < 0 || index >= (end - start)) {
+            throw new IndexOutOfBoundsException("Indice fuori dall'intervallo valido per l'array 1D.");
+        }
+
+        return array[start + index];
+    }
+
+    /**
+     * Stampa il contenuto di un array 1D specifico.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param strutturaIndex L'indice della struttura dati da stampare.
+     */
+    public static void stampaArray1D(boolean[] array, int[][] offsets, int strutturaIndex) {
+        int start = offsets[strutturaIndex][0];
+        int end = offsets[strutturaIndex][1];
+
+        if (start < 0 || end > array.length || start >= end) {
+            throw new IndexOutOfBoundsException("Gli offset per l'array 1D sono fuori intervallo.");
+        }
+
         System.out.println("Array 1D: " + Arrays.toString(Arrays.copyOfRange(array, start, end)));
     }
 
@@ -264,6 +318,87 @@ public class gestioneArray1DMultidimensionali {
         }
     }
 
+    // boolean
+    /**
+     * Imposta un valore in una specifica posizione di una matrice, all'interno
+     * di un array 1D booleano.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da modificare.
+     * @param row La riga della matrice in cui inserire il valore.
+     * @param col La colonna della matrice in cui inserire il valore.
+     * @param value Il valore booleano da inserire nella matrice.
+     */
+    public static void setMatrice(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col, boolean value) {
+        int start = offsets[strutturaIndex][0];
+        int rows = listaStrutturaDati[strutturaIndex][0];
+        int cols = listaStrutturaDati[strutturaIndex][1];
+
+        if (row < 0 || row >= rows) {
+            throw new IndexOutOfBoundsException("Riga fuori intervallo valido per la matrice.");
+        }
+        if (col < 0 || col >= cols) {
+            throw new IndexOutOfBoundsException("Colonna fuori intervallo valido per la matrice.");
+        }
+
+        array[start + row * cols + col] = value;
+    }
+
+    /**
+     * Ottiene un valore da una specifica posizione di una matrice all'interno
+     * di un array 1D booleano.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da leggere.
+     * @param row La riga della matrice da cui ottenere il valore.
+     * @param col La colonna della matrice da cui ottenere il valore.
+     * @return Il valore booleano della matrice alla posizione specificata.
+     */
+    public static boolean getMatrice(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col) {
+        int start = offsets[strutturaIndex][0];
+        int rows = listaStrutturaDati[strutturaIndex][0];
+        int cols = listaStrutturaDati[strutturaIndex][1];
+
+        if (row < 0 || row >= rows) {
+            throw new IndexOutOfBoundsException("Riga fuori intervallo valido per la matrice.");
+        }
+        if (col < 0 || col >= cols) {
+            throw new IndexOutOfBoundsException("Colonna fuori intervallo valido per la matrice.");
+        }
+
+        return array[start + row * cols + col];
+    }
+
+    /**
+     * Stampa il contenuto di una matrice specifica.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da stampare.
+     */
+    public static void stampaMatrice(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
+        int start = offsets[strutturaIndex][0];
+        int rows = listaStrutturaDati[strutturaIndex][0];
+        int cols = listaStrutturaDati[strutturaIndex][1];
+
+        if (start < 0 || start + rows * cols > array.length) {
+            throw new IndexOutOfBoundsException("Gli offset per la matrice sono fuori intervallo.");
+        }
+
+        System.out.println("Matrice " + rows + "x" + cols + ":");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(array[start + i * cols + j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     // --- METODI SPECIFICI PER CUBI ---
     /**
      * Imposta un valore in una specifica posizione di un cubo, all'interno di
@@ -352,6 +487,87 @@ public class gestioneArray1DMultidimensionali {
      * @param strutturaIndex L'indice della struttura dati da stampare.
      */
     public static void stampaCubo(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
+        int start = offsets[strutturaIndex][0];
+        int dimX = listaStrutturaDati[strutturaIndex][0];
+        int dimY = listaStrutturaDati[strutturaIndex][1];
+        int dimZ = listaStrutturaDati[strutturaIndex][2];
+
+        System.out.println("Cubo " + dimX + "x" + dimY + "x" + dimZ + ":");
+        for (int x = 0; x < dimX; x++) {
+            System.out.println("Livello " + x + ":");
+            for (int y = 0; y < dimY; y++) {
+                for (int z = 0; z < dimZ; z++) {
+                    int posizione = start + x * (dimY * dimZ) + y * dimZ + z;
+                    System.out.print(array[posizione] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+    }
+
+    // boolean
+    /**
+     * Imposta un valore in una specifica posizione di un cubo, all'interno di
+     * un array 1D booleano.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da modificare.
+     * @param x La coordinata X del cubo in cui inserire il valore.
+     * @param y La coordinata Y del cubo in cui inserire il valore.
+     * @param z La coordinata Z del cubo in cui inserire il valore.
+     * @param value Il valore booleano da inserire nel cubo.
+     */
+    public static void setCubo(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z, boolean value) {
+        int start = offsets[strutturaIndex][0];
+        int dimX = listaStrutturaDati[strutturaIndex][0];
+        int dimY = listaStrutturaDati[strutturaIndex][1];
+        int dimZ = listaStrutturaDati[strutturaIndex][2];
+
+        if (x < 0 || x >= dimX || y < 0 || y >= dimY || z < 0 || z >= dimZ) {
+            throw new IndexOutOfBoundsException("Indici fuori dai limiti del cubo.");
+        }
+
+        array[start + x * (dimY * dimZ) + y * dimZ + z] = value;
+    }
+
+    /**
+     * Ottiene un valore da una specifica posizione di un cubo all'interno di un
+     * array 1D booleano.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da leggere.
+     * @param x La coordinata X del cubo da cui ottenere il valore.
+     * @param y La coordinata Y del cubo da cui ottenere il valore.
+     * @param z La coordinata Z del cubo da cui ottenere il valore.
+     * @return Il valore booleano del cubo alla posizione specificata.
+     */
+    public static boolean getCubo(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z) {
+        int start = offsets[strutturaIndex][0];
+        int dimX = listaStrutturaDati[strutturaIndex][0];
+        int dimY = listaStrutturaDati[strutturaIndex][1];
+        int dimZ = listaStrutturaDati[strutturaIndex][2];
+
+        if (x < 0 || x >= dimX || y < 0 || y >= dimY || z < 0 || z >= dimZ) {
+            throw new IndexOutOfBoundsException("Indici fuori dai limiti del cubo.");
+        }
+
+        return array[start + x * (dimY * dimZ) + y * dimZ + z];
+    }
+
+    /**
+     * Stampa il contenuto di un cubo specifico.
+     *
+     * @param array L'array booleano principale.
+     * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
+     * @param listaStrutturaDati Lista delle dimensioni delle strutture dati.
+     * @param strutturaIndex L'indice della struttura dati da stampare.
+     */
+    public static void stampaCubo(boolean[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
         int start = offsets[strutturaIndex][0];
         int dimX = listaStrutturaDati[strutturaIndex][0];
         int dimY = listaStrutturaDati[strutturaIndex][1];
