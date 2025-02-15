@@ -23,6 +23,8 @@ public class DE_BASE_SINGLE_SOLUTION {
     static random rand = new random();
 
     public DE_BASE_SINGLE_SOLUTION() {
+                // resetto soluzioni txt
+        utilita.resetFile("DE.txt");
         variabilGlobali = new VariabilGlobali();
     }
 

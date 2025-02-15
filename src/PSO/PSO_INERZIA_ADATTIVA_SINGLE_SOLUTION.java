@@ -6,6 +6,7 @@ package PSO;
 
 import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
+import classi_condivise.utility;
 
 /**
  *
@@ -20,9 +21,11 @@ public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
     static PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
 
     static random rand = new random();
-
+static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION() {
+        // resetto soluzioni txt
+        utilita.resetFile("PSO_Adattiva.txt");
         variabilGlobali = new VariabilGlobali();
 
     }

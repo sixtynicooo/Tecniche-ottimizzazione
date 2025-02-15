@@ -143,6 +143,20 @@ public class utility {
             e.printStackTrace();
         }
     }
+    /**
+     * Resetta (svuota) il contenuto di un file dato il suo nome.
+     * Se il file non esiste, verrà creato.
+     *
+     * @param fileName Il nome del file da resettare.
+     */
+    public static void resetFile(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName, false)) {
+            // Apre il file in modalità sovrascrittura (append=false) e lo svuota
+        } catch (IOException e) {
+            System.err.println("Errore durante il reset del file: " + e.getMessage());
+        }
+    }
+    
     
     
 }

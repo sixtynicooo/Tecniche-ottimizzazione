@@ -33,6 +33,8 @@ public class BAT_BASE_SINGLE_SOLUTION{
     static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public BAT_BASE_SINGLE_SOLUTION() {
+                // resetto soluzioni txt
+        utilita.resetFile("BAT.txt");
         variabilGlobali=new VariabilGlobali();
 
     }

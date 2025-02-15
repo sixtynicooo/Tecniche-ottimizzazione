@@ -4,8 +4,10 @@
  */
 package PSO;
 
+import static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION.utilita;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
+import classi_condivise.utility;
 
 /**
  *
@@ -18,9 +20,11 @@ public class PSO_Base_SINGLE_SOLUTION {
 
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
-
+    static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public PSO_Base_SINGLE_SOLUTION() {
+        // resetto soluzioni txt
+        utilita.resetFile("PSO.txt");
         variabilGlobali = new VariabilGlobali();
 
     }

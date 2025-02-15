@@ -23,6 +23,8 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
     static random rand = new random();
 
     public DE_ADATTIVO_SINGLE_SOLUTION() {
+                    // resetto soluzioni txt
+        utilita.resetFile("DE Adattivo.txt");
         variabilGlobali = new VariabilGlobali();
     }
 

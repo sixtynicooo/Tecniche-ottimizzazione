@@ -31,8 +31,8 @@ public class AlgoritmiOttimizzazione {
 
         // PSO funziona bene con variabili continue
         // versione base
-        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
-        pso.run();
+//        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
+//        pso.run();
         // valore inerziale cambia nel tempo
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION();
 //        psoAdattivo.run();
@@ -49,8 +49,8 @@ public class AlgoritmiOttimizzazione {
 //          BAT.BAT_BASE_SINGLE_SOLUTION bat=new BAT_BASE_SINGLE_SOLUTION();
 //          bat.run();
         // lucciole
-//          LUCCIOLE.LUCCIOLA_BASE_SINGLE_SOLUTION lucciola=new LUCCIOLA_BASE_SINGLE_SOLUTION();
-//          lucciola.run();
+          LUCCIOLE.LUCCIOLA_BASE_SINGLE_SOLUTION lucciola=new LUCCIOLA_BASE_SINGLE_SOLUTION();
+          lucciola.run();
     }
 
 }
