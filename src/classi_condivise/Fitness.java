@@ -28,12 +28,12 @@ public class Fitness {
      * @return Il valore della funzione per i dati x e y.
      */
     // funzione banana f(1,1)=0
-//    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
-//        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
-//        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
-//        return Math.pow(1 - x, 2)
-//                + 100 * Math.pow(y - x * x, 2);
-//    }
+    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
+        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
+        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
+        return Math.pow(1 - x, 2)
+                + 100 * Math.pow(y - x * x, 2);
+    }
     //funzione sferica f(0,0)=0
 //    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
 //         double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
@@ -72,19 +72,19 @@ public class Fitness {
 //        return 12 - (Math.pow(x, 2) + Math.pow(y, 2)) / 12;
 //    }
     // minimizzare Funzione di Binh e Korn con vincoli
-        public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
-        double x = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 0);
-        double y = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 1);
-
-        double f1 = 4 * Math.pow(x, 2) + 4 * Math.pow(y, 2);
-        double f2 = 4 * Math.pow(x - 5, 2) + 4 * Math.pow(y - 5, 2);
-        double f = f1 + f2;
-        boolean vincolo1 = Math.pow(x - 5, 2) + Math.pow(y, 2) <= 25;
-        boolean vincolo2 = Math.pow(x - 8, 2) + Math.pow(y, +3) > 7.7;
-
-        boolean booleanvincolo = vincolo1 && vincolo2;
-        // se booleanvincolo non vera allora penalità
-        f = booleanvincolo ? f : f + 10000;
-        return f;
-    }
+//        public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
+//        double x = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 0);
+//        double y = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 1);
+//
+//        double f1 = 4 * Math.pow(x, 2) + 4 * Math.pow(y, 2);
+//        double f2 = 4 * Math.pow(x - 5, 2) + 4 * Math.pow(y - 5, 2);
+//        double f = f1 + f2;
+//        boolean vincolo1 = Math.pow(x - 5, 2) + Math.pow(y, 2) <= 25;
+//        boolean vincolo2 = Math.pow(x - 8, 2) + Math.pow(y, +3) > 7.7;
+//
+//        boolean booleanvincolo = vincolo1 && vincolo2;
+//        // se booleanvincolo non vera allora penalità
+//        f = booleanvincolo ? f : f + 10000;
+//        return f;
+//    }
 }
