@@ -19,9 +19,6 @@ public class Variabili_Individuo {
     public Double[] arrDoublePosMiglioreLocale;          // array double parametri
     public Double fitnessLocaleMigliore;          // array double parametri
     
-    // variabili pipistrelli
-    public double loudness=0;
-    public double pulse=0;
 
    
    
