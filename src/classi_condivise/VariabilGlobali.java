@@ -15,7 +15,7 @@ public class VariabilGlobali {
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
     public static int NUM_INDIVIDUO = 100;        // Numero di particelle
-    public static long ITERAZIONI = 20000000;         // generazioni o movimento 
+    public static long ITERAZIONI = 200000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI / 10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -33,7 +33,6 @@ public class VariabilGlobali {
     public static // Dimensioni delle strutture (matrici, array, cubi)
             int[][] listaStrutturaDati = {
                 {2}, // array 1
-                {10}
             };
     // utile per iterare e calcolare indici
 
@@ -45,8 +44,8 @@ public class VariabilGlobali {
     public static double[] ARR_DOUBLE_STRUTTURA_DATI_MIN;          // array double STRUTTURA_DATI
     public static double[] ARR_DOUBLE_STRUTTURA_DATI_MAX;          // array double STRUTTURA_DATI
 
-    public static double[] ARR_DOUBLE_MIN;          // array double parametri
-    public static double[] ARR_DOUBLE_MAX;          // array double parametri
+    public static Double[] ARR_DOUBLE_MIN;          // array double parametri
+    public static Double[] ARR_DOUBLE_MAX;          // array double parametri
 
     // spazio variabili
     // parametri PSO 
@@ -77,20 +76,29 @@ public class VariabilGlobali {
     // PARAMETRI BAT
     // modificando frequenza e aMax e alfabet funziona bene
     public static double FREQUENZA_MIN = 0;
-    public static double FREQUENZA_MAX = 1;
+    public static double FREQUENZA_MAX = 10;
     // gestita a livello individuo, serve per diminuire gradualmente il valore
-    public static double A_MIN = 0;
-    public static double A_MAX = 1000000000;
-    public static double alfaBat = 0.9999;
+    public static double A_MIN = 0.00001;
+    public static double A_MAX = 100.0;
+    public static double ALFA_BAT = 0.9999;
+    public static double PULSE_MIN=0.0000001;
+    public static double PULSE_MAX=1.0;
+    public static double GAMMA_BAT=-10.0;// gamma<0
+    
 
     // parametri lucciole 
     // si potrebbe fare una versione adattiva di BETACASUALE
     // gamma da 0.01 a 100
-    public static double GAMMA = 10;
-    public static double ALFALucciola_MIN = 0.00001;
-    public static double ALFALucciola_MAX = 10;
-    public static double ALFALucciola = ALFALucciola_MAX;
-    public static double BETACASUALE = 1;
+//        public static double GAMMA = 100;
+//    public static double ALFALucciola_MIN = 0.000000001;
+//    public static double ALFALucciola_MAX = 1;
+//    public static double BETACASUALE = 0.5;
+//    public static double THETA = 0.99; 
+    
+    public static double GAMMA_FIREFLY = 100;
+    public static double ALFALucciola_MIN = 0.000000001;
+    public static double ALFALucciola_MAX = 1;
+    public static double BETACASUALE = 0.5;
     public static double THETA = 0.99; //da 0.95 a 0.97 riduce ALFALucciola
 
     public VariabilGlobali() {
@@ -105,8 +113,8 @@ public class VariabilGlobali {
         // al momento ho scelto di usare numeri costanti per ogni struttura dati
         ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min, -10};
         ARR_DOUBLE_STRUTTURA_DATI_MAX = new double[]{max, 10};
-        ARR_DOUBLE_MIN = new double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MAX = new double[DIM_ARR_DOUBLE];
+        ARR_DOUBLE_MIN = new Double[DIM_ARR_DOUBLE];
+        ARR_DOUBLE_MAX = new Double[DIM_ARR_DOUBLE];
         // popolo gli array come ho deciso di fare
         for (int n_struttura = 0; n_struttura < listaStrutturaDati.length; n_struttura++) {
             for (int indice = 0; indice < listaStrutturaDati[n_struttura][0]; indice++) {

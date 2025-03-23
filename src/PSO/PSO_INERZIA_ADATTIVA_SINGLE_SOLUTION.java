@@ -43,6 +43,7 @@ static utility utilita=new utility();
         for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new PSO.PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividui[i].calcoloFitnessPos(variabilGlobali);
+             listaIndividui[i].variabili_Individuo.fitnessLocaleMigliore= listaIndividui[i].variabili_Individuo.fitness;
         }
         globalFitnessMIgliore.calcoloFitnessPos( variabilGlobali);
 
@@ -76,7 +77,7 @@ static utility utilita=new utility();
                 globalFitnessMIgliore.stampa(movimento,"PSO_Adattiva.txt",variabilGlobali);
                 indiceMovimenti = 0;
                 migliorato = false; 
-               w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
+              //w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
                 
             }
             if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
@@ -85,7 +86,7 @@ static utility utilita=new utility();
             }
             indiceMovimenti++;
             if(w_ARR_DOUBLE< variabilGlobali.w_ARR_DOUBLE_MIN){
-            w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
+                w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
         }
 
         }

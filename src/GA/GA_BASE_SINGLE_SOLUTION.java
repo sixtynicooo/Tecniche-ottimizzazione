@@ -55,11 +55,11 @@ public class GA_BASE_SINGLE_SOLUTION {
         int indiceMovimenti = 0;
         boolean migliorato1 = false;
         boolean migliorato2 = false;
-        int[] indiciIndividui = new int[variabilGlobali.NUM_INDIVIDUO];
-        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
+        int[] indiciIndividui = new int[VariabilGlobali.NUM_INDIVIDUO];
+        for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
             indiciIndividui[i] = i;
         }
-        utilita.mescolaArray(indiciIndividui);
+        utility.mescolaArray(indiciIndividui);
 
         for (long i = 0; i < variabilGlobali.ITERAZIONI; i++) {
             for (int individuo = 0; individuo + 1 < variabilGlobali.NUM_INDIVIDUO; individuo++) {

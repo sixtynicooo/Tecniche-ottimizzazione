@@ -41,9 +41,9 @@ public class utility {
 
         double getFitness();
 
-        void setFitness(double fitness);
+        void setFitness(Double fitness);
 
-        void setArrDouble(double[] arrDoublePos);
+        void setArrDouble(Double[] arrDoublePos);
 
         void stampa(long generation,String fileName,VariabilGlobali variabilGlobali);
     }
@@ -134,7 +134,7 @@ public class utility {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             
             // Scrivi le informazioni sul miglioramento della soluzione
-            bufferedWriter.write("Iterazione: " + iterazione + " - Soluzione: " + variabili_Individuo.fitness + " x= "+variabili_Individuo.arrDouble[0]+" y= "+variabili_Individuo.arrDouble[0]);
+            bufferedWriter.write("Iterazione: " + iterazione + " - Soluzione: " + variabili_Individuo.fitness + " x= "+variabili_Individuo.arrDouble[0]+" y= "+variabili_Individuo.arrDouble[1]);
             bufferedWriter.newLine();
             
             // Chiudi il file

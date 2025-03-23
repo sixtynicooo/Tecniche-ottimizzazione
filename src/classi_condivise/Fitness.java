@@ -28,7 +28,7 @@ public class Fitness {
      * @return Il valore della funzione per i dati x e y.
      */
     // funzione banana f(1,1)=0
-    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
+    public Double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
         double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
         double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
         return Math.pow(1 - x, 2)
@@ -42,15 +42,6 @@ public class Fitness {
 //        
 //        return Math.pow( x, 2)+
 //                 Math.pow(y, 2);
-//
-////        double results = 0;
-////        for (int n_struttura = 0; n_struttura < variabilGlobali.listaStrutturaDati.length; n_struttura++) {
-////            for (int indice = 0; indice < variabilGlobali.listaStrutturaDati[n_struttura][0]; indice++) {
-////                //System.out.println(gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, n_struttura, indice));
-////                results +=Math.pow(gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, n_struttura, indice),2) ;
-////            }
-////        }
-////        return results;
 //    }
     // f(3,0.5)=0
 //    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {

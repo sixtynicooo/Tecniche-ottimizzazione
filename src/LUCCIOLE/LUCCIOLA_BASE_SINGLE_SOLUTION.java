@@ -12,24 +12,22 @@ import classi_condivise.utility;
  * @author sixty
  */
 public class LUCCIOLA_BASE_SINGLE_SOLUTION {
-     // variabili globali
-    VariabilGlobali  variabilGlobali;
+    // variabili globali
+
+    VariabilGlobali variabilGlobali;
 
     static LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[] listaIndividui;    // lista individui
-    static LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[] listaIndividuiCopia ;
     static LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
-    
 
+    static utility utilita = new utility();
 
-static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public LUCCIOLA_BASE_SINGLE_SOLUTION() {
-                // resetto soluzioni txt
-        utilita.resetFile("Lucciole.txt");
-        variabilGlobali=new VariabilGlobali();
+        // resetto soluzioni txt
+        utility.resetFile("Lucciole.txt");
+        variabilGlobali = new VariabilGlobali();
 
     }
-
 
     public void run() {
         inizializza();
@@ -38,22 +36,20 @@ static utility utilita=new utility();
 
     private void inizializza() {
         // Creazione dell'array di individui
-        listaIndividui = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
-           globalFitnessMIgliore= new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
-        listaIndividuiCopia = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
+        listaIndividui = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION[VariabilGlobali.NUM_INDIVIDUO];
+        globalFitnessMIgliore = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
         // Inizializzazione degli individui
-        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
+        for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividui[i].calcoloFitness(variabilGlobali);
-            listaIndividuiCopia[i]=new LUCCIOLE.INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
-            listaIndividuiCopia[i].variabili_Individuo=listaIndividui[i].variabili_Individuo.copiaVariabiliIndividuo(variabilGlobali);
+            listaIndividui[i].variabili_Individuo.fitnessLocaleMigliore = listaIndividui[i].variabili_Individuo.fitness;
         }
         globalFitnessMIgliore.calcoloFitness(variabilGlobali);
-        
-        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
-            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
+
+        for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
+            listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore, variabilGlobali);
         }
-        
+
     }
 
     private void movimenti() {
@@ -61,14 +57,18 @@ static utility utilita=new utility();
         boolean migliorato=false;
         double ALFALucciola=variabilGlobali.ALFALucciola_MAX;
         for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
-            
-            
             // Aggiorna la velocità
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,individuo,listaIndividuiCopia,ALFALucciola,variabilGlobali);
-                // Calcolo del fitness aggiornato
-                listaIndividui[individuo].calcoloFitness(variabilGlobali);
-                //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
+                for (int lucciola2 = 0; lucciola2 < variabilGlobali.NUM_INDIVIDUO; lucciola2++) {
+                    if(individuo!=lucciola2){
+                       listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,lucciola2,listaIndividui,ALFALucciola,variabilGlobali);
+                            // Calcolo del fitness aggiornato
+                    listaIndividui[individuo].calcoloFitness(variabilGlobali);
+                    //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness); 
+                    }
+                    
+                }
+                
             }
             // aggiorna globale
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
@@ -80,7 +80,7 @@ static utility utilita=new utility();
             if(migliorato){
                 System.out.print("N iterazione "+movimento);
                 globalFitnessMIgliore.stampa(movimento,"Lucciole.txt",variabilGlobali);
-                ALFALucciola=variabilGlobali.ALFALucciola_MAX;
+                // ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 indiceMovimenti=0;
                 migliorato=false;
             }
@@ -88,25 +88,18 @@ static utility utilita=new utility();
                 System.out.println("Uscito per stazionarieta");
                 break;
             }
-            // copia lucciole
-            for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                listaIndividuiCopia[individuo].variabili_Individuo=listaIndividui[individuo].variabili_Individuo.copiaVariabiliIndividuo(variabilGlobali);
-            }
             indiceMovimenti++;
             // diminuisco theta
             ALFALucciola*=variabilGlobali.THETA;
-            
+
             if(ALFALucciola<variabilGlobali.ALFALucciola_MIN){
-                
+
                  
                  ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 
             }
         }
-       
-        
 
     }
 
-    
 }

@@ -4,9 +4,7 @@
  */
 package PSO;
 
-import static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION.utilita;
 import classi_condivise.VariabilGlobali;
-import classi_condivise.random;
 import classi_condivise.utility;
 
 /**
@@ -20,11 +18,10 @@ public class PSO_Base_SINGLE_SOLUTION {
 
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION[] listaIndividui;    // lista individui
     static PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION globalFitnessMIgliore;    // lista individui
-    static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public PSO_Base_SINGLE_SOLUTION() {
         // resetto soluzioni txt
-        utilita.resetFile("PSO.txt");
+        utility.resetFile("PSO.txt");
         variabilGlobali = new VariabilGlobali();
 
     }
@@ -38,17 +35,18 @@ public class PSO_Base_SINGLE_SOLUTION {
 
     private void inizializza() {
         // Creazione dell'array di individui
-        listaIndividui = new PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION[variabilGlobali.NUM_INDIVIDUO];
+        listaIndividui = new PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION[VariabilGlobali.NUM_INDIVIDUO];
         globalFitnessMIgliore = new PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
         // Inizializzazione degli individui
         
-        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
+        for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i] = new PSO.PARTICELLA_PSO_Base_SINGLE_SOLUTION(variabilGlobali); // Crea un nuovo individuo
             listaIndividui[i].calcoloFitnessPos(variabilGlobali);
+            listaIndividui[i].variabili_Individuo.fitnessLocaleMigliore= listaIndividui[i].variabili_Individuo.fitness;
         }
         globalFitnessMIgliore.calcoloFitnessPos(variabilGlobali);
 
-        for (int i = 0; i < variabilGlobali.NUM_INDIVIDUO; i++) {
+        for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
             listaIndividui[i].aggiornaFitnessGlobale(globalFitnessMIgliore, variabilGlobali);
         }
     }
@@ -57,14 +55,14 @@ public class PSO_Base_SINGLE_SOLUTION {
         int indiceMovimenti = 0;
         boolean migliorato = false;
 
-        for (long movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
+        for (long movimento = 0; movimento < VariabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
-            for (int individuo = 0; individuo < variabilGlobali.NUM_INDIVIDUO; individuo++) {
+            for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
                 //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
-            for (int individuo = 0; individuo < variabilGlobali.NUM_INDIVIDUO; individuo++) {
+            for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
                 if (listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore, variabilGlobali)) {
                     migliorato = true;
                 }
@@ -76,7 +74,7 @@ public class PSO_Base_SINGLE_SOLUTION {
                 indiceMovimenti = 0;
                 migliorato = false;
             }
-            if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
+            if (indiceMovimenti > VariabilGlobali.STAZIONARIETA) {
                 System.out.println("Uscito per stazionarieta");
                 break;
             }

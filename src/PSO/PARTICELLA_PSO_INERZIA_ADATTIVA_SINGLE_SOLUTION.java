@@ -16,37 +16,43 @@ import classi_condivise.utility.FitnessEntity;
  *
  * @author sixty
  */
-public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.FitnessEntity{
+public class PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION implements utility.FitnessEntity {
+
     Variabili_Individuo variabili_Individuo;
 
-    
     static random rand = new random();
-    static Fitness fitnessClass=new Fitness();
-    static utility utilita=new utility();
-    
-public double[] getArrDoublePos() {
+    static Fitness fitnessClass = new Fitness();
+    static utility utilita = new utility();
+
+    public Double[] getArrDoublePos() {
         return this.variabili_Individuo.arrDouble;
     }
-public void setArrDouble(double[] ARR_DOUBLE_POS) {
+
+    @Override
+    public void setArrDouble(Double[] ARR_DOUBLE_POS) {
         this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
     }
-
 
     public double getFitness() {
         return this.variabili_Individuo.fitness;
     }
-    public void setFitness(double fitness) {
+
+    @Override
+    public void setFitness(Double fitness) {
         this.variabili_Individuo.fitness = fitness;
     }
-    public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(VariabilGlobali  variabilGlobali) {
-        
-        this.variabili_Individuo=new Variabili_Individuo(variabilGlobali);
+
+    public PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION(VariabilGlobali variabilGlobali) {
+
+        this.variabili_Individuo = new Variabili_Individuo(variabilGlobali);
         // inizializzo ARR_DOUBLE
         for (int i = 0; i < variabilGlobali.DIM_ARR_DOUBLE; i++) {
             this.variabili_Individuo.arrDouble[i] = rand.generateRandomDouble(variabilGlobali.ARR_DOUBLE_MIN[i], variabilGlobali.ARR_DOUBLE_MAX[i]);
+            this.variabili_Individuo.arrDoublePosMiglioreLocale[i] = this.variabili_Individuo.arrDouble[i];
         }
     }
-    public void aggiornaVelocitaPosizione( PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore, VariabilGlobali variabilGlobali, double w_ARR_DOUBLE) {
+
+    public void aggiornaVelocitaPosizione(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore, VariabilGlobali variabilGlobali, double w_ARR_DOUBLE) {
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
             double r1 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente cognitiva
             double r2 = rand.generateRandomDouble(0, 1); // Fattore casuale per componente sociale
@@ -54,43 +60,37 @@ public void setArrDouble(double[] ARR_DOUBLE_POS) {
                     = w_ARR_DOUBLE * this.variabili_Individuo.arrDoubleVel[d]
                     + variabilGlobali.c1 * r1 * (this.variabili_Individuo.arrDoublePosMiglioreLocale[d] - this.variabili_Individuo.arrDouble[d])
                     + variabilGlobali.c2 * r2 * (globalFitnessMIgliore.getArrDoublePos()[d] - this.variabili_Individuo.arrDouble[d]);
-            
-            this.variabili_Individuo.arrDouble[d]+=this.variabili_Individuo.arrDoubleVel[d];
-            this.variabili_Individuo.arrDouble[d]=utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
-             
+
+            this.variabili_Individuo.arrDouble[d] += this.variabili_Individuo.arrDoubleVel[d];
+            this.variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d], variabilGlobali.ARR_DOUBLE_MIN[d], variabilGlobali.ARR_DOUBLE_MAX[d]);
+
         }
         this.calcoloFitnessPos(variabilGlobali);
     }
 
+    public void calcoloFitnessPos(VariabilGlobali variabilGlobali) {
+        // Calcolo del fitness attuale
+        this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo, variabilGlobali);
 
-    public void calcoloFitnessPos(VariabilGlobali  variabilGlobali) {
-    // Calcolo del fitness attuale
-    this.variabili_Individuo.fitness = fitnessClass.fitness(this.variabili_Individuo, variabilGlobali);
-
-    // Verifica miglioramento locale in base al tipo di problema
-    utilita.verificaMiglioramentoLocale(this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
-}
-
-
- public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore,VariabilGlobali  variabilGlobali) {
-        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore,this.variabili_Individuo,variabilGlobali.problemaMassimizzareMinimizzare);
-       
+        // Verifica miglioramento locale in base al tipo di problema
+        utilita.verificaMiglioramentoLocale(this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
     }
- 
 
+    public boolean aggiornaFitnessGlobale(PARTICELLA_PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION globalFitnessMIgliore, VariabilGlobali variabilGlobali) {
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore, this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
 
-     @Override
-        public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
-        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
-        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
+    }
+
+    @Override
+    public void stampa(long generation, String fileName, VariabilGlobali variabilGlobali) {
+        double x = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 0);
+        double y = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 1);
         // System.out.print(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness);
-         gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0);
-          System.out.println();
+        System.out.println(" fitness " + this.variabili_Individuo.fitness);
+        gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0);
+        System.out.println();
         // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
-         utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
+        utilita.scriviSuFile(generation, this.variabili_Individuo, fileName);
     }
 
-
-    
 }

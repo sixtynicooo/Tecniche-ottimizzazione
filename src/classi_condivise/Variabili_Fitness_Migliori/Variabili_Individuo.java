@@ -12,21 +12,30 @@ import static classi_condivise.VariabilGlobali.NUM_INDIVIDUO;
  * @author sixty
  */
 public class Variabili_Individuo {
-     public double[] arrDouble;          // array double parametri
-    public double[] arrDoubleVel;          // array double parametri
-    public double fitness;          // array double parametri
+     public Double[] arrDouble;          // array double parametri
+    public Double[] arrDoubleVel;          // array double parametri
+    public Double fitness;          // array double parametri
     
-    public double[] arrDoublePosMiglioreLocale;          // array double parametri
-    public double fitnessLocaleMigliore;          // array double parametri
+    public Double[] arrDoublePosMiglioreLocale;          // array double parametri
+    public Double fitnessLocaleMigliore;          // array double parametri
     
+    // variabili pipistrelli
+    public double loudness=0;
+    public double pulse=0;
 
    
    
 
     public Variabili_Individuo(VariabilGlobali variabilGlobali) {
-        this.arrDouble = new double[VariabilGlobali.DIM_ARR_DOUBLE];
-        this.arrDoubleVel = new double[VariabilGlobali.DIM_ARR_DOUBLE];
-        this.arrDoublePosMiglioreLocale=new double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDouble = new Double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDoubleVel = new Double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDoublePosMiglioreLocale=new Double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.fitness=0.0;
+        this.fitnessLocaleMigliore=0.0;
+        for(int i=0;i<variabilGlobali.DIM_ARR_DOUBLE;i++){
+            this.arrDoubleVel[i]=0.0;
+            this.arrDoublePosMiglioreLocale[i]=0.0;
+        }
        
         
     }
@@ -42,14 +51,4 @@ public class Variabili_Individuo {
         
         return copia;
     }
-       // Metodo per creare una copia posizione e fitness con A
-    public Variabili_Individuo copiaVariabiliIndividuoBat(VariabilGlobali variabilGlobali) {
-        Variabili_Individuo copia = new Variabili_Individuo(variabilGlobali);
-        copia.arrDouble=this.arrDouble.clone();
-        copia.fitness=this.fitness;
-        
-        return copia;
-    }
-
-   
 }
