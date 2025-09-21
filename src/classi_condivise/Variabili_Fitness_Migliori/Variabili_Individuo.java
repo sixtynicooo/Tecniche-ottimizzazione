@@ -12,16 +12,16 @@ import static classi_condivise.VariabilGlobali.NUM_INDIVIDUO;
  * @author sixty
  */
 public class Variabili_Individuo {
-     public Double[] arrDouble;          // array double parametri
+    public Double[] arrDouble;          // array double parametri
     public Double[] arrDoubleVel;          // array double parametri
     public Double fitness;          // array double parametri
     
     public Double[] arrDoublePosMiglioreLocale;          // array double parametri
     public Double fitnessLocaleMigliore;          // array double parametri
     
-
-   
-   
+    // per algo bat
+    public Double probabilitaRandomWalk;          // array double parametri
+    
 
     public Variabili_Individuo(VariabilGlobali variabilGlobali) {
         this.arrDouble = new Double[VariabilGlobali.DIM_ARR_DOUBLE];
@@ -33,6 +33,7 @@ public class Variabili_Individuo {
             this.arrDoubleVel[i]=0.0;
             this.arrDoublePosMiglioreLocale[i]=0.0;
         }
+        this.probabilitaRandomWalk=VariabilGlobali.probabilitaRandomWalk_start;
        
         
     }

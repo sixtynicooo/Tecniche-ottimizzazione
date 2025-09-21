@@ -55,11 +55,11 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
     private void movimenti() {
         int indiceMovimenti=0;
         boolean migliorato=false;
-        double ALFALucciola=variabilGlobali.ALFALucciola_MAX;
-        for (long  movimento = 0; movimento < variabilGlobali.ITERAZIONI; movimento++) {
+        double ALFALucciola=VariabilGlobali.ALFALucciola_MAX;
+        for (long  movimento = 0; movimento < VariabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
-            for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
-                for (int lucciola2 = 0; lucciola2 < variabilGlobali.NUM_INDIVIDUO; lucciola2++) {
+            for(int individuo=0;individuo<VariabilGlobali.NUM_INDIVIDUO;individuo++){
+                for (int lucciola2 = 0; lucciola2 < VariabilGlobali.NUM_INDIVIDUO; lucciola2++) {
                     if(individuo!=lucciola2){
                        listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,lucciola2,listaIndividui,ALFALucciola,variabilGlobali);
                             // Calcolo del fitness aggiornato
@@ -71,7 +71,7 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
                 
             }
             // aggiorna globale
-            for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
+            for(int individuo=0;individuo<VariabilGlobali.NUM_INDIVIDUO;individuo++){
                 if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali)){
                     migliorato=true;
                 }
@@ -84,18 +84,16 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
                 indiceMovimenti=0;
                 migliorato=false;
             }
-            if(indiceMovimenti>variabilGlobali.STAZIONARIETA){
+            if(indiceMovimenti>VariabilGlobali.STAZIONARIETA){
                 System.out.println("Uscito per stazionarieta");
                 break;
             }
             indiceMovimenti++;
             // diminuisco theta
-            ALFALucciola*=variabilGlobali.THETA;
+            ALFALucciola*=VariabilGlobali.THETA;
 
-            if(ALFALucciola<variabilGlobali.ALFALucciola_MIN){
-
-                 
-                 ALFALucciola=variabilGlobali.ALFALucciola_MAX;
+            if(ALFALucciola<VariabilGlobali.ALFALucciola_MIN){
+                 ALFALucciola=VariabilGlobali.ALFALucciola_MAX;
                 
             }
         }

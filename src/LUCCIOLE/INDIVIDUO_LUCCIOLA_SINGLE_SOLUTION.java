@@ -9,6 +9,7 @@ import classi_condivise.Fitness;
 import static classi_condivise.Fitness.gestioneParametri;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+import classi_condivise.gestioneArray1DMultidimensionali;
 import classi_condivise.random;
 import classi_condivise.utility;
 
@@ -58,12 +59,12 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
         double intensitaCorrente;
         double distanza;
         double componenteCasuale;
-        for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
+        for (int d = 0; d < VariabilGlobali.DIM_ARR_DOUBLE; d++) {
             // Componente casuale  new_alpha * (self.rng.random(dim) - 0.5)
             componenteCasuale = ALFALucciola * (rand.generateRandomDouble(-variabilGlobali.BETACASUALE, variabilGlobali.BETACASUALE));
            
             // caso in cui la lucciola corrente è la migliore
-            if (utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare,
+            if (utilita.verificaMiglioramento(VariabilGlobali.problemaMassimizzareMinimizzare,
                     this.variabili_Individuo.fitness,
                     listaIndividuiCopia[individuoCorrente].variabili_Individuo.fitness)) {
 
@@ -71,17 +72,19 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
 
                 // Verifica dei limiti della variabile
                 this.variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d],
-                        variabilGlobali.ARR_DOUBLE_MIN[d],
-                        variabilGlobali.ARR_DOUBLE_MAX[d]);
+                        VariabilGlobali.ARR_DOUBLE_MIN[d],
+                        VariabilGlobali.ARR_DOUBLE_MAX[d]);
 
             } else {
                 // Calcolo della distanza tra le due lucciole
                 distanza = calcolaDistanza(this.variabili_Individuo.arrDouble[d],
                         listaIndividuiCopia[individuoCorrente].variabili_Individuo.arrDouble[d]);
                 // Calcolo dell'intensità della lucciola corrente
-                        intensitaCorrente = this.variabili_Individuo.arrDouble[d]
-                                * Math.exp(-variabilGlobali.GAMMA_FIREFLY * distanza);
-
+//                        intensitaCorrente = this.variabili_Individuo.arrDouble[d]
+//                                * Math.exp(-VariabilGlobali.GAMMA_FIREFLY * distanza);
+                // metodo standard
+                intensitaCorrente = ALFALucciola
+                                * Math.exp(-VariabilGlobali.GAMMA_FIREFLY * distanza*distanza);
                 // Aggiornamento della posizione della lucciola corrente
                 this.variabili_Individuo.arrDouble[d] = listaIndividuiCopia[individuoCorrente].variabili_Individuo.arrDouble[d] + intensitaCorrente
                         * (listaIndividuiCopia[individuoCorrente].variabili_Individuo.arrDouble[d]
@@ -91,8 +94,8 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
             }
             // Verifica dei limiti della variabile
             this.variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(this.variabili_Individuo.arrDouble[d],
-                    variabilGlobali.ARR_DOUBLE_MIN[d],
-                    variabilGlobali.ARR_DOUBLE_MAX[d]);
+                    VariabilGlobali.ARR_DOUBLE_MIN[d],
+                    VariabilGlobali.ARR_DOUBLE_MAX[d]);
 
         }
 
@@ -104,20 +107,20 @@ public class INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION implements utility.FitnessEntity
     }
 
     public boolean aggiornaFitnessGlobale(INDIVIDUO_LUCCIOLA_SINGLE_SOLUTION globalFitnessMIgliore, VariabilGlobali variabilGlobali) {
-        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore, this.variabili_Individuo, variabilGlobali.problemaMassimizzareMinimizzare);
+        return utilita.aggiornaFitnessGlobale(globalFitnessMIgliore, this.variabili_Individuo, VariabilGlobali.problemaMassimizzareMinimizzare);
 
     }
 
     @Override
     public void stampa(long generation, String fileName, VariabilGlobali variabilGlobali) {
-        double x = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 0);
-        double y = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 1);
+        double x = gestioneArray1DMultidimensionali.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, VariabilGlobali.listaStrutturaDati, 0, 0);
+        double y = gestioneArray1DMultidimensionali.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, VariabilGlobali.listaStrutturaDati, 0, 1);
         // System.out.print(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
         System.out.println(" fitness " + this.variabili_Individuo.fitness);
-        gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0);
+        gestioneArray1DMultidimensionali.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, VariabilGlobali.listaStrutturaDati, 0);
         System.out.println();
         // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
-        utilita.scriviSuFile(generation, this.variabili_Individuo, fileName);
+        utility.scriviSuFile(generation, this.variabili_Individuo, fileName);
     }
 
     // Metodo per calcolare la distanza euclidea tra due lucciole

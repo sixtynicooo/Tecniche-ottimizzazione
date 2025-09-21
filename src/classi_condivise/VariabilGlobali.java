@@ -15,7 +15,7 @@ public class VariabilGlobali {
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
     public static int NUM_INDIVIDUO = 100;        // Numero di particelle
-    public static long ITERAZIONI = 200000;         // generazioni o movimento 
+    public static long ITERAZIONI = 200000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI / 10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -76,14 +76,16 @@ public class VariabilGlobali {
     // PARAMETRI BAT
     // modificando frequenza e aMax e alfabet funziona bene
     public static double FREQUENZA_MIN = 0;
-    public static double FREQUENZA_MAX = 10;
+    public static double FREQUENZA_MAX = 1;
     // gestita a livello individuo, serve per diminuire gradualmente il valore
-    public static double A_MIN = 0.00001;
-    public static double A_MAX = 100.0;
-    public static double ALFA_BAT = 0.9999;
+    public static double A_MIN = 0.001;
+    public static double A_MAX = 10.0;
+    public static double ALFA_BAT = 0.99;
     public static double PULSE_MIN=0.0000001;
     public static double PULSE_MAX=1.0;
-    public static double GAMMA_BAT=-10.0;// gamma<0
+    public static double GAMMA_BAT=0.1;// gamma>0
+    public static double probabilitaRandomWalk_start=0.5;
+    public static double probabilitaRandomWalk=0.0001; // se probabilitaRandomWalk < resetto
     
 
     // parametri lucciole 
@@ -95,11 +97,12 @@ public class VariabilGlobali {
 //    public static double BETACASUALE = 0.5;
 //    public static double THETA = 0.99; 
     
-    public static double GAMMA_FIREFLY = 100;
-    public static double ALFALucciola_MIN = 0.000000001;
+    public static double GAMMA_FIREFLY = 1;
+    public static double ALFALucciola_MIN = 0.0000001;
     public static double ALFALucciola_MAX = 1;
+    public static double ALFALucciola_0 = 0.000000001;
     public static double BETACASUALE = 0.5;
-    public static double THETA = 0.99; //da 0.95 a 0.97 riduce ALFALucciola
+    public static double THETA = 0.9; //da 0.95 a 0.97 riduce ALFALucciola
 
     public VariabilGlobali() {
         gestioneArray1D = new gestioneArray1DMultidimensionali();
@@ -107,8 +110,8 @@ public class VariabilGlobali {
         problemaMassimizzareMinimizzare = false;
         // sistemo ARR_DOUBLE
         DIM_ARR_DOUBLE = gestioneArray1D.calcolaDimensioneTotale(listaStrutturaDati);
-        double min = -1000000000;
-        double max = 1000000000;
+        double min = -10000;
+        double max = 10000;
         offsets = gestioneArray1D.calcolaOffset(listaStrutturaDati);
         // al momento ho scelto di usare numeri costanti per ogni struttura dati
         ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min, -10};
