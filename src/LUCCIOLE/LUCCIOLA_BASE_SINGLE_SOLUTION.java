@@ -4,14 +4,22 @@
  */
 package LUCCIOLE;
 
+import BAT.BAT_BASE_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class LUCCIOLA_BASE_SINGLE_SOLUTION {
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="Lucciole.txt";
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync(nameFile);
     // variabili globali
 
     VariabilGlobali variabilGlobali;
@@ -64,7 +72,6 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
                        listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,lucciola2,listaIndividui,ALFALucciola,variabilGlobali);
                             // Calcolo del fitness aggiornato
                     listaIndividui[individuo].calcoloFitness(variabilGlobali);
-                    //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness); 
                     }
                     
                 }
@@ -78,14 +85,14 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
             }
             // se migliorato resetto
             if(migliorato){
-                System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa(movimento,"Lucciole.txt",variabilGlobali);
+                asyncLogger.add("N iterazione "+movimento);
+                globalFitnessMIgliore.stampa(movimento,nameFile,variabilGlobali,asyncLogger,writeFile);
                 // ALFALucciola=variabilGlobali.ALFALucciola_MAX;
                 indiceMovimenti=0;
                 migliorato=false;
             }
             if(indiceMovimenti>VariabilGlobali.STAZIONARIETA){
-                System.out.println("Uscito per stazionarieta");
+                asyncLogger.add("Uscito per stazionarieta");
                 break;
             }
             indiceMovimenti++;
@@ -97,7 +104,14 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
                 
             }
         }
-
+        try {
+             asyncLogger.close();
+        } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        writeFile.close();
     }
+    
+    
 
 }

@@ -4,15 +4,23 @@
  */
 package GA;
 
+import BAT.BAT_BASE_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class GA_BASE_SINGLE_SOLUTION {
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="GA.txt";
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync(nameFile);
 
     // variabili globali
     VariabilGlobali variabilGlobali;
@@ -53,15 +61,14 @@ public class GA_BASE_SINGLE_SOLUTION {
 
     private void generazioni() {
         int indiceMovimenti = 0;
-        boolean migliorato1 = false;
-        boolean migliorato2 = false;
+        boolean migliorato = false;
         int[] indiciIndividui = new int[VariabilGlobali.NUM_INDIVIDUO];
         for (int i = 0; i < VariabilGlobali.NUM_INDIVIDUO; i++) {
             indiciIndividui[i] = i;
         }
         utility.mescolaArray(indiciIndividui);
 
-        for (long i = 0; i < variabilGlobali.ITERAZIONI; i++) {
+        for (long generazione = 0; generazione < variabilGlobali.ITERAZIONI; generazione++) {
             for (int individuo = 0; individuo + 1 < variabilGlobali.NUM_INDIVIDUO; individuo++) {
                 int figlio1 = individuo;
                 int figlio2 = individuo + 1;
@@ -75,33 +82,38 @@ public class GA_BASE_SINGLE_SOLUTION {
                     mutazione(figlio2);
                 }
                 if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_MUTAZIONE_ULTRARRARA) {
-                    System.out.println("mutazione ultrarara");
+                    asyncLogger.add("mutazione ultrarara");
                     mutazione_ultrarara(figlio1);
                 }
                 if (rand.generateRandomDouble(0, 1) < variabilGlobali.GA_PROBABILITA_MUTAZIONE_ULTRARRARA) {
-                    System.out.println("mutazione ultrarara");
+                    asyncLogger.add("mutazione ultrarara");
                     mutazione_ultrarara(figlio2);
                 }
 
                 listaIndividui[figlio1].calcoloFitness(variabilGlobali);
                 listaIndividui[figlio2].calcoloFitness(variabilGlobali);
-                
-                // aggiorna globale
-                migliorato1 = listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
-                migliorato2 = listaIndividui[individuo+1].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
-                
-                if (migliorato1 || migliorato2) {
-                System.out.print("generazione " + i);
-                globalFitnessMIgliore.stampa(i,"GA.txt",variabilGlobali);
-                indiceMovimenti = 0;
-                migliorato1 = false;
-                migliorato2 = false;
-            }
 
             }
+            
+            // aggiorna globale
+            for(int individuo=0;individuo<VariabilGlobali.NUM_INDIVIDUO;individuo++){
+                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali)){
+                    migliorato=true;
+                }
+            }
+            // se migliorato resetto
+            if(migliorato){
+                asyncLogger.add("N generazione "+generazione);
+                globalFitnessMIgliore.stampa(generazione,nameFile,variabilGlobali,asyncLogger,writeFile);
+                // ALFALucciola=variabilGlobali.ALFALucciola_MAX;
+                indiceMovimenti=0;
+                migliorato=false;
+            }
+            
             // aggiorno migliore soluzione
             if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
-                System.out.println("Uscito per stazionarieta");
+                asyncLogger.add("generazione " + generazione);
+                
                 break;
             }
             // semigliorato resetto
@@ -111,6 +123,11 @@ public class GA_BASE_SINGLE_SOLUTION {
             utilita.mescolaArray(indiciIndividui);
 
         }
+        try {
+             asyncLogger.close();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
 
     }
 

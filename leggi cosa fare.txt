@@ -1,0 +1,1 @@
+sistemare async write dei file per velocizzare

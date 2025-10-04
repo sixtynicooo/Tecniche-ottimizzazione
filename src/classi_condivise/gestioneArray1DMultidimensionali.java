@@ -6,6 +6,7 @@ package classi_condivise;
 
 import static classi_condivise.VariabilGlobali.ARR_DOUBLE_MIN;
 import java.util.Arrays;
+import utility.loggerAsync;
 
 /**
  *
@@ -27,7 +28,7 @@ public class gestioneArray1DMultidimensionali {
 //        // Test set e get
 //        gestioneArray1DMultidimensionali.setArray1D(array, offsets, listaStrutturaDati, 1, 2, 25.5); // Imposta il valore 25.5
 //        double value = gestioneArray1DMultidimensionali.getArray1D(array, offsets, listaStrutturaDati, 0, 5); // Ottiene il valore
-//        System.out.println("Valore ottenuto da array 1D: " + value);
+//        asyncLogger.add("Valore ottenuto da array 1D: " + value);
 ////
 ////        // Test stampa
 //        gestioneArray1DMultidimensionali.stampaArray1D(array, offsets, listaStrutturaDati, 1); // Stampa l'array 1D
@@ -40,7 +41,7 @@ public class gestioneArray1DMultidimensionali {
 //
 //// Ottieni un valore dalla matrice
 //        double value = gestioneArray1DMultidimensionali.getMatrice(array, offsets, listaStrutturaDati, 1,2, 1);
-//        System.out.println("Valore ottenuto: " + value);
+//        asyncLogger.add("Valore ottenuto: " + value);
 //
 //// Stampa una matrice
 //        gestioneArray1DMultidimensionali.stampaMatrice(array, offsets, listaStrutturaDati, 1);
@@ -166,8 +167,9 @@ public class gestioneArray1DMultidimensionali {
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
      * (matrici, cubi, array).
      * @param strutturaIndex L'indice della struttura dati da stampare.
+     * @param asyncLogger
      */
-    public static <T> void stampaArray1D(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
+    public static <T> void stampaArray1D(Double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Calcola la posizione di fine (sfruttando il secondo valore nell'offset).
@@ -179,7 +181,7 @@ public class gestioneArray1DMultidimensionali {
         }
 
         // Stampa l'array 1D nella forma di una sottosequenza dell'array principale.
-        System.out.println("Array 1D: " + Arrays.toString(Arrays.copyOfRange(array, start, end)));
+        asyncLogger.add("Array 1D: " + Arrays.toString(Arrays.copyOfRange(array, start, end)));
     }
 
     // --- METODI SPECIFICI PER MATRICI ---
@@ -258,8 +260,9 @@ public class gestioneArray1DMultidimensionali {
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
      * (matrici, cubi, array).
      * @param strutturaIndex L'indice della struttura dati da stampare.
+     * @param asyncLogger
      */
-    public static <T> void stampaMatrice(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
+    public static <T> void stampaMatrice(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Ottieni il numero di righe e colonne dalla listaStrutturaDati.
@@ -272,12 +275,12 @@ public class gestioneArray1DMultidimensionali {
         }
 
         // Stampa la matrice.
-        System.out.println("Matrice " + rows + "x" + cols + ":");
+         asyncLogger.add("Matrice " + rows + "x" + cols + ":");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.print(array[start + i * cols + j] + " ");
+                asyncLogger.add(array[start + i * cols + j] + " ");
             }
-            System.out.println();
+            asyncLogger.add("");
         }
     }
 
@@ -316,7 +319,6 @@ public class gestioneArray1DMultidimensionali {
         int strideY = listaStrutturaDati[strutturaIndex][1]; // dimY
         int strideZ = listaStrutturaDati[strutturaIndex][2]; // dimZ
         int posizione = start + x * (dimY * dimZ) + y * dimZ + z;
-        System.out.println("pos " + posizione);
 
         // Imposta il valore nella posizione calcolata.
         array[posizione] = value;
@@ -370,24 +372,26 @@ public class gestioneArray1DMultidimensionali {
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
      * (matrici, cubi, array).
      * @param strutturaIndex L'indice della struttura dati da stampare.
+     * @param asyncLogger
      */
-    public static <T> void stampaCubo(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex) {
+    public static <T> void stampaCubo(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         int start = offsets[strutturaIndex][0];
         int dimX = listaStrutturaDati[strutturaIndex][0];
         int dimY = listaStrutturaDati[strutturaIndex][1];
         int dimZ = listaStrutturaDati[strutturaIndex][2];
 
-        System.out.println("Cubo " + dimX + "x" + dimY + "x" + dimZ + ":");
+        asyncLogger.add("Cubo " + dimX + "x" + dimY + "x" + dimZ + ":");
+        
         for (int x = 0; x < dimX; x++) {
-            System.out.println("Livello " + x + ":");
+            asyncLogger.add("Livello " + x + ":");
             for (int y = 0; y < dimY; y++) {
                 for (int z = 0; z < dimZ; z++) {
                     int posizione = start + x * (dimY * dimZ) + y * dimZ + z;
-                    System.out.print(array[posizione] + " ");
+                    asyncLogger.add(array[posizione] + " ");
                 }
-                System.out.println();
+                asyncLogger.add(" ");
             }
-            System.out.println();
+            asyncLogger.add(" ");
         }
     }
 }

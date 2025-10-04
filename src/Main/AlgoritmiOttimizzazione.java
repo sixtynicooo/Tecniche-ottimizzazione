@@ -13,6 +13,7 @@ import PSO.PSO_Base_SINGLE_SOLUTION;
 import PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.gestioneArray1DMultidimensionali;
+import utility.loggerAsync;
 
 /**
  *
@@ -27,6 +28,8 @@ public class AlgoritmiOttimizzazione {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
         //AlgoritmiOttimizzazione.variabilGlobali = new VariabilGlobali();
 
         // PSO funziona bene con variabili continue

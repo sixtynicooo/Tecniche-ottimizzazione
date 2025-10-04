@@ -4,15 +4,23 @@
  */
 package PSO;
 
+import BAT.BAT_BASE_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="PSO_Adattiva.txt";
+    utilityWriteFileAsync writeFileAsync=new utilityWriteFileAsync(nameFile);
     // variabili globali
 
     VariabilGlobali variabilGlobali;
@@ -63,7 +71,6 @@ static utility utilita=new utility();
             // Aggiorna la velocità
             for (int individuo = 0; individuo < variabilGlobali.NUM_INDIVIDUO; individuo++) {
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore,variabilGlobali,w_ARR_DOUBLE);
-                //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
             for (int individuo = 0; individuo < variabilGlobali.NUM_INDIVIDUO; individuo++) {
@@ -73,15 +80,16 @@ static utility utilita=new utility();
             }
             // semigliorato resetto
             if(migliorato){
-                System.out.print("N iterazione " + movimento);
-                globalFitnessMIgliore.stampa(movimento,"PSO_Adattiva.txt",variabilGlobali);
+                asyncLogger.add("N iterazione " + movimento);
+                
+                globalFitnessMIgliore.stampa(movimento,nameFile,variabilGlobali,asyncLogger,writeFileAsync);
                 indiceMovimenti = 0;
                 migliorato = false; 
               //w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
                 
             }
             if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
-                System.out.println("Uscito per stazionarieta");
+                asyncLogger.add("Uscito per stazionarieta");
                 break;
             }
             indiceMovimenti++;
@@ -90,6 +98,11 @@ static utility utilita=new utility();
         }
 
         }
+        try {
+             asyncLogger.close();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
 
     }
 

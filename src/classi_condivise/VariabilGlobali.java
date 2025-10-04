@@ -14,8 +14,8 @@ public class VariabilGlobali {
 
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
-    public static int NUM_INDIVIDUO = 100;        // Numero di particelle
-    public static long ITERAZIONI = 200000000;         // generazioni o movimento 
+    public static int NUM_INDIVIDUO = 500;        // Numero di particelle
+    public static long ITERAZIONI = 1000000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI / 10;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -59,10 +59,10 @@ public class VariabilGlobali {
     public static double w_Riduzione = 0.99;    // ad ogni ciclo diminuisce w
 
     // Parametri GA
-    public static double GA_PROBABILITA_CROSSOWER = 0.7;
-    public static double GA_PROBABILITA_MUTAZIONE = 0.1;
+    public static double GA_PROBABILITA_CROSSOWER = 0.9;
+    public static double GA_PROBABILITA_MUTAZIONE = 0.05;
     public static double GA_PROBABILITA_MUTAZIONE_ULTRARRARA = 0.00000001;
-    public static double GA_MUTAZIONE = 0.15;
+    public static double GA_MUTAZIONE = 0.05;
     public static double GA_MUTAZIONE_ULTRARARA = 0.5;
 
     // parametri DE
@@ -110,8 +110,8 @@ public class VariabilGlobali {
         problemaMassimizzareMinimizzare = false;
         // sistemo ARR_DOUBLE
         DIM_ARR_DOUBLE = gestioneArray1D.calcolaDimensioneTotale(listaStrutturaDati);
-        double min = -10000;
-        double max = 10000;
+        double min = -1000000000;
+        double max = 1000000000;
         offsets = gestioneArray1D.calcolaOffset(listaStrutturaDati);
         // al momento ho scelto di usare numeri costanti per ogni struttura dati
         ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min, -10};
@@ -127,7 +127,7 @@ public class VariabilGlobali {
         }
 
 //        for ( strutturaDati = 0; strutturaDati < listaStrutturaDati.length; strutturaDati++) {
-//            System.out.println("Struttura "+strutturaDati);
+//            asyncLogger.add("Struttura "+strutturaDati)
 //            for (int indice = offsets[strutturaDati][0]; indice < offsets[strutturaDati][1]; indice++) {
 //            }
 //           

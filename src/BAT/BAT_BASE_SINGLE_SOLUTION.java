@@ -14,12 +14,20 @@ import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
 import classi_condivise.random;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class BAT_BASE_SINGLE_SOLUTION{
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="BAT.txt";
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync(nameFile);
+    
    // variabili globali
     VariabilGlobali  variabilGlobali;
 
@@ -33,8 +41,6 @@ public class BAT_BASE_SINGLE_SOLUTION{
     static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public BAT_BASE_SINGLE_SOLUTION() {
-                // resetto soluzioni txt
-        utilita.resetFile("BAT.txt");
         variabilGlobali=new VariabilGlobali();
 
     }
@@ -83,7 +89,6 @@ public class BAT_BASE_SINGLE_SOLUTION{
                 }
                 
                 
-                //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
             for(int individuo=0;individuo<variabilGlobali.NUM_INDIVIDUO;individuo++){
@@ -93,8 +98,8 @@ public class BAT_BASE_SINGLE_SOLUTION{
             }
             // semigliorato resetto
             if(migliorato){
-                System.out.print("N iterazione "+movimento);
-                globalFitnessMIgliore.stampa(movimento,"BAT.txt",variabilGlobali);
+                 asyncLogger.add("N iterazione "+movimento);
+                globalFitnessMIgliore.stampa(movimento,nameFile,variabilGlobali,asyncLogger,writeFile);
                 indiceMovimenti=0;
                 migliorato=false;
                 // rimeetto al massimo le A
@@ -102,12 +107,17 @@ public class BAT_BASE_SINGLE_SOLUTION{
                 
             }
             if(indiceMovimenti>variabilGlobali.STAZIONARIETA){
-                System.out.println("Uscito per stazionarieta");
+                 asyncLogger.add("Uscito per stazionarieta");
                 break;
             }
             indiceMovimenti++;
             
         }
+         try {
+             asyncLogger.close();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
        
         
 

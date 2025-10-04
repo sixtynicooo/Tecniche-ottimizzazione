@@ -4,15 +4,25 @@
  */
 package DE;
 
+import BAT.BAT_BASE_SINGLE_SOLUTION;
+import static DE.DE_BASE_SINGLE_SOLUTION.listaIndividui;
+import static DE.DE_BASE_SINGLE_SOLUTION.utilita;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.random;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class DE_ADATTIVO_SINGLE_SOLUTION {
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="DE Adattivo.txt";
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync("DE Adattivo.txt");
 
     // variabili globali
     VariabilGlobali variabilGlobali;
@@ -65,7 +75,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
         mutante = new DE.INDIVIDUO_DE_SINGLE_SOLUTION(variabilGlobali);
 
         double fattoreQAdattivo = 0;
-        for (long iter = 0; iter < variabilGlobali.ITERAZIONI; iter++) {
+        for (long generazione = 0; generazione < variabilGlobali.ITERAZIONI; generazione++) {
             fattoreQAdattivo = indiceMovimenti / variabilGlobali.STAZIONARIETA;
             variabilGlobali.DE_q = utilita.verificaIntervalloDouble(
                     variabilGlobali.DE_q+fattoreQAdattivo, 
@@ -83,18 +93,28 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
                 // operatore crossower
                 //crossower(mutante, genitorePrimario);
                 // operatore selezione
-                if (selezione(mutante, genitorePrimario)) {
-                    indiceMovimenti = 0;
-                    variabilGlobali.DE_q=variabilGlobali.DE_MIN_Q_ARR_DOUBLE;
-                    System.out.print("N iterazione "+iter);
-                    globalFitnessMIgliore.stampa(iter,"DE Adattivo.txt",variabilGlobali);
-                    migliorato = true;
-                }
+                selezione(mutante, genitorePrimario);
 
             }
+            
+            // aggiorna globale
+            for(int individuo=0;individuo<VariabilGlobali.NUM_INDIVIDUO;individuo++){
+                if(listaIndividui[individuo].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali)){
+                    migliorato=true;
+                }
+            }
+            // se migliorato resetto
+            if(migliorato){
+                indiceMovimenti = 0;
+                variabilGlobali.DE_q=variabilGlobali.DE_MIN_Q_ARR_DOUBLE;
+                asyncLogger.add("N iterazione "+generazione);
+                globalFitnessMIgliore.stampa(generazione,nameFile, variabilGlobali,asyncLogger,writeFile);
+                migliorato = true;
+            }
+            
             // aggiorno migliore soluzione
             if (indiceMovimenti > variabilGlobali.STAZIONARIETA) {
-                System.out.println("Uscito per stazionarieta " + iter);
+                asyncLogger.add("Uscito per stazionarieta " + generazione);
                 break;
             }
             // semigliorato resetto
@@ -102,6 +122,11 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
             indiceMovimenti++;
             utilita.mescolaArray(indiciIndividui);
         }
+        try {
+             asyncLogger.close();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     private void mutazione(int mutante1, int mutante2, int mutante3, INDIVIDUO_DE_SINGLE_SOLUTION mutante) {
@@ -124,19 +149,16 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
         }
     }
 
-    private boolean selezione(INDIVIDUO_DE_SINGLE_SOLUTION mutante, int genitorePrimario) {
-        boolean migliorato = false;
+    private void selezione(INDIVIDUO_DE_SINGLE_SOLUTION mutante, int genitorePrimario) {
         // Calcola la fitness del mutante
         mutante.calcoloFitness(variabilGlobali);
         // Confronta la fitness del mutante con il genitore
-        if ((variabilGlobali.problemaMassimizzareMinimizzare && mutante.getFitness() > listaIndividui[genitorePrimario].getFitness())
-                || (!variabilGlobali.problemaMassimizzareMinimizzare && mutante.getFitness() < listaIndividui[genitorePrimario].getFitness())) {
+        if (utilita.verificaMiglioramento(variabilGlobali.problemaMassimizzareMinimizzare, 
+                                  mutante.getFitness(), 
+                                  listaIndividui[genitorePrimario].getFitness())) {
             // Sostituisci il genitore con il mutante se la fitness è migliore
             listaIndividui[genitorePrimario].variabili_Individuo = mutante.copiare(variabilGlobali);
-            migliorato = listaIndividui[genitorePrimario].aggiornaFitnessGlobale(globalFitnessMIgliore,variabilGlobali);
         }
-
-        return migliorato;
     }
 
 }

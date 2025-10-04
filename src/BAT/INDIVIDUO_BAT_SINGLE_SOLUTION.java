@@ -9,8 +9,11 @@ import classi_condivise.Fitness;
 import static classi_condivise.Fitness.gestioneParametri;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
+import classi_condivise.gestioneArray1DMultidimensionali;
 import classi_condivise.random;
 import classi_condivise.utility;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
@@ -79,15 +82,15 @@ public Double[] getArrDoublePos() {
        
     }
 
-        public void stampa(long generation,String fileName,VariabilGlobali variabilGlobali) {
-        double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
-        double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
-        // System.out.print(" fitness "+ this.variabili_Individuo.fitness+" x "+x+" y "+y);
-         System.out.println(" fitness "+ this.variabili_Individuo.fitness);
-         gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0);
-          System.out.println();
+    @Override
+    public void stampa(long generation, String fileName, VariabilGlobali variabilGlobali, loggerAsync asyncLogger, utilityWriteFileAsync writeFile) {
+        double x = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 0);
+        double y = gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, variabilGlobali.listaStrutturaDati, 0, 1);
+        asyncLogger.add(" fitness " + this.variabili_Individuo.fitness);
+        gestioneArray1DMultidimensionali.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets, VariabilGlobali.listaStrutturaDati, 0,asyncLogger);
+        asyncLogger.add("");
         // gestioneParametri.stampaArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0);
-         utilita.scriviSuFile(generation, this.variabili_Individuo,fileName);
+        utilita.scriviSuFile(generation, this.variabili_Individuo, fileName,writeFile);
     }
 
 

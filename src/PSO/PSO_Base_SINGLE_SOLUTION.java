@@ -4,14 +4,23 @@
  */
 package PSO;
 
+import BAT.BAT_BASE_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.utility;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
  * @author sixty
  */
 public class PSO_Base_SINGLE_SOLUTION {
+    loggerAsync asyncLogger = new loggerAsync();
+    final String nameFile="PSO.txt";
+    utilityWriteFileAsync writeFileAsync=new utilityWriteFileAsync(nameFile);
+    
 
     // variabili globali
     VariabilGlobali variabilGlobali;
@@ -59,7 +68,6 @@ public class PSO_Base_SINGLE_SOLUTION {
             // Aggiorna la velocità
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
                 listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
-                //System.out.println("movimento "+movimento+" fitness "+ listaIndividui[individuo].fitness);
             }
             // aggiorna globale
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
@@ -69,19 +77,24 @@ public class PSO_Base_SINGLE_SOLUTION {
             }
             // semigliorato resetto
             if (migliorato) {
-                System.out.print("N iterazione " + movimento);
-                globalFitnessMIgliore.stampa(movimento, "PSO.txt",variabilGlobali);
+                asyncLogger.add("N iterazione " + movimento);
+                globalFitnessMIgliore.stampa(movimento, nameFile,variabilGlobali,asyncLogger,writeFileAsync);
                 indiceMovimenti = 0;
                 migliorato = false;
             }
             if (indiceMovimenti > VariabilGlobali.STAZIONARIETA) {
-                System.out.println("Uscito per stazionarieta");
+                asyncLogger.add("Uscito per stazionarieta");
                 break;
             }
             indiceMovimenti++;
 
         }
         //globalFitnessMIgliore.stampa();
+        try {
+             asyncLogger.close();
+         } catch (InterruptedException ex) {
+             Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
+         }
 
     }
 

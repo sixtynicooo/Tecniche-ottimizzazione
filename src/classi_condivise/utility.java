@@ -8,6 +8,8 @@ import classi_condivise.Variabili_Fitness_Migliori.Variabili_Individuo;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import utility.loggerAsync;
+import utility.utilityWriteFileAsync;
 
 /**
  *
@@ -16,6 +18,8 @@ import java.io.IOException;
 public class utility {
 
     static random rand = new random();
+    
+
 
     public double verificaIntervalloDouble(double numero, double min, double max) {
         if (numero < min) {
@@ -45,7 +49,7 @@ public class utility {
 
         void setArrDouble(Double[] arrDoublePos);
 
-        void stampa(long generation,String fileName,VariabilGlobali variabilGlobali);
+        void stampa(long generation, String fileName, VariabilGlobali variabilGlobali, loggerAsync asyncLogger,utilityWriteFileAsync writeFile);
     }
 
     /**
@@ -127,21 +131,8 @@ public class utility {
  * @param variabili_Individuo
  * @param fileName 
  */
-    public static void scriviSuFile(long iterazione, Variabili_Individuo variabili_Individuo,String fileName) {
-        try {
-            // Usa FileWriter per aprire il file in modalità append
-            FileWriter fileWriter = new FileWriter(fileName, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            
-            // Scrivi le informazioni sul miglioramento della soluzione
-            bufferedWriter.write("Iterazione: " + iterazione + " - Soluzione: " + variabili_Individuo.fitness + " x= "+variabili_Individuo.arrDouble[0]+" y= "+variabili_Individuo.arrDouble[1]);
-            bufferedWriter.newLine();
-            
-            // Chiudi il file
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void scriviSuFile(long iterazione, Variabili_Individuo variabili_Individuo,String fileName,utilityWriteFileAsync  writeFileAsync) {
+        writeFileAsync.add("Iterazione: " + iterazione + " - Soluzione: " + variabili_Individuo.fitness + " x= "+variabili_Individuo.arrDouble[0]+" y= "+variabili_Individuo.arrDouble[1]);
     }
     /**
      * Resetta (svuota) il contenuto di un file dato il suo nome.
