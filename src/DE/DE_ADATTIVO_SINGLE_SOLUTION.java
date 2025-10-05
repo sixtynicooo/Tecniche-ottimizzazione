@@ -34,7 +34,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
 
     public DE_ADATTIVO_SINGLE_SOLUTION() {
                     // resetto soluzioni txt
-        utilita.resetFile("DE Adattivo.txt");
+        utilita.resetFile(nameFile);
         variabilGlobali = new VariabilGlobali();
     }
 

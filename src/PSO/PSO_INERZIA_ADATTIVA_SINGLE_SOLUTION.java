@@ -33,7 +33,7 @@ static utility utilita=new utility();
     // Costruttore della classe PSO_Base
     public PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION() {
         // resetto soluzioni txt
-        utilita.resetFile("PSO_Adattiva.txt");
+        utilita.resetFile(nameFile);
         variabilGlobali = new VariabilGlobali();
 
     }

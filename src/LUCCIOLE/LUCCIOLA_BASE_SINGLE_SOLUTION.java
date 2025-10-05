@@ -32,7 +32,7 @@ public class LUCCIOLA_BASE_SINGLE_SOLUTION {
     // Costruttore della classe PSO_Base
     public LUCCIOLA_BASE_SINGLE_SOLUTION() {
         // resetto soluzioni txt
-        utility.resetFile("Lucciole.txt");
+        utilita.resetFile(nameFile);
         variabilGlobali = new VariabilGlobali();
 
     }

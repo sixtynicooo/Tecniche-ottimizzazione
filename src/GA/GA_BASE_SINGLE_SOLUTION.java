@@ -30,8 +30,8 @@ public class GA_BASE_SINGLE_SOLUTION {
     static utility utilita = new utility();
     static random rand = new random();
     public GA_BASE_SINGLE_SOLUTION() {
-                // resetto soluzioni txt
-        utilita.resetFile("GA.txt");
+        // resetto soluzioni txt
+        utilita.resetFile(nameFile);
         variabilGlobali = new VariabilGlobali();
     }
 

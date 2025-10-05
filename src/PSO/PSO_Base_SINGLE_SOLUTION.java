@@ -31,7 +31,7 @@ public class PSO_Base_SINGLE_SOLUTION {
     // Costruttore della classe PSO_Base
     public PSO_Base_SINGLE_SOLUTION() {
         // resetto soluzioni txt
-        utility.resetFile("PSO.txt");
+        utility.resetFile(nameFile);
         variabilGlobali = new VariabilGlobali();
 
     }
