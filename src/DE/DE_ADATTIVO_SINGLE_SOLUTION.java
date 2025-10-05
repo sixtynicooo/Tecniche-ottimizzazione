@@ -127,6 +127,7 @@ public class DE_ADATTIVO_SINGLE_SOLUTION {
          } catch (InterruptedException ex) {
              Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
          }
+        writeFile.close();
     }
 
     private void mutazione(int mutante1, int mutante2, int mutante3, INDIVIDUO_DE_SINGLE_SOLUTION mutante) {

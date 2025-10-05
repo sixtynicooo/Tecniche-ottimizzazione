@@ -9,6 +9,7 @@ import classi_condivise.VariabilGlobali;
 import classi_condivise.utility;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 import utility.loggerAsync;
 import utility.utilityWriteFileAsync;
 
@@ -19,7 +20,7 @@ import utility.utilityWriteFileAsync;
 public class PSO_Base_SINGLE_SOLUTION {
     loggerAsync asyncLogger = new loggerAsync();
     final String nameFile="PSO.txt";
-    utilityWriteFileAsync writeFileAsync=new utilityWriteFileAsync(nameFile);
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync(nameFile);
     
 
     // variabili globali
@@ -67,7 +68,7 @@ public class PSO_Base_SINGLE_SOLUTION {
         for (long movimento = 0; movimento < VariabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
-                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
+             listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
             }
             // aggiorna globale
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
@@ -78,7 +79,7 @@ public class PSO_Base_SINGLE_SOLUTION {
             // semigliorato resetto
             if (migliorato) {
                 asyncLogger.add("N iterazione " + movimento);
-                globalFitnessMIgliore.stampa(movimento, nameFile,variabilGlobali,asyncLogger,writeFileAsync);
+                globalFitnessMIgliore.stampa(movimento, nameFile,variabilGlobali,asyncLogger,writeFile);
                 indiceMovimenti = 0;
                 migliorato = false;
             }
@@ -95,6 +96,7 @@ public class PSO_Base_SINGLE_SOLUTION {
          } catch (InterruptedException ex) {
              Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
          }
+        writeFile.close();
 
     }
 

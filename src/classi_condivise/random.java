@@ -5,42 +5,31 @@
 package classi_condivise;
 import java.security.SecureRandom;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 /**
  *
  * @author sixty
  */
 public class random {
-    private static final Random random = new Random(); // Sorgente casuale
-    
-    // Sorgente casuale sicura in teoria migliore ma più lento
-    //private static final SecureRandom random = new SecureRandom();
     /**
-     * Genera un numero casuale double tra min e max (inclusi min e max).
-     *
-     * @param min Il valore minimo (incluso).
-     * @param max Il valore massimo (incluso).
-     * @return Un numero double casuale tra min e max.
+     * Genera un numero double casuale tra min e max (inclusi min e max).
      */
-    public double generateRandomDouble(double min, double max) {
-        return min + (max - min) * random.nextDouble(); // Genera un double tra min e max
+    public static double generateRandomDouble(double min, double max) {
+        return ThreadLocalRandom.current().nextDouble(min, max);
     }
-        /**
-     * Genera un numero casuale intero tra min e max (inclusi min e max).
-     *
-     * @param min Il valore minimo (incluso).
-     * @param max Il valore massimo (incluso).
-     * @return Un numero intero casuale tra min e max.
+
+    /**
+     * Genera un numero intero casuale tra min e max (inclusi min e max).
      */
-    public int generateRandomInt(int min, int max) {
-        return random.nextInt(max - min + 1) + min; // Genera un intero tra min e max
+    public static int generateRandomInt(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
-      /**
+
+    /**
      * Genera un valore booleano casuale (true o false).
-     *
-     * @return true o false in modo casuale.
      */
-    public boolean generateRandomBoolean() {
-        return random.nextBoolean(); // Genera un booleano casuale
+    public static boolean generateRandomBoolean() {
+        return ThreadLocalRandom.current().nextBoolean();
     }
     
 }

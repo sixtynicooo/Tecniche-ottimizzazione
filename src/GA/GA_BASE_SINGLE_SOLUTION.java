@@ -128,6 +128,7 @@ public class GA_BASE_SINGLE_SOLUTION {
          } catch (InterruptedException ex) {
              Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
          }
+        writeFile.close();
 
     }
 

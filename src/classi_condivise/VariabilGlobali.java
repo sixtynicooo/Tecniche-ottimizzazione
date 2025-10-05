@@ -14,9 +14,9 @@ public class VariabilGlobali {
 
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
-    public static int NUM_INDIVIDUO = 500;        // Numero di particelle
-    public static long ITERAZIONI = 1000000;         // generazioni o movimento 
-    public static long STAZIONARIETA = ITERAZIONI / 10;         // generazioni o movimento 
+    public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
+    public static long ITERAZIONI = 10000;         // generazioni o movimento 
+    public static long STAZIONARIETA = ITERAZIONI / 1;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
     // struttura per gestire array multidimensionali usando 

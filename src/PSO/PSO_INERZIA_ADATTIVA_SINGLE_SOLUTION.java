@@ -20,7 +20,7 @@ import utility.utilityWriteFileAsync;
 public class PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION {
     loggerAsync asyncLogger = new loggerAsync();
     final String nameFile="PSO_Adattiva.txt";
-    utilityWriteFileAsync writeFileAsync=new utilityWriteFileAsync(nameFile);
+    utilityWriteFileAsync writeFile=new utilityWriteFileAsync(nameFile);
     // variabili globali
 
     VariabilGlobali variabilGlobali;
@@ -82,7 +82,7 @@ static utility utilita=new utility();
             if(migliorato){
                 asyncLogger.add("N iterazione " + movimento);
                 
-                globalFitnessMIgliore.stampa(movimento,nameFile,variabilGlobali,asyncLogger,writeFileAsync);
+                globalFitnessMIgliore.stampa(movimento,nameFile,variabilGlobali,asyncLogger,writeFile);
                 indiceMovimenti = 0;
                 migliorato = false; 
               //w_ARR_DOUBLE= variabilGlobali.w_ARR_DOUBLE_MAX;
@@ -103,6 +103,8 @@ static utility utilita=new utility();
          } catch (InterruptedException ex) {
              Logger.getLogger(BAT_BASE_SINGLE_SOLUTION.class.getName()).log(Level.SEVERE, null, ex);
          }
+        writeFile.close();
+        
 
     }
 
