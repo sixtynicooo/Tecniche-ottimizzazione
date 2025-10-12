@@ -13,6 +13,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class random {
     /**
      * Genera un numero double casuale tra min e max (inclusi min e max).
+     * IMPORTANTE MIN E MAX NON POSSONO ESSERE UGUALI
+     * @param min
+     * @param max
+     * @return 
      */
     public static double generateRandomDouble(double min, double max) {
         return ThreadLocalRandom.current().nextDouble(min, max);
@@ -20,6 +24,10 @@ public class random {
 
     /**
      * Genera un numero intero casuale tra min e max (inclusi min e max).
+     * IMPORTANTE MIN E MAX NON POSSONO ESSERE UGUALI
+     * @param min
+     * @param max
+     * @return 
      */
     public static int generateRandomInt(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
@@ -27,6 +35,7 @@ public class random {
 
     /**
      * Genera un valore booleano casuale (true o false).
+     * @return 
      */
     public static boolean generateRandomBoolean() {
         return ThreadLocalRandom.current().nextBoolean();

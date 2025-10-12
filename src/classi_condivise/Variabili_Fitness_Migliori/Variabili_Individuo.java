@@ -12,21 +12,21 @@ import static classi_condivise.VariabilGlobali.NUM_INDIVIDUO;
  * @author sixty
  */
 public class Variabili_Individuo {
-    public Double[] arrDouble;          // array double parametri
-    public Double[] arrDoubleVel;          // array double parametri
-    public Double fitness;          // array double parametri
+    public double[] arrDouble;          // array double parametri
+    public double[] arrDoubleVel;          // array double parametri
+    public double fitness;          // array double parametri
     
-    public Double[] arrDoublePosMiglioreLocale;          // array double parametri
-    public Double fitnessLocaleMigliore;          // array double parametri
+    public double[] arrDoublePosMiglioreLocale;          // array double parametri
+    public double fitnessLocaleMigliore;          // array double parametri
     
     // per algo bat
-    public Double probabilitaRandomWalk;          // array double parametri
+    public double probabilitaRandomWalk;          // array double parametri
     
 
     public Variabili_Individuo(VariabilGlobali variabilGlobali) {
-        this.arrDouble = new Double[VariabilGlobali.DIM_ARR_DOUBLE];
-        this.arrDoubleVel = new Double[VariabilGlobali.DIM_ARR_DOUBLE];
-        this.arrDoublePosMiglioreLocale=new Double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDouble = new double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDoubleVel = new double[VariabilGlobali.DIM_ARR_DOUBLE];
+        this.arrDoublePosMiglioreLocale=new double[VariabilGlobali.DIM_ARR_DOUBLE];
         this.fitness=0.0;
         this.fitnessLocaleMigliore=0.0;
         for(int i=0;i<variabilGlobali.DIM_ARR_DOUBLE;i++){

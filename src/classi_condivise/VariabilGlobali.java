@@ -15,7 +15,7 @@ public class VariabilGlobali {
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
     public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
-    public static long ITERAZIONI = 10000;         // generazioni o movimento 
+    public static long ITERAZIONI = 100000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI / 1;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -44,8 +44,8 @@ public class VariabilGlobali {
     public static double[] ARR_DOUBLE_STRUTTURA_DATI_MIN;          // array double STRUTTURA_DATI
     public static double[] ARR_DOUBLE_STRUTTURA_DATI_MAX;          // array double STRUTTURA_DATI
 
-    public static Double[] ARR_DOUBLE_MIN;          // array double parametri
-    public static Double[] ARR_DOUBLE_MAX;          // array double parametri
+    public static double[] ARR_DOUBLE_MIN;          // array double parametri
+    public static double[] ARR_DOUBLE_MAX;          // array double parametri
 
     // spazio variabili
     // parametri PSO 
@@ -60,10 +60,10 @@ public class VariabilGlobali {
 
     // Parametri GA
     public static double GA_PROBABILITA_CROSSOWER = 0.9;
-    public static double GA_PROBABILITA_MUTAZIONE = 0.05;
+    public static double GA_PROBABILITA_MUTAZIONE = 0.5;
     public static double GA_PROBABILITA_MUTAZIONE_ULTRARRARA = 0.00000001;
     public static double GA_MUTAZIONE = 0.05;
-    public static double GA_MUTAZIONE_ULTRARARA = 0.5;
+    public static double GA_MUTAZIONE_ULTRARARA = 0.99;
 
     // parametri DE
     public static double DE_q = 0.9;
@@ -110,14 +110,14 @@ public class VariabilGlobali {
         problemaMassimizzareMinimizzare = false;
         // sistemo ARR_DOUBLE
         DIM_ARR_DOUBLE = gestioneArray1D.calcolaDimensioneTotale(listaStrutturaDati);
-        double min = -1000000000;
-        double max = 1000000000;
+        double min = -10000000;
+        double max = 10000000;
         offsets = gestioneArray1D.calcolaOffset(listaStrutturaDati);
         // al momento ho scelto di usare numeri costanti per ogni struttura dati
         ARR_DOUBLE_STRUTTURA_DATI_MIN = new double[]{min, -10};
         ARR_DOUBLE_STRUTTURA_DATI_MAX = new double[]{max, 10};
-        ARR_DOUBLE_MIN = new Double[DIM_ARR_DOUBLE];
-        ARR_DOUBLE_MAX = new Double[DIM_ARR_DOUBLE];
+        ARR_DOUBLE_MIN = new double[DIM_ARR_DOUBLE];
+        ARR_DOUBLE_MAX = new double[DIM_ARR_DOUBLE];
         // popolo gli array come ho deciso di fare
         for (int n_struttura = 0; n_struttura < listaStrutturaDati.length; n_struttura++) {
             for (int indice = 0; indice < listaStrutturaDati[n_struttura][0]; indice++) {

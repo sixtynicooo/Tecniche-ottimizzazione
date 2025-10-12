@@ -28,7 +28,7 @@ public class Fitness {
      * @return Il valore della funzione per i dati x e y.
      */
     // funzione banana f(1,1)=0
-    public Double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
+    public double fitness(Variabili_Individuo variabili_Individuo, VariabilGlobali variabilGlobali) {
         double x =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 0);
         double y =gestioneParametri.getArray1D(variabili_Individuo.arrDouble, variabilGlobali.offsets,variabilGlobali.listaStrutturaDati, 0, 1);
         return Math.pow(1 - x, 2)

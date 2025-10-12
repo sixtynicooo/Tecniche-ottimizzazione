@@ -25,12 +25,12 @@ public class PARTICELLA_PSO_Base_SINGLE_SOLUTION implements utility.FitnessEntit
     static Fitness fitnessClass = new Fitness();
     static utility utilita = new utility();
 
-    public Double[] getArrDoublePos() {
+    public double[] getArrDoublePos() {
         return this.variabili_Individuo.arrDouble;
     }
 
     @Override
-    public void setArrDouble(Double[] ARR_DOUBLE_POS) {
+    public void setArrDouble(double[] ARR_DOUBLE_POS) {
         this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
     }
 
@@ -40,7 +40,7 @@ public class PARTICELLA_PSO_Base_SINGLE_SOLUTION implements utility.FitnessEntit
     }
 
     @Override
-    public void setFitness(Double fitness) {
+    public void setFitness(double fitness) {
         this.variabili_Individuo.fitness = fitness;
     }
 

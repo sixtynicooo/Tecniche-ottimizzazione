@@ -68,7 +68,7 @@ public class PSO_Base_SINGLE_SOLUTION {
         for (long movimento = 0; movimento < VariabilGlobali.ITERAZIONI; movimento++) {
             // Aggiorna la velocità
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {
-             listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
+                listaIndividui[individuo].aggiornaVelocitaPosizione(globalFitnessMIgliore, variabilGlobali);
             }
             // aggiorna globale
             for (int individuo = 0; individuo < VariabilGlobali.NUM_INDIVIDUO; individuo++) {

@@ -13,6 +13,7 @@ import PSO.PSO_Base_SINGLE_SOLUTION;
 import PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION;
 import classi_condivise.VariabilGlobali;
 import classi_condivise.gestioneArray1DMultidimensionali;
+import java.util.concurrent.ThreadLocalRandom;
 import utility.loggerAsync;
 
 /**
@@ -29,19 +30,18 @@ public class AlgoritmiOttimizzazione {
      */
     public static void main(String[] args) {
         
-        
         //AlgoritmiOttimizzazione.variabilGlobali = new VariabilGlobali();
 
         // PSO funziona bene con variabili continue
         // versione base
-        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
-        pso.run();
+//        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
+//        pso.run();
         // valore inerziale cambia nel tempo
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION();
 //        psoAdattivo.run();
 // GA
-//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION();
-//          ga.run();
+          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION();
+          ga.run();
 // DE 
 //        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION();
 //        de.run();

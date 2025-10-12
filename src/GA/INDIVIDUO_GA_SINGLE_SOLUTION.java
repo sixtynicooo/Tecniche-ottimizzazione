@@ -54,12 +54,12 @@ public class INDIVIDUO_GA_SINGLE_SOLUTION implements utility.FitnessEntity {
     }
 
     @Override
-    public void setFitness(Double fitness) {
+    public void setFitness(double fitness) {
         this.variabili_Individuo.fitness = fitness;
     }
 
     @Override
-    public void setArrDouble(Double[] ARR_DOUBLE_POS) {
+    public void setArrDouble(double[] ARR_DOUBLE_POS) {
         this.variabili_Individuo.arrDouble = ARR_DOUBLE_POS;
     }
 

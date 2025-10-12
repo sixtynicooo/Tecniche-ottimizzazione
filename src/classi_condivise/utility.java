@@ -45,9 +45,9 @@ public class utility {
 
         double getFitness();
 
-        void setFitness(Double fitness);
+        void setFitness(double fitness);
 
-        void setArrDouble(Double[] arrDoublePos);
+        void setArrDouble(double[] arrDoublePos);
 
         void stampa(long generation, String fileName, VariabilGlobali variabilGlobali, loggerAsync asyncLogger,utilityWriteFileAsync writeFile);
     }

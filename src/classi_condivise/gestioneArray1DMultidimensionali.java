@@ -98,7 +98,7 @@ public class gestioneArray1DMultidimensionali {
      * calcolata. Gli offset definiscono l'intervallo valido per l'indice e il
      * valore viene inserito solo se l'indice è compreso nell'intervallo.</p>
      *
-     * @param <T> il tipo dell'array e del valore da inserire. Può essere
+     * @param double il tipo dell'array e del valore da inserire. Può essere
      * qualsiasi tipo di oggetto.
      * @param array l'array 1D in cui il valore deve essere inserito.
      * @param offsets una matrice 2D di offset, dove ogni elemento rappresenta
@@ -114,8 +114,8 @@ public class gestioneArray1DMultidimensionali {
      * @throws IndexOutOfBoundsException se l'indice è fuori dall'intervallo
      * valido calcolato con gli offset.
      */
-    public static <T> void setArray1D(T[] array, int[][] offsets, int[][] listaStrutturaDati,
-            int strutturaIndex, int index, T value) {
+    public static void setArray1D(double[] array, int[][] offsets, int[][] listaStrutturaDati,
+            int strutturaIndex, int index, double value) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         int end = offsets[strutturaIndex][1];
@@ -132,7 +132,7 @@ public class gestioneArray1DMultidimensionali {
     /**
      * Ottiene un valore da una specifica posizione di un array 1D.
      *
-     * @param <T> Il tipo di elemento dell'array.
+     * @param double Il tipo di elemento dell'array.
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -143,7 +143,7 @@ public class gestioneArray1DMultidimensionali {
      * @throws IndexOutOfBoundsException Se l'indice è fuori dall'intervallo
      * valido.
      */
-    public static <T> T getArray1D(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int index) {
+    public static double getArray1D(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int index) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Calcola la posizione finale per il controllo degli indici.
@@ -157,11 +157,11 @@ public class gestioneArray1DMultidimensionali {
         // Restituisce il valore nell'array 1D.
         return array[start + index];
     }
-
+    
     /**
      * Stampa il contenuto di un array 1D specifico.
      *
-     * @param <T> Il tipo di elemento dell'array.
+     * @param double Il tipo di elemento dell'array.
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -169,7 +169,7 @@ public class gestioneArray1DMultidimensionali {
      * @param strutturaIndex L'indice della struttura dati da stampare.
      * @param asyncLogger
      */
-    public static <T> void stampaArray1D(Double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
+    public static void stampaArray1D(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Calcola la posizione di fine (sfruttando il secondo valore nell'offset).
@@ -189,7 +189,7 @@ public class gestioneArray1DMultidimensionali {
      * Imposta un valore in una specifica posizione di una matrice, all'interno
      * di un array 1D.
      *
-     * @param <T> Tipo dell'array numerico (es. Double, Integer, etc.).
+     * @param double Tipo dell'array numerico (es. double, Integer, etc.).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -199,7 +199,7 @@ public class gestioneArray1DMultidimensionali {
      * @param col La colonna della matrice in cui inserire il valore.
      * @param value Il valore da inserire nella matrice.
      */
-    public static <T> void setMatrice(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col, T value) {
+    public static void setMatrice(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col, double value) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Ottieni il numero di righe e colonne dalla listaStrutturaDati.
@@ -222,7 +222,7 @@ public class gestioneArray1DMultidimensionali {
      * Ottiene un valore da una specifica posizione di una matrice all'interno
      * di un array 1D.
      *
-     * @param <T> Tipo dell'array numerico (es. Double, Integer, etc.).
+     * @param double Tipo dell'array numerico (es. double, Integer, etc.).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -232,7 +232,7 @@ public class gestioneArray1DMultidimensionali {
      * @param col La colonna della matrice da cui ottenere il valore.
      * @return Il valore della matrice alla posizione specificata.
      */
-    public static <T> T getMatrice(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col) {
+    public static double getMatrice(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int row, int col) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Ottieni il numero di righe e colonne dalla listaStrutturaDati.
@@ -254,7 +254,7 @@ public class gestioneArray1DMultidimensionali {
     /**
      * Stampa il contenuto di una matrice specifica.
      *
-     * @param <T> Tipo dell'array numerico (es. Double, Integer, etc.).
+     * @param double Tipo dell'array numerico (es. double, Integer, etc.).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -262,7 +262,7 @@ public class gestioneArray1DMultidimensionali {
      * @param strutturaIndex L'indice della struttura dati da stampare.
      * @param asyncLogger
      */
-    public static <T> void stampaMatrice(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
+    public static void stampaMatrice(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         // Calcola la posizione di partenza nell'array 1D usando l'offset della struttura.
         int start = offsets[strutturaIndex][0];
         // Ottieni il numero di righe e colonne dalla listaStrutturaDati.
@@ -289,7 +289,7 @@ public class gestioneArray1DMultidimensionali {
      * Imposta un valore in una specifica posizione di un cubo, all'interno di
      * un array 1D.
      *
-     * @param <T> Tipo dell'array principale (es. Double).
+     * @param double Tipo dell'array principale (es. double).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -305,7 +305,7 @@ public class gestioneArray1DMultidimensionali {
      * @throws IndexOutOfBoundsException Se gli indici sono fuori dai limiti del
      * cubo.
      */
-    public static <T> void setCubo(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z, T value) {
+    public static void setCubo(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z, double value) {
         // Controlla che gli indici siano validi.
         int dimX = listaStrutturaDati[strutturaIndex][0];
         int dimY = listaStrutturaDati[strutturaIndex][1];
@@ -328,7 +328,7 @@ public class gestioneArray1DMultidimensionali {
      * Ottiene un valore da una specifica posizione di un cubo all'interno di un
      * array 1D.
      *
-     * @param <T> Tipo dell'array principale (es. Double).
+     * @param double Tipo dell'array principale (es. double).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -344,7 +344,7 @@ public class gestioneArray1DMultidimensionali {
      * @throws IndexOutOfBoundsException Se gli indici sono fuori dai limiti del
      * cubo.
      */
-    public static <T> T getCubo(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z) {
+    public static double getCubo(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, int x, int y, int z) {
         // Controlla che gli indici siano validi.
         int dimX = listaStrutturaDati[strutturaIndex][0];
         int dimY = listaStrutturaDati[strutturaIndex][1];
@@ -366,7 +366,7 @@ public class gestioneArray1DMultidimensionali {
     /**
      * Stampa il contenuto di un cubo specifico.
      *
-     * @param <T> Tipo dell'array principale (es. Double).
+     * @param double Tipo dell'array principale (es. double).
      * @param array L'array principale che contiene tutte le strutture dati.
      * @param offsets Matrice degli offset [start, end] per ogni struttura dati.
      * @param listaStrutturaDati Lista delle dimensioni delle strutture dati
@@ -374,7 +374,7 @@ public class gestioneArray1DMultidimensionali {
      * @param strutturaIndex L'indice della struttura dati da stampare.
      * @param asyncLogger
      */
-    public static <T> void stampaCubo(T[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
+    public static void stampaCubo(double[] array, int[][] offsets, int[][] listaStrutturaDati, int strutturaIndex, loggerAsync asyncLogger) {
         int start = offsets[strutturaIndex][0];
         int dimX = listaStrutturaDati[strutturaIndex][0];
         int dimY = listaStrutturaDati[strutturaIndex][1];
