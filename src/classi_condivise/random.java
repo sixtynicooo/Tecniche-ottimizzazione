@@ -19,7 +19,7 @@ public class random {
      * @return 
      */
     public static double generateRandomDouble(double min, double max) {
-        return ThreadLocalRandom.current().nextDouble(min, max);
+       return min<max?ThreadLocalRandom.current().nextDouble(min, max):min>max?ThreadLocalRandom.current().nextDouble(max, min):min;
     }
 
     /**
@@ -30,7 +30,7 @@ public class random {
      * @return 
      */
     public static int generateRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
+        return min<max?ThreadLocalRandom.current().nextInt(min, max):min>max?ThreadLocalRandom.current().nextInt(max, min):min;
     }
 
     /**

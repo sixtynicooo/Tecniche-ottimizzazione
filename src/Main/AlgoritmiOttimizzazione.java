@@ -34,14 +34,14 @@ public class AlgoritmiOttimizzazione {
 
         // PSO funziona bene con variabili continue
         // versione base
-//        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
-//        pso.run();
+        PSO.PSO_Base_SINGLE_SOLUTION pso = new PSO_Base_SINGLE_SOLUTION();
+        pso.run();
         // valore inerziale cambia nel tempo
 //        PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION psoAdattivo = new PSO.PSO_INERZIA_ADATTIVA_SINGLE_SOLUTION();
 //        psoAdattivo.run();
 // GA
-          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION();
-          ga.run();
+//          GA.GA_BASE_SINGLE_SOLUTION ga=new GA_BASE_SINGLE_SOLUTION();
+//          ga.run();
 // DE 
 //        DE.DE_BASE_SINGLE_SOLUTION de = new DE_BASE_SINGLE_SOLUTION();
 //        de.run();

@@ -144,41 +144,24 @@ public class GA_BASE_SINGLE_SOLUTION {
     private void mutazione(int figlio) {
         int dimensioneRandomArrDouble = rand.generateRandomInt(0, variabilGlobali.DIM_ARR_DOUBLE - 1);
         if (dimensioneRandomArrDouble >= 0) {
-            double min=listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 - variabilGlobali.GA_PROBABILITA_MUTAZIONE);
-            double max=listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 + variabilGlobali.GA_PROBABILITA_MUTAZIONE);
-            if(min<max){
-                 listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble]=rand.generateRandomDouble(
-                    min,max
-                 );
-            }else if(min==max){
-                listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble]=min;
-            }
-            else{
-                listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble]=rand.generateRandomDouble(
-                   max,min
-                 );
-            }
+            listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] = rand.generateRandomDouble(
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 - variabilGlobali.GA_PROBABILITA_MUTAZIONE),
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] * (1 + variabilGlobali.GA_PROBABILITA_MUTAZIONE)
+            );
             listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble] = utilita.verificaIntervalloDouble(listaIndividui[figlio].variabili_Individuo.arrDouble[dimensioneRandomArrDouble],
                     variabilGlobali.ARR_DOUBLE_MIN[dimensioneRandomArrDouble],
                     variabilGlobali.ARR_DOUBLE_MAX[dimensioneRandomArrDouble]);
-
         }
 
     }
 
     private void mutazione_ultrarara(int figlio) {
         for (int d = 0; d < variabilGlobali.DIM_ARR_DOUBLE; d++) {
-            double min=listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 - variabilGlobali.GA_MUTAZIONE_ULTRARARA);
-            double max=listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 + variabilGlobali.GA_MUTAZIONE_ULTRARARA);
-            
-            if(min<max){
-                listaIndividui[figlio].variabili_Individuo.arrDouble[d]=rand.generateRandomDouble(min,max);
-            }else if(min==max){
-                listaIndividui[figlio].variabili_Individuo.arrDouble[d]=min;
-            }
-            else{
-                listaIndividui[figlio].variabili_Individuo.arrDouble[d]=rand.generateRandomDouble(max,min);
-            }
+            listaIndividui[figlio].variabili_Individuo.arrDouble[d] = listaIndividui[figlio].variabili_Individuo.arrDouble[d];
+             listaIndividui[figlio].variabili_Individuo.arrDouble[d] = rand.generateRandomDouble(
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 - variabilGlobali.GA_MUTAZIONE_ULTRARARA),
+                    listaIndividui[figlio].variabili_Individuo.arrDouble[d] * (1 + variabilGlobali.GA_MUTAZIONE_ULTRARARA)
+            );
             listaIndividui[figlio].variabili_Individuo.arrDouble[d] = utilita.verificaIntervalloDouble(
                     listaIndividui[figlio].variabili_Individuo.arrDouble[d],
                     variabilGlobali.ARR_DOUBLE_MIN[d],

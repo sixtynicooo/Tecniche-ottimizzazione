@@ -15,7 +15,7 @@ public class VariabilGlobali {
     public static gestioneArray1DMultidimensionali gestioneArray1D;
 
     public static int NUM_INDIVIDUO = 10000;        // Numero di particelle
-    public static long ITERAZIONI = 100000;         // generazioni o movimento 
+    public static long ITERAZIONI = 10000;         // generazioni o movimento 
     public static long STAZIONARIETA = ITERAZIONI / 1;         // generazioni o movimento 
     public static boolean problemaMassimizzareMinimizzare; // false= minimizzo, true=massimizzo
 
@@ -59,11 +59,11 @@ public class VariabilGlobali {
     public static double w_Riduzione = 0.99;    // ad ogni ciclo diminuisce w
 
     // Parametri GA
-    public static double GA_PROBABILITA_CROSSOWER = 0.9;
-    public static double GA_PROBABILITA_MUTAZIONE = 0.5;
+   public static double GA_PROBABILITA_CROSSOWER = 0.9;
+    public static double GA_PROBABILITA_MUTAZIONE = 0.1;
     public static double GA_PROBABILITA_MUTAZIONE_ULTRARRARA = 0.00000001;
-    public static double GA_MUTAZIONE = 0.05;
-    public static double GA_MUTAZIONE_ULTRARARA = 0.99;
+    public static double GA_MUTAZIONE = 0.01;
+    public static double GA_MUTAZIONE_ULTRARARA = 0.5;
 
     // parametri DE
     public static double DE_q = 0.9;
